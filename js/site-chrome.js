@@ -54,19 +54,19 @@
     <a class="ellipse-logo ellipse-logo--header shrink-0 hover:opacity-80 transition-opacity" href="index.html" aria-label="Ellipse Hotels home">
       <img src="assets/brand/logo-on-light.png" alt="Ellipse Hotels" width="200" height="68" />
     </a>
-    <div class="hidden md:flex items-center space-x-8">
+    <div class="hidden lg:flex items-center space-x-8">
       ${navLinks(page)}
     </div>
-    <a class="hidden md:inline-flex items-center justify-center px-6 py-3 bg-deep-navy text-on-secondary font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-12" ${bookingAttrs(bookHref)}>
+    <a class="hidden lg:inline-flex items-center justify-center px-6 py-3 bg-deep-navy text-on-secondary font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-12" ${bookingAttrs(bookHref)}>
       Book Your Stay
     </a>
-    <button class="md:hidden text-deep-navy" type="button" aria-label="Open menu" data-menu-open>
+    <button class="lg:hidden text-deep-navy" type="button" aria-label="Open menu" data-menu-open>
       <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
     </button>
   </div>
 </nav>
 <div class="ellipse-mobile-nav" id="mobile-nav" hidden>
-  <div class="flex justify-between items-center">
+  <div class="ellipse-mobile-nav__top">
     <a class="ellipse-logo ellipse-logo--header" href="index.html" aria-label="Ellipse Hotels home">
       <img src="assets/brand/logo-on-light.png" alt="Ellipse Hotels" width="180" height="61" />
     </a>
@@ -74,15 +74,23 @@
       <span class="material-symbols-outlined text-2xl" aria-hidden="true">close</span>
     </button>
   </div>
-  <nav aria-label="Mobile navigation">
-    ${NAV.map((item) => {
-      const current = page === item.id ? ' aria-current="page"' : "";
-      return `<a href="${item.href}"${current}>${item.label}</a>`;
-    }).join("")}
-  </nav>
-  <a class="inline-flex items-center justify-center px-6 py-4 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest" ${bookingAttrs(bookHref)}>
-    Book Your Stay
-  </a>
+  <div class="ellipse-mobile-nav__body">
+    <nav aria-label="Mobile navigation">
+      ${NAV.map((item) => {
+        const current = page === item.id ? ' aria-current="page"' : "";
+        return `<a href="${item.href}"${current}>${item.label}</a>`;
+      }).join("")}
+    </nav>
+    <div class="ellipse-mobile-nav__divider" aria-hidden="true"></div>
+    <div class="ellipse-mobile-nav__aside">
+      <div class="ellipse-mobile-nav__media">
+        <img src="assets/images/home/experience-main.jpg" alt="" />
+      </div>
+      <a class="ellipse-mobile-nav__cta inline-flex items-center justify-center px-5 py-3.5 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest" ${bookingAttrs(bookHref)}>
+        Book Your Stay
+      </a>
+    </div>
+  </div>
 </div>`;
   }
 
