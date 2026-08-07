@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact | Ellipse Hotels</title>
+  <meta name="description" content="Contact Ellipse Hotels — 31 Sola Adewumi Street, Bucknor, Ejigbo, Lagos." />
+  <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-theme.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/ellipse.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+</head>
+<body class="has-legacy-content bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col" data-page="contact">
+  <div id="site-header-root"></div>
+
+  <main id="main" class="legacy-main flex-grow">
+    <header class="page-hero" style="min-height:min(52vh,480px)">
+      <div class="media-slot" data-ratio="16/9" data-image="contactHero" data-eager>
+        <div class="media-slot__label"><span>[16:9 HERO]</span><span>Contact</span></div>
+      </div>
+      <div class="page-hero__content reveal">
+        <p class="eyebrow" style="color:var(--gold-soft)">Contact</p>
+        <h1 class="display">We’d love to hear from you</h1>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <h2 class="subhead">Address</h2>
+          <p style="margin:1rem 0 1.5rem;line-height:1.75">
+            31 Sola Adewumi Street<br />
+            Shola, Oshodi<br />
+            Bucknor, Ejigbo<br />
+            Lagos, Nigeria
+          </p>
+
+          <h2 class="subhead">Contact</h2>
+          <p class="muted" style="margin:0.75rem 0 0.5rem">Phone, email and WhatsApp will appear here when supplied.</p>
+          <span class="placeholder-note">Contact details pending</span>
+
+          <div class="contact-actions">
+            <a class="btn btn-primary" id="contact-directions" href="#" target="_blank" rel="noopener noreferrer">Get Directions</a>
+            <!-- Call / WhatsApp / Email buttons intentionally omitted until real details exist -->
+          </div>
+
+          <div style="margin-top:2.5rem">
+            <div class="media-slot" data-ratio="16/9" data-image="location">
+              <div class="media-slot__label"><span>[16:9 MAP AREA]</span><span>Property context</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <h2 class="subhead" style="margin-bottom:1.25rem">Send a message</h2>
+          <form class="form-grid" id="contact-form" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="subject">Subject</label>
+              <input id="subject" name="subject" type="text" required />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="muted" id="form-status" role="status" aria-live="polite" style="margin:0;font-size:0.9rem"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="site-footer-root"></div>
+  <script src="data/booking.js"></script>
+  <script src="data/images.js"></script>
+  <script src="js/site-chrome.js"></script>
+  <script src="js/images.js"></script>
+  <script src="js/motion.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var dir = document.getElementById("contact-directions");
+      if (dir && window.EllipseChrome) dir.href = window.EllipseChrome.mapsUrl;
+
+      var form = document.getElementById("contact-form");
+      var status = document.getElementById("form-status");
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        status.textContent = "Thank you. Message handling will connect to the hotel’s inbox when email is configured. Your details were not sent yet.";
+        form.reset();
+      });
+    });
+  </script>
+</body>
+</html>
