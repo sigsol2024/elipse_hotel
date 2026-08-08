@@ -361,18 +361,19 @@ body.facilities-page {
 .facilities-stack .stacked-section__label {
   display: inline-block;
   color: #fff;
-  background: rgba(27, 43, 58, 0.55);
+  background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   padding: 0.55rem 0.85rem;
   margin-bottom: 1rem;
 }
 
 .facilities-stack .stacked-section__title {
-  color: #fff;
+  color: #fff !important;
 }
 
 .facilities-stack .stacked-section__copy {
-  color: #fff;
+  color: #fff !important;
 }
 
 .facilities-stack .stacked-section__cta {
@@ -382,8 +383,8 @@ body.facilities-page {
   gap: 0.5rem;
   min-height: 3.25rem;
   padding: 0.85rem 1.75rem;
-  background: #fff;
-  color: #1b2b3a;
+  background: #ffffff !important;
+  color: #1b2b3a !important;
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -396,8 +397,8 @@ body.facilities-page {
 }
 
 .facilities-stack .stacked-section__cta:hover {
-  background: #d4af37;
-  color: #1b2b3a;
+  background: #d4af37 !important;
+  color: #1b2b3a !important;
 }
 
 .facilities-stack .stacked-section__cta:hover .material-symbols-outlined {
