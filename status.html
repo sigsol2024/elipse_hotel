@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deploy check | Ellipse Hotels</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1c1c; }
+    h1 { font-size: 1.25rem; }
+    .ok { color: #0a7a3e; }
+    .bad { color: #b00020; }
+    pre { background: #f3f3f3; padding: 1rem; overflow: auto; font-size: 0.85rem; }
+    li { margin: 0.4rem 0; }
+  </style>
+</head>
+<body>
+  <h1>Ellipse deploy check</h1>
+  <p>Open this file directly: <code>/status.html</code>. If this page loads but <code>/</code> shows “Index of /”, Apache is not using <code>index.html</code> as the directory index.</p>
+  <ul id="checks"></ul>
+  <h2>Log</h2>
+  <pre id="log"></pre>
+  <script>
+    (function () {
+      var checks = document.getElementById("checks");
+      var logEl = document.getElementById("log");
+      var lines = [];
+
+      function log(msg) {
+        var stamp = new Date().toISOString();
+        lines.push("[" + stamp + "] " + msg);
+        logEl.textContent = lines.join("\n");
+        try { console.log("[ellipse-deploy]", msg); } catch (e) {}
+      }
+
+      function add(label, ok, detail) {
+        var li = document.createElement("li");
+        li.className = ok ? "ok" : "bad";
+        li.textContent = (ok ? "OK — " : "FAIL — ") + label + (detail ? " (" + detail + ")" : "");
+        checks.appendChild(li);
+        log((ok ? "OK" : "FAIL") + ": " + label + (detail ? " | " + detail : ""));
+      }
+
+      log("Path: " + location.href);
+      log("Host: " + location.host);
+      add("status.html is reachable", true, location.pathname);
+
+      var required = [
+        "index.html",
+        "about.html",
+        "rooms.html",
+        "css/ellipse.css",
+        "js/site-chrome.js",
+        "js/rooms.js",
+        "data/rooms.js",
+        "data/booking.js",
+        "assets/brand/logo-on-light.png"
+      ];
+
+      required.forEach(function (path) {
+        fetch(path, { method: "HEAD", cache: "no-store" })
+          .then(function (res) {
+            add(path, res.ok, "HTTP " + res.status);
+          })
+          .catch(function (err) {
+            add(path, false, String(err && err.message ? err.message : err));
+          });
+      });
+
+      fetch("index.html", { cache: "no-store" })
+        .then(function (res) { return res.text().then(function (t) { return { res: res, t: t }; }); })
+        .then(function (data) {
+          var hasTitle = /Ellipse Hotels/i.test(data.t || "");
+          add("index.html contains Ellipse markup", hasTitle, "HTTP " + data.res.status + ", bytes " + (data.t || "").length);
+        })
+        .catch(function (err) {
+          add("index.html readable", false, String(err && err.message ? err.message : err));
+        });
+    })();
+  </script>
+</body>
+</html>

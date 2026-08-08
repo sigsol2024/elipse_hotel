@@ -1,0 +1,21 @@
+# Ellipse Hotels — Apache document root helpers
+# Place this file in the same folder as index.html (usually public_html)
+
+DirectoryIndex index.html index.htm
+
+# Stop Apache from showing a bare folder listing when index fails
+Options -Indexes
+
+# If someone hits a directory URL, try index.html first
+<IfModule mod_dir.c>
+  DirectoryIndex index.html
+</IfModule>
+
+# Helpful when assets 404 after deploy
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Do not rewrite real files/folders
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+</IfModule>
