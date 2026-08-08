@@ -1,106 +1,92 @@
 /**
- * Room catalogue — provisional categories until Ellipse Hotels supplies final data.
- * Update this file (not HTML) when names, photos, prices, amenities, or booking IDs arrive.
+ * Shared room catalogue — single source for homepage, rooms page, and room details.
+ * Update this file (not HTML) when names, copy, photos, rates, or booking IDs change.
  */
 window.EllipseRooms = {
-  order: ["standard", "deluxe", "executive", "suite"],
+  /** Rooms page / general catalogue order */
+  order: ["executive", "deluxe", "standard"],
+
+  /** Homepage teaser order */
+  homeOrder: ["standard", "deluxe", "executive"],
 
   items: {
     standard: {
       slug: "standard",
       name: "Standard Room",
+      headline: "Intelligent Comfort",
       provisional: true,
       shortDescription:
-        "A calm, well-proportioned room for restful stays. Final details to be confirmed.",
+        "A focused, intelligent space designed for the practical traveler. Featuring essential comforts, fine linens, and a dedicated work area bathed in natural light.",
       description:
-        "Thoughtfully arranged for comfort and clarity. Occupancy, bed configuration, size and amenity lists will be published once confirmed by the hotel.",
-      occupancy: "To be confirmed",
-      bed: "To be confirmed",
-      size: "To be confirmed",
+        "Essential comfort executed with precision. An intimate space designed purely for rest, stripping away the unnecessary to focus on quality sleep and clarity.",
+      occupancy: "Up to 2 Guests",
+      bed: "King Bed",
+      size: "",
       priceFrom: null,
+      image: "assets/images/home/room-standard.jpg",
       amenities: [],
       amenitiesNote: "Amenity list forthcoming.",
       bookingRoomId: "",
       bookingUrl: "",
+      catalogueLayout: "split-left",
+      homeLayout: "image-left",
       gallery: [
-        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography placeholder" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" },
-        { ratio: "3/2", label: "3:2 Detail", caption: "Replace with room photo" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" }
-      ],
-      featureLayout: "feature"
+        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography" },
+        { ratio: "4/5", label: "4:5 Detail", caption: "Room detail" },
+        { ratio: "3/2", label: "3/2 Detail", caption: "Room detail" }
+      ]
     },
     deluxe: {
       slug: "deluxe",
       name: "Deluxe Room",
+      headline: "Expanded Perspectives",
       provisional: true,
       shortDescription:
-        "Additional space and a quieter sense of finish. Specifications to be confirmed.",
+        "Expanded volume and enhanced materiality. The Deluxe offers a broader perspective with elevated seating arrangements and curated architectural details.",
       description:
-        "Designed for guests who want a little more room to settle. Exact furnishings, views and inclusions will be updated when hotel photography and specs are available.",
-      occupancy: "To be confirmed",
-      bed: "To be confirmed",
-      size: "To be confirmed",
+        "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced amenities for a truly restful experience.",
+      occupancy: "Up to 2 Guests",
+      bed: "King Bed",
+      size: "",
       priceFrom: null,
+      image: "assets/images/home/room-deluxe.jpg",
       amenities: [],
       amenitiesNote: "Amenity list forthcoming.",
       bookingRoomId: "",
       bookingUrl: "",
+      catalogueLayout: "split-right",
+      homeLayout: "image-right",
       gallery: [
-        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography placeholder" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" },
-        { ratio: "3/2", label: "3:2 Detail", caption: "Replace with room photo" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" }
-      ],
-      featureLayout: "pair"
+        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography" },
+        { ratio: "4/5", label: "4:5 Detail", caption: "Room detail" },
+        { ratio: "3/2", label: "3/2 Detail", caption: "Room detail" }
+      ]
     },
     executive: {
       slug: "executive",
-      name: "Executive Room",
+      name: "Executive Suite",
+      headline: "Ultimate Refinement",
       provisional: true,
       shortDescription:
-        "Balanced for rest and focused work. Final configuration forthcoming.",
+        "Our most generous offering. The Executive Suite features a distinct living space, premium amenities, and panoramic views of the city.",
       description:
-        "A composed setting for guests who move between rest and productivity. Work surface, seating and technical details will be confirmed by the hotel.",
-      occupancy: "To be confirmed",
-      bed: "To be confirmed",
-      size: "To be confirmed",
+        "Our most expansive offering. The Executive Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
+      occupancy: "Up to 3 Guests",
+      bed: "King Bed",
+      size: "",
       priceFrom: null,
+      image: "assets/images/home/room-executive.jpg",
       amenities: [],
       amenitiesNote: "Amenity list forthcoming.",
       bookingRoomId: "",
       bookingUrl: "",
+      catalogueLayout: "featured",
+      homeLayout: "image-left",
       gallery: [
-        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography placeholder" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" },
-        { ratio: "3/2", label: "3:2 Detail", caption: "Replace with room photo" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" }
-      ],
-      featureLayout: "pair"
-    },
-    suite: {
-      slug: "suite",
-      name: "Suite",
-      provisional: true,
-      shortDescription:
-        "Our most spacious category. Layout and appointments to be confirmed.",
-      description:
-        "A more expansive stay with room to gather and unwind. Suite composition, pricing and photography will replace these placeholders when supplied.",
-      occupancy: "To be confirmed",
-      bed: "To be confirmed",
-      size: "To be confirmed",
-      priceFrom: null,
-      amenities: [],
-      amenitiesNote: "Amenity list forthcoming.",
-      bookingRoomId: "",
-      bookingUrl: "",
-      gallery: [
-        { ratio: "16/9", label: "16:9 Hero image", caption: "Room photography placeholder" },
-        { ratio: "4/5", label: "4:5 Detail", caption: "Replace with room photo" },
-        { ratio: "3/2", label: "3:2 Detail", caption: "Replace with room photo" },
-        { ratio: "16/9", label: "16:9 Living area", caption: "Replace with suite photo" }
-      ],
-      featureLayout: "full"
+        { ratio: "16/9", label: "16:9 Hero image", caption: "Suite photography" },
+        { ratio: "4/5", label: "4:5 Detail", caption: "Suite detail" },
+        { ratio: "3/2", label: "3/2 Detail", caption: "Suite detail" }
+      ]
     }
   },
 
@@ -108,8 +94,20 @@ window.EllipseRooms = {
     return this.order.map((slug) => this.items[slug]).filter(Boolean);
   },
 
+  homeList() {
+    const order = this.homeOrder || this.order;
+    return order.map((slug) => this.items[slug]).filter(Boolean);
+  },
+
   get(slug) {
     if (!slug) return null;
     return this.items[slug] || null;
+  },
+
+  facts(room) {
+    if (!room) return [];
+    return [room.size, room.bed, room.occupancy].filter(
+      (part) => part && String(part).trim() && part !== "To be confirmed"
+    );
   }
 };

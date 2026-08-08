@@ -1,122 +1,193 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About | Ellipse Hotels</title>
-  <meta name="description" content="About Ellipse Hotels — hospitality shaped around comfort, clarity and attentive service in Lagos." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Ellipse Hotels</title>
+  <meta name="description" content="About Ellipse Hotels — a different way to stay in Lagos. Comfort, thoughtful hospitality and considered spaces." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/ellipse.css" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/pages.css" />
 </head>
-<body class="has-legacy-content bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col" data-page="about">
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="about">
   <div id="site-header-root"></div>
 
-  <main id="main" class="legacy-main flex-grow">
-    <header class="page-hero">
-      <div class="media-slot" data-ratio="16/9" data-image="about" data-eager>
-        <div class="media-slot__label"><span>[16:9 HERO]</span><span>About</span></div>
+  <main id="main" class="flex-grow pt-[88px]">
+    <!-- Hero -->
+    <section class="relative h-[80vh] min-h-[520px] max-h-[760px] w-full flex items-end pb-20 md:pb-24">
+      <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover" alt="Ellipse Hotels interior" src="assets/images/about/hero.jpg" />
+        <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 via-deep-navy/40 to-deep-navy/50"></div>
       </div>
-      <div class="page-hero__content reveal">
-        <p class="eyebrow" style="color:var(--gold-soft)">About</p>
-        <h1 class="display">About Ellipse Hotels</h1>
-        <p class="lede" style="color:rgba(247,244,239,0.78);margin-top:0.85rem;max-width:32rem">Hospitality should feel effortless — contemporary comfort with genuine human service.</p>
-      </div>
-    </header>
-
-    <section class="section">
-      <div class="container intro-block">
-        <h2 class="display reveal" style="font-size:clamp(2rem,4vw,3rem);max-width:16ch">A simple idea, held carefully.</h2>
-        <p class="lede reveal">Ellipse Hotels is built around the belief that a good stay is clear, calm and considered. We do not invent a long history here — the hotel’s story will deepen as the property and its people are ready to share it.</p>
-      </div>
-    </section>
-
-    <section class="section section-tight">
-      <div class="container">
-        <article class="chapter reveal">
-          <div class="chapter__media">
-            <div class="media-slot signature-curve" data-ratio="4/5" data-image="corridor">
-              <div class="media-slot__label"><span>[4:5]</span><span>Chapter 01</span></div>
-            </div>
-          </div>
-          <div class="chapter__body">
-            <p class="eyebrow">Chapter 01</p>
-            <h2 class="headline">A place to arrive</h2>
-            <p class="lede" style="margin-top:1rem">From the first moment, the aim is ease — orientation without noise, welcome without performance. Lagos outside; composure within.</p>
-          </div>
-        </article>
-
-        <article class="chapter chapter--reverse reveal">
-          <div class="chapter__media">
-            <div class="media-slot" data-ratio="3/2" data-image="dining">
-              <div class="media-slot__label"><span>[3:2]</span><span>Chapter 02</span></div>
-            </div>
-          </div>
-          <div class="chapter__body">
-            <p class="eyebrow">Chapter 02</p>
-            <h2 class="headline">Comfort, considered</h2>
-            <p class="lede" style="margin-top:1rem">Rooms and shared spaces are shaped for rest and everyday clarity. Materials, light and proportion do the quiet work — not decoration for its own sake.</p>
-          </div>
-        </article>
-
-        <article class="chapter reveal">
-          <div class="chapter__media">
-            <div class="media-slot" data-ratio="4/5" data-image="roomsHero">
-              <div class="media-slot__label"><span>[4:5]</span><span>Chapter 03</span></div>
-            </div>
-          </div>
-          <div class="chapter__body">
-            <p class="eyebrow">Chapter 03</p>
-            <h2 class="headline">Hospitality with intention</h2>
-            <p class="lede" style="margin-top:1rem">Service principles stay human: listen well, move with care, leave room for the guest’s own rhythm. Details will be published as the team formalises them.</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section section-surface">
-      <div class="container location-grid">
-        <div class="reveal">
-          <p class="eyebrow">Location</p>
-          <h2 class="headline">Lagos, with intention</h2>
-          <p style="margin:1.25rem 0;line-height:1.7">
-            31 Sola Adewumi Street<br />
-            Shola, Oshodi<br />
-            Bucknor, Ejigbo<br />
-            Lagos, Nigeria
+      <div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+        <div class="max-w-3xl">
+          <p class="font-label-caps text-label-caps text-white mb-6 tracking-widest uppercase flex items-center">
+            <span class="w-12 h-px bg-accent-gold mr-4" aria-hidden="true"></span>About Ellipse
           </p>
-          <a class="btn btn-secondary" href="contact.html">Contact &amp; directions</a>
+          <h1 class="font-headline-md text-[2rem] leading-tight md:text-[2.75rem] lg:text-[3.25rem] text-white mb-2 font-light tracking-tight">
+            A different way to stay<br class="lg:hidden" /><span class="hidden lg:inline"> </span>in Lagos.
+          </h1>
         </div>
-        <div class="reveal">
-          <div class="media-slot" data-ratio="16/9" data-image="location">
-            <div class="media-slot__label"><span>[16:9]</span><span>Location</span></div>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface reveal">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+        <div class="md:col-span-5 md:pr-12">
+          <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center">
+            <span class="w-12 h-px bg-accent-gold mr-4" aria-hidden="true"></span>Our Story
+          </p>
+          <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-6 leading-snug">A place to arrive.</h2>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 pt-2 md:pt-0">
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-6">
+            We have created a sanctuary in the heart of Lagos—a place where the vibrant energy of the city is balanced by genuine, attentive service and a profound respect for your rest and relaxation.
+          </p>
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant">
+            Whether you are here for a critical business summit or a moment of personal retreat, our spaces are crafted to adapt to your rhythm.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="py-20 md:py-section-gap bg-warm-grey px-margin-mobile md:px-margin-desktop reveal">
+      <div class="max-w-container-max mx-auto">
+        <div class="text-center mb-12 md:mb-16">
+          <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Our Philosophy</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
+          <div>
+            <div class="w-8 h-px bg-accent-gold mb-6" aria-hidden="true"></div>
+            <h3 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-4">Comfort</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Every detail of our rooms and public spaces has been considered to foster a sense of well-being, removing friction so you can simply be.</p>
+          </div>
+          <div>
+            <div class="w-8 h-px bg-accent-gold mb-6" aria-hidden="true"></div>
+            <h3 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-4">Hospitality</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">Our team is trained not just in operational excellence, but in the art of genuine connection, ensuring every interaction feels personal and warm.</p>
+          </div>
+          <div>
+            <div class="w-8 h-px bg-accent-gold mb-6" aria-hidden="true"></div>
+            <h3 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-4">Attention to Detail</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant">From the acoustics of our walls to the curation of our spaces, we prioritize the fundamentals of a perfect stay.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="final-cta">
-      <div class="media-slot" data-ratio="16/9" style="position:absolute;inset:0" data-image="finalCta">
-        <div class="media-slot__label"><span>[16:9]</span><span></span></div>
+    <!-- The Hotel -->
+    <section class="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
+      <div class="mb-12 md:mb-16 text-center md:text-left">
+        <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center justify-center md:justify-start">
+          <span class="w-12 h-px bg-accent-gold mr-4" aria-hidden="true"></span>The Hotel
+        </p>
+        <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Spaces designed for purpose.</h2>
       </div>
-      <div class="container final-cta__content reveal">
-        <h2 class="display" style="font-size:clamp(2.25rem,4vw,3.25rem)">Stay with Ellipse</h2>
-        <p class="lede" style="color:rgba(247,244,239,0.75);margin:1rem 0 1.75rem">Explore rooms, or open the booking engine when it is connected.</p>
-        <a class="btn btn-primary" href="rooms.html" style="background:#fff;color:var(--navy);border-color:#fff">Explore Rooms</a>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-12 md:mb-gutter">
+        <div class="aspect-[4/3] bg-surface-container overflow-hidden group">
+          <img class="w-full h-full object-cover hover-zoom" alt="Wellness and fitness spaces" src="assets/images/about/wellness.jpg" />
+        </div>
+        <div class="flex flex-col justify-center px-0 md:px-12 py-4 md:py-0">
+          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Wellness &amp; Fitness</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">Dedicated spaces for physical and mental rejuvenation, featuring considered equipment and tranquil recovery areas.</p>
+          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="facilities.html">
+            View Facilities
+            <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+        <div class="flex flex-col justify-center px-0 md:px-12 py-4 md:py-0 order-2 md:order-1">
+          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Meeting Spaces</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">Seamless connectivity and thoughtfully designed environments that cater to the needs of the modern business professional.</p>
+          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="facilities.html">
+            Explore Facilities
+            <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+          </a>
+        </div>
+        <div class="aspect-[4/3] bg-surface-container overflow-hidden order-1 md:order-2 group">
+          <img class="w-full h-full object-cover hover-zoom" alt="Meeting and gathering spaces" src="assets/images/about/meeting.jpg" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Lagos / Location -->
+    <section class="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+        <div class="md:col-span-7 pr-0 md:pr-12">
+          <img class="w-full aspect-[16/10] object-cover" alt="Ellipse Hotels location in Lagos" src="assets/images/about/lagos.jpg" />
+        </div>
+        <div class="md:col-span-5 mt-10 md:mt-0">
+          <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center">
+            <span class="w-12 h-px bg-accent-gold mr-4" aria-hidden="true"></span>Our Location
+          </p>
+          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-6 leading-snug">Lagos, within reach.</h3>
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-6">
+            Strategically located in Ejigbo, Ellipse offers considered accessibility. We are positioned for smooth arrivals and departures for travelers moving through Lagos.
+          </p>
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-8">
+            Set within a quieter residential enclave at 31 Sola Adewumi Street, Shola, Oshodi, Bucknor, Ejigbo, the hotel provides a peaceful retreat while keeping key districts within reach.
+          </p>
+          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="https://www.google.com/maps/search/?api=1&query=31%20Sola%20Adewumi%20Street%2C%20Shola%2C%20Oshodi%2C%20Bucknor%2C%20Ejigbo%2C%20Lagos%2C%20Nigeria" target="_blank" rel="noopener noreferrer">
+            Get Directions
+            <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full-width break -->
+    <section class="relative h-[50vh] min-h-[360px] w-full flex items-center justify-center reveal">
+      <div class="absolute inset-0 z-0">
+        <img class="w-full h-full object-cover" alt="Ellipse Hotels exterior" src="assets/images/about/break.jpg" />
+        <div class="absolute inset-0 bg-deep-navy/55"></div>
+      </div>
+      <div class="relative z-10 text-center px-margin-mobile">
+        <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:font-display-lg lg:text-display-lg text-white leading-snug">Your stay starts here.</h2>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="bg-deep-navy py-20 md:py-section-gap text-center px-margin-mobile md:px-margin-desktop reveal">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-white mb-10 leading-snug">Make Ellipse your next stay in Lagos.</h2>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-accent-gold text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors h-14" href="#book" data-book-general>
+            Book Your Stay
+          </a>
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="rooms.html">
+            Explore Our Rooms
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
   <div id="site-footer-root"></div>
+
   <script src="data/booking.js"></script>
-  <script src="data/images.js"></script>
   <script src="js/site-chrome.js"></script>
-  <script src="js/images.js"></script>
-  <script src="js/motion.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var bookHref =
+        window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
+          ? window.EllipseChrome.bookingGeneralHref()
+          : "#book";
+      document.querySelectorAll("[data-book-general]").forEach(function (el) {
+        if (bookHref !== "#book") {
+          el.setAttribute("href", bookHref);
+          el.setAttribute("target", "_blank");
+          el.setAttribute("rel", "noopener noreferrer");
+        }
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,49 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rooms &amp; Suites | Ellipse Hotels</title>
-  <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos — thoughtfully designed spaces for rest and work." />
+  <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos — thoughtfully designed spaces for rest, work, and everything in between." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/ellipse.css" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/pages.css" />
 </head>
-<body class="has-legacy-content bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col" data-page="rooms">
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col overflow-x-hidden" data-page="rooms">
   <div id="site-header-root"></div>
 
-  <main id="main" class="legacy-main flex-grow">
-    <header class="page-hero">
-      <div class="media-slot" data-ratio="16/9" data-image="roomsHero" data-eager>
-        <div class="media-slot__label"><span>[16:9 HERO]</span><span>Rooms</span></div>
+  <main id="main" class="flex-grow pt-[88px]">
+    <!-- Intro -->
+    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pt-16 md:pt-24 pb-16 md:pb-24 reveal">
+      <div class="grid grid-cols-4 md:grid-cols-12 gap-gutter">
+        <div class="col-span-4 md:col-span-8 md:col-start-3 text-center">
+          <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center">
+            <span class="w-6 h-px bg-accent-gold mr-4" aria-hidden="true"></span>Stay Your Way
+          </p>
+          <h1 class="font-headline-md text-[2rem] leading-tight md:text-[2.75rem] lg:text-[3.25rem] text-deep-navy mb-6 font-light tracking-tight">
+            Rooms &amp; Suites
+          </h1>
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+            Thoughtfully designed spaces for rest, work, and everything in between. Experience architectural calm infused with quiet hospitality.
+          </p>
+        </div>
       </div>
-      <div class="page-hero__content reveal">
-        <p class="eyebrow" style="color:var(--gold-soft)">Accommodation</p>
-        <h1 class="display">Rooms &amp; Suites</h1>
-        <p class="lede" style="color:rgba(247,244,239,0.78);margin-top:0.85rem;max-width:34rem">Thoughtfully designed spaces for rest, work and everything in between.</p>
-      </div>
-    </header>
+    </section>
 
-    <section class="section">
-      <div class="container" style="margin-bottom:2rem">
-        <p class="muted reveal">Categories below are provisional placeholders. Names, photography, rates and amenities will replace this content when supplied. “Book Now” opens the hotel’s booking engine for that room type once booking links are connected.</p>
+    <!-- Dynamic catalogue from data/rooms.js -->
+    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-20 md:pb-section-gap space-y-24 md:space-y-32" id="rooms-catalogue" aria-live="polite">
+      <p class="text-on-surface-variant text-center">Loading rooms…</p>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-deep-navy py-20 md:py-section-gap text-center px-margin-mobile md:px-margin-desktop reveal">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-white mb-10 leading-snug">Ready to reserve your stay?</h2>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-accent-gold text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors h-14" href="#book" data-book-general>
+            Book Your Stay
+          </a>
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="contact.html">
+            Contact Us
+          </a>
+        </div>
       </div>
-      <div id="rooms-catalogue" class="container"></div>
     </section>
   </main>
 
   <div id="site-footer-root"></div>
+
   <script src="data/booking.js"></script>
   <script src="data/rooms.js"></script>
   <script src="data/images.js"></script>
   <script src="js/site-chrome.js"></script>
-  <script src="js/images.js"></script>
   <script src="js/rooms.js"></script>
-  <script src="js/motion.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var bookHref =
+        window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
+          ? window.EllipseChrome.bookingGeneralHref()
+          : "#book";
+      document.querySelectorAll("[data-book-general]").forEach(function (el) {
+        if (bookHref !== "#book") {
+          el.setAttribute("href", bookHref);
+          el.setAttribute("target", "_blank");
+          el.setAttribute("rel", "noopener noreferrer");
+        }
+      });
+    });
+  </script>
 </body>
 </html>

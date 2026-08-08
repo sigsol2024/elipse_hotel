@@ -226,11 +226,10 @@
       });
     });
 
-    // Reveal on scroll
-    const reveals = document.querySelectorAll(".reveal");
+    // Reveal on scroll (re-query each time so dynamically injected rooms appear)
     function reveal() {
       const windowHeight = window.innerHeight;
-      reveals.forEach((el) => {
+      document.querySelectorAll(".reveal").forEach((el) => {
         if (el.getBoundingClientRect().top < windowHeight - 100) {
           el.classList.add("active");
         }
@@ -238,6 +237,8 @@
     }
     window.addEventListener("scroll", reveal, { passive: true });
     reveal();
+    window.EllipseChrome = window.EllipseChrome || {};
+    window.EllipseChrome.refreshReveals = reveal;
 
     // Soft notice when booking not configured
     document.addEventListener("click", (e) => {
@@ -269,10 +270,10 @@
     initChrome();
   }
 
-  window.EllipseChrome = {
+  window.EllipseChrome = Object.assign(window.EllipseChrome || {}, {
     mapsUrl: MAPS_URL,
     address: ADDRESS,
     addressShort: ADDRESS_SHORT,
     bookingGeneralHref
-  };
+  });
 })();

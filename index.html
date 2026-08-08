@@ -173,74 +173,12 @@
         <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Stay Your Way</p>
         <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Rooms &amp; Suites</h2>
       </div>
-
-      <!-- Standard -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center mb-24 reveal">
-        <div class="md:col-span-7 group">
-          <div class="aspect-[16/9] bg-surface-container overflow-hidden">
-            <img class="w-full h-full object-cover hover-zoom" alt="Standard room" src="assets/images/home/room-standard.jpg" />
-          </div>
-        </div>
-        <div class="md:col-span-4 md:col-start-9 flex flex-col justify-center mt-8 md:mt-0">
-          <p class="font-label-caps text-label-caps text-accent-gold mb-2 uppercase tracking-widest">Standard Room</p>
-          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Intelligent Comfort</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-8">
-            A focused, intelligent space designed for the practical traveler. Featuring essential comforts, fine linens, and a dedicated work area bathed in natural light.
-          </p>
-          <div class="flex items-center gap-6">
-            <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=standard">
-              View Room
-              <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-            </a>
-            <a class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest border-b border-accent-gold hover:opacity-80 transition-opacity" href="#book" data-book-general>Book Now</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Deluxe -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center mb-24 reveal">
-        <div class="md:col-span-4 md:col-start-1 flex flex-col justify-center order-2 md:order-1 mt-8 md:mt-0">
-          <p class="font-label-caps text-label-caps text-accent-gold mb-2 uppercase tracking-widest">Deluxe Room</p>
-          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Expanded Perspectives</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-8">
-            Expanded volume and enhanced materiality. The Deluxe offers a broader perspective with elevated seating arrangements and curated architectural details.
-          </p>
-          <div class="flex items-center gap-6">
-            <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=deluxe">
-              View Room
-              <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-            </a>
-            <a class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest border-b border-accent-gold hover:opacity-80 transition-opacity" href="#book" data-book-general>Book Now</a>
-          </div>
-        </div>
-        <div class="md:col-span-7 md:col-start-6 order-1 md:order-2 group">
-          <div class="aspect-[16/9] bg-surface-container overflow-hidden">
-            <img class="w-full h-full object-cover hover-zoom" alt="Deluxe room" src="assets/images/home/room-deluxe.jpg" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Executive -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center reveal">
-        <div class="md:col-span-7 group">
-          <div class="aspect-[16/9] bg-surface-container overflow-hidden">
-            <img class="w-full h-full object-cover hover-zoom" alt="Executive suite" src="assets/images/home/room-executive.jpg" />
-          </div>
-        </div>
-        <div class="md:col-span-4 md:col-start-9 flex flex-col justify-center mt-8 md:mt-0">
-          <p class="font-label-caps text-label-caps text-accent-gold mb-2 uppercase tracking-widest">Executive Suite</p>
-          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Ultimate Refinement</h3>
-          <p class="font-body-md text-body-md text-on-surface-variant mb-8">
-            Our most generous offering. The Executive Suite features a distinct living space, premium amenities, and panoramic views of the city.
-          </p>
-          <div class="flex items-center gap-6">
-            <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=executive">
-              View Suite
-              <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-            </a>
-            <a class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest border-b border-accent-gold hover:opacity-80 transition-opacity" href="#book" data-book-general>Book Now</a>
-          </div>
-        </div>
+      <div id="home-rooms"></div>
+      <div class="mt-16 text-center reveal">
+        <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="rooms.html">
+          View All Rooms
+          <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+        </a>
       </div>
     </section>
 
@@ -387,7 +325,9 @@
   <div id="site-footer-root"></div>
 
   <script src="data/booking.js"></script>
+  <script src="data/rooms.js"></script>
   <script src="js/site-chrome.js"></script>
+  <script src="js/rooms.js"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
