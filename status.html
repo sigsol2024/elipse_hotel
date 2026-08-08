@@ -5,25 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Deploy check | Ellipse Hotels</title>
   <style>
-    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1c1c; }
+    body { font-family: system-ui, sans-serif; max-width: 44rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; color: #1a1c1c; }
     h1 { font-size: 1.25rem; }
     .ok { color: #0a7a3e; }
     .bad { color: #b00020; }
-    pre { background: #f3f3f3; padding: 1rem; overflow: auto; font-size: 0.85rem; }
+    .warn { color: #9a6700; }
+    pre { background: #f3f3f3; padding: 1rem; overflow: auto; font-size: 0.85rem; white-space: pre-wrap; }
     li { margin: 0.4rem 0; }
+    code { background: #f3f3f3; padding: 0.1rem 0.3rem; }
   </style>
 </head>
 <body>
   <h1>Ellipse deploy check</h1>
-  <p>Open this file directly: <code>/status.html</code>. If this page loads but <code>/</code> shows “Index of /”, Apache is not using <code>index.html</code> as the directory index.</p>
+  <p>This page diagnoses why <code>/</code> may show “Index of /” on a subdomain docroot.</p>
+  <p><strong>Also try:</strong> <a href="/">/</a> · <a href="/index.html">/index.html</a> · <a href="/diag.php">/diag.php</a></p>
   <ul id="checks"></ul>
+  <h2>Server folder listing (from diag.php)</h2>
+  <pre id="server">Loading…</pre>
   <h2>Log</h2>
   <pre id="log"></pre>
   <script>
     (function () {
       var checks = document.getElementById("checks");
       var logEl = document.getElementById("log");
+      var serverEl = document.getElementById("server");
       var lines = [];
+      var runId = "deploy-" + Date.now();
+
+      // #region agent log
+      function agentLog(hypothesisId, location, message, data) {
+        var payload = {
+          sessionId: "4f0b0f",
+          runId: runId,
+          hypothesisId: hypothesisId,
+          location: location,
+          message: message,
+          data: data || {},
+          timestamp: Date.now()
+        };
+        try {
+          fetch("http://127.0.0.1:7636/ingest/2243377c-6971-4843-b988-87e068d9386f", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Debug-Session-Id": "4f0b0f"
+            },
+            body: JSON.stringify(payload)
+          }).catch(function () {});
+        } catch (e) {}
+      }
+      // #endregion
 
       function log(msg) {
         var stamp = new Date().toISOString();
@@ -32,9 +63,9 @@
         try { console.log("[ellipse-deploy]", msg); } catch (e) {}
       }
 
-      function add(label, ok, detail) {
+      function add(label, ok, detail, cls) {
         var li = document.createElement("li");
-        li.className = ok ? "ok" : "bad";
+        li.className = cls || (ok ? "ok" : "bad");
         li.textContent = (ok ? "OK — " : "FAIL — ") + label + (detail ? " (" + detail + ")" : "");
         checks.appendChild(li);
         log((ok ? "OK" : "FAIL") + ": " + label + (detail ? " | " + detail : ""));
@@ -42,39 +73,140 @@
 
       log("Path: " + location.href);
       log("Host: " + location.host);
+      // #region agent log
+      agentLog("E", "status.html:boot", "status page loaded", {
+        href: location.href,
+        host: location.host,
+        pathname: location.pathname
+      });
+      // #endregion
       add("status.html is reachable", true, location.pathname);
 
       var required = [
         "index.html",
+        ".htaccess",
         "about.html",
         "rooms.html",
         "css/ellipse.css",
         "js/site-chrome.js",
-        "js/rooms.js",
         "data/rooms.js",
-        "data/booking.js",
         "assets/brand/logo-on-light.png"
       ];
 
+      var pending = required.length + 2;
+
+      function doneOne() {
+        pending -= 1;
+        if (pending <= 0) {
+          // #region agent log
+          agentLog("ALL", "status.html:complete", "all client checks finished", {
+            href: location.href,
+            logTail: lines.slice(-12)
+          });
+          // #endregion
+        }
+      }
+
       required.forEach(function (path) {
-        fetch(path, { method: "HEAD", cache: "no-store" })
+        fetch(path, { method: "GET", cache: "no-store" })
           .then(function (res) {
-            add(path, res.ok, "HTTP " + res.status);
+            var ok = res.ok;
+            add(path, ok, "HTTP " + res.status);
+            // #region agent log
+            agentLog(
+              path === "index.html" ? "A" : path === ".htaccess" ? "C" : "A",
+              "status.html:fetch",
+              "asset check",
+              { path: path, status: res.status, ok: ok }
+            );
+            // #endregion
           })
           .catch(function (err) {
             add(path, false, String(err && err.message ? err.message : err));
-          });
+            // #region agent log
+            agentLog("A", "status.html:fetch-error", "asset fetch failed", {
+              path: path,
+              error: String(err && err.message ? err.message : err)
+            });
+            // #endregion
+          })
+          .then(doneOne);
       });
 
       fetch("index.html", { cache: "no-store" })
-        .then(function (res) { return res.text().then(function (t) { return { res: res, t: t }; }); })
+        .then(function (res) {
+          return res.text().then(function (t) {
+            return { res: res, t: t };
+          });
+        })
         .then(function (data) {
           var hasTitle = /Ellipse Hotels/i.test(data.t || "");
-          add("index.html contains Ellipse markup", hasTitle, "HTTP " + data.res.status + ", bytes " + (data.t || "").length);
+          add(
+            "index.html contains Ellipse markup",
+            hasTitle,
+            "HTTP " + data.res.status + ", bytes " + (data.t || "").length
+          );
+          // #region agent log
+          agentLog("B", "status.html:index-body", "index.html body probe", {
+            status: data.res.status,
+            bytes: (data.t || "").length,
+            hasTitle: hasTitle,
+            head: String(data.t || "").slice(0, 120)
+          });
+          // #endregion
         })
         .catch(function (err) {
           add("index.html readable", false, String(err && err.message ? err.message : err));
-        });
+        })
+        .then(doneOne);
+
+      fetch("diag.php", { cache: "no-store" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          serverEl.textContent = JSON.stringify(data, null, 2);
+          var names = (data.entries || []).map(function (e) { return e.name; });
+          var hasIndex = names.indexOf("index.html") !== -1;
+          var hasCgiOnly =
+            names.filter(function (n) { return n !== "." && n !== ".."; }).length <= 2 &&
+            names.indexOf("cgi-bin") !== -1;
+          add("diag.php server listing", true, data.docRoot || "");
+          add("index.html in server docroot listing", hasIndex, hasIndex ? "found" : "NOT in this folder");
+          if (data.nestedProjectHint) {
+            add(
+              "possible nested git folder",
+              false,
+              data.nestedProjectHint,
+              "warn"
+            );
+          }
+          // #region agent log
+          agentLog("A", "status.html:diag", "server filesystem listing", {
+            docRoot: data.docRoot,
+            names: names,
+            hasIndex: hasIndex,
+            hasCgiOnly: hasCgiOnly,
+            nestedProjectHint: data.nestedProjectHint || null,
+            indexReadable: data.indexReadable,
+            htaccessReadable: data.htaccessReadable
+          });
+          // #endregion
+        })
+        .catch(function (err) {
+          serverEl.textContent =
+            "diag.php not available (" +
+            String(err && err.message ? err.message : err) +
+            "). Upload diag.php to the subdomain document root.";
+          add("diag.php server listing", false, String(err && err.message ? err.message : err), "warn");
+          // #region agent log
+          agentLog("A", "status.html:diag-missing", "diag.php failed", {
+            error: String(err && err.message ? err.message : err)
+          });
+          // #endregion
+        })
+        .then(doneOne);
     })();
   </script>
 </body>
