@@ -276,6 +276,131 @@
   }
 }
 
+/* ——— Facilities stacked storytelling ——— */
+html.facilities-page,
+body.facilities-page {
+  overflow-x: clip;
+}
+
+body.facilities-page {
+  display: block;
+  min-height: 0;
+}
+
+.facilities-stack {
+  position: relative;
+  display: block;
+}
+
+.facilities-stack .stacked-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.facilities-stack .stacked-section:nth-child(1) {
+  z-index: 1;
+}
+
+.facilities-stack .stacked-section:nth-child(2) {
+  z-index: 2;
+}
+
+.facilities-stack .stacked-section:nth-child(3) {
+  z-index: 3;
+}
+
+.facilities-stack .stacked-section:nth-child(4) {
+  z-index: 4;
+}
+
+.facilities-stack .stacked-section__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.facilities-stack .stacked-section__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+}
+
+.facilities-stack .stacked-section:hover .stacked-section__media img {
+  transform: scale(1.04);
+}
+
+.facilities-stack .stacked-section__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to top,
+    rgba(27, 43, 58, 0.92) 0%,
+    rgba(27, 43, 58, 0.45) 42%,
+    rgba(27, 43, 58, 0.12) 72%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.facilities-stack .stacked-section__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* Shared footer rides above last sticky panel */
+body.facilities-page #site-footer-root,
+body.facilities-page #site-footer-root > footer {
+  position: relative;
+  z-index: 25;
+}
+
+/* Facility modals */
+.facility-modal {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.facility-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.facility-modal__panel {
+  transform: translateY(20px);
+  transition: transform 0.4s ease;
+}
+
+.facility-modal.is-open .facility-modal__panel {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .facilities-stack .stacked-section__media img {
+    transition: none;
+  }
+
+  .facilities-stack .stacked-section:hover .stacked-section__media img {
+    transform: none;
+  }
+
+  .facility-modal,
+  .facility-modal__panel {
+    transition: none;
+  }
+}
+
 /* Inner pages still using legacy content CSS */
 body.has-legacy-content {
   background: #fff;
