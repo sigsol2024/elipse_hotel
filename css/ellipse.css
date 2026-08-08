@@ -344,10 +344,10 @@ body.facilities-page {
   z-index: 1;
   background: linear-gradient(
     to top,
-    rgba(27, 43, 58, 0.96) 0%,
-    rgba(27, 43, 58, 0.72) 38%,
-    rgba(27, 43, 58, 0.4) 62%,
-    rgba(27, 43, 58, 0.22) 100%
+    rgba(27, 43, 58, 0.92) 0%,
+    rgba(27, 43, 58, 0.45) 42%,
+    rgba(27, 43, 58, 0.12) 72%,
+    transparent 100%
   );
   pointer-events: none;
 }
@@ -371,10 +371,15 @@ body.facilities-page {
   color: #fff;
 }
 
+.facilities-stack .stacked-section__copy {
+  color: #fff;
+}
+
 .facilities-stack .stacked-section__cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   min-height: 3.25rem;
   padding: 0.85rem 1.75rem;
   background: #fff;
@@ -384,9 +389,19 @@ body.facilities-page {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+.facilities-stack .stacked-section__cta .material-symbols-outlined {
+  font-size: 1.125rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
 .facilities-stack .stacked-section__cta:hover {
   background: #d4af37;
   color: #1b2b3a;
+}
+
+.facilities-stack .stacked-section__cta:hover .material-symbols-outlined {
+  transform: translateX(3px);
 }
 
 /* Shared footer rides above last sticky panel */
