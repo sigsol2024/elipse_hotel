@@ -277,19 +277,20 @@
 }
 
 /* ——— Facilities stacked storytelling ——— */
-html.facilities-page,
-body.facilities-page {
-  overflow-x: clip;
+html.facilities-page {
+  scroll-behavior: smooth;
 }
 
 body.facilities-page {
   display: block;
   min-height: 0;
+  overflow-x: clip;
 }
 
 .facilities-stack {
   position: relative;
   display: block;
+  overflow-x: clip;
 }
 
 .facilities-stack .stacked-section {
@@ -301,6 +302,8 @@ body.facilities-page {
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  /* Let lower sticky panels slide over without stealing clicks on media */
+  pointer-events: none;
 }
 
 .facilities-stack .stacked-section:nth-child(1) {
@@ -356,16 +359,19 @@ body.facilities-page {
   position: relative;
   z-index: 2;
   width: 100%;
+  pointer-events: auto;
 }
 
 .facilities-stack .stacked-section__label {
   display: inline-block;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  padding: 0.55rem 0.85rem;
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.28) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.65rem 1rem;
   margin-bottom: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .facilities-stack .stacked-section__title {
@@ -387,6 +393,9 @@ body.facilities-page {
   color: #1b2b3a !important;
   border: none;
   cursor: pointer;
+  position: relative;
+  z-index: 5;
+  pointer-events: auto;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
@@ -410,25 +419,30 @@ body.facilities-page #site-footer-root,
 body.facilities-page #site-footer-root > footer {
   position: relative;
   z-index: 25;
+  pointer-events: auto;
 }
 
-/* Facility modals */
+/* Facility modals — above sticky stack */
 .facility-modal {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
   transition: opacity 0.4s ease, visibility 0.4s ease;
   padding: 0.75rem;
+  z-index: 200;
 }
 
 .facility-modal.is-open {
   opacity: 1;
   visibility: visible;
+  pointer-events: auto;
 }
 
 .facility-modal[hidden] {
   display: none !important;
 }
 
+.facility-modal.is-open:not([hidden]),
 .facility-modal.is-open[hidden] {
   display: flex !important;
 }

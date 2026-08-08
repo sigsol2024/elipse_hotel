@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light facilities-page scroll-smooth" lang="en">
+<html class="light facilities-page" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -88,7 +88,7 @@
   <div id="site-footer-root"></div>
 
   <!-- Modals -->
-  <div class="facility-modal fixed inset-0 z-[100] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="wellness-modal" role="dialog" aria-modal="true" aria-labelledby="wellness-modal-title" hidden>
+  <div class="facility-modal fixed inset-0 z-[200] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="wellness-modal" role="dialog" aria-modal="true" aria-labelledby="wellness-modal-title" aria-hidden="true" hidden>
     <div class="facility-modal__panel relative">
       <button type="button" class="facility-modal__close" data-modal-close aria-label="Close">
         <span class="material-symbols-outlined text-2xl block" aria-hidden="true">close</span>
@@ -133,7 +133,7 @@
     </div>
   </div>
 
-  <div class="facility-modal fixed inset-0 z-[100] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="pool-modal" role="dialog" aria-modal="true" aria-labelledby="pool-modal-title" hidden>
+  <div class="facility-modal fixed inset-0 z-[200] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="pool-modal" role="dialog" aria-modal="true" aria-labelledby="pool-modal-title" aria-hidden="true" hidden>
     <div class="facility-modal__panel relative">
       <button type="button" class="facility-modal__close" data-modal-close aria-label="Close">
         <span class="material-symbols-outlined text-2xl block" aria-hidden="true">close</span>
@@ -178,7 +178,7 @@
     </div>
   </div>
 
-  <div class="facility-modal fixed inset-0 z-[100] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="dining-modal" role="dialog" aria-modal="true" aria-labelledby="dining-modal-title" hidden>
+  <div class="facility-modal fixed inset-0 z-[200] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="dining-modal" role="dialog" aria-modal="true" aria-labelledby="dining-modal-title" aria-hidden="true" hidden>
     <div class="facility-modal__panel relative">
       <button type="button" class="facility-modal__close" data-modal-close aria-label="Close">
         <span class="material-symbols-outlined text-2xl block" aria-hidden="true">close</span>
@@ -223,7 +223,7 @@
     </div>
   </div>
 
-  <div class="facility-modal fixed inset-0 z-[100] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="events-modal" role="dialog" aria-modal="true" aria-labelledby="events-modal-title" hidden>
+  <div class="facility-modal fixed inset-0 z-[200] flex items-center justify-center bg-deep-navy/95 backdrop-blur-sm" id="events-modal" role="dialog" aria-modal="true" aria-labelledby="events-modal-title" aria-hidden="true" hidden>
     <div class="facility-modal__panel relative">
       <button type="button" class="facility-modal__close" data-modal-close aria-label="Close">
         <span class="material-symbols-outlined text-2xl block" aria-hidden="true">close</span>
@@ -302,7 +302,9 @@
             dot.className = "facility-modal__dot" + (n === 0 ? " is-active" : "");
             dot.setAttribute("aria-label", "Go to image " + (n + 1));
             if (n === 0) dot.setAttribute("aria-current", "true");
-            dot.addEventListener("click", function () {
+            dot.addEventListener("click", function (e) {
+              e.preventDefault();
+              e.stopPropagation();
               goTo(n);
             });
             dotsWrap.appendChild(dot);
@@ -311,12 +313,14 @@
 
         if (prev) {
           prev.addEventListener("click", function (e) {
+            e.preventDefault();
             e.stopPropagation();
             goTo(index - 1);
           });
         }
         if (next) {
           next.addEventListener("click", function (e) {
+            e.preventDefault();
             e.stopPropagation();
             goTo(index + 1);
           });
@@ -347,33 +351,64 @@
 
       document.querySelectorAll("[data-facility-slider]").forEach(initSlider);
 
+      function lockScroll() {
+        var scrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.dataset.modalScrollY = String(scrollY);
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + scrollY + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+      }
+
+      function unlockScroll() {
+        var scrollY = parseInt(document.body.dataset.modalScrollY || "0", 10);
+        document.documentElement.style.overflow = "";
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+        delete document.body.dataset.modalScrollY;
+        window.scrollTo(0, scrollY);
+      }
+
       function openModal(id) {
         var el = document.getElementById(id);
         if (!el) return;
+        lockScroll();
         el.hidden = false;
+        el.setAttribute("aria-hidden", "false");
         requestAnimationFrame(function () {
           el.classList.add("is-open");
         });
-        document.body.style.overflow = "hidden";
       }
 
       function closeModal(el) {
         if (!el) return;
         el.classList.remove("is-open");
-        document.body.style.overflow = "";
+        el.setAttribute("aria-hidden", "true");
         setTimeout(function () {
-          if (!el.classList.contains("is-open")) el.hidden = true;
+          if (!el.classList.contains("is-open")) {
+            el.hidden = true;
+            unlockScroll();
+          }
         }, 400);
       }
 
       document.querySelectorAll("[data-modal-open]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
           openModal(btn.getAttribute("data-modal-open"));
         });
       });
 
       document.querySelectorAll("[data-modal-close]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
+        btn.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
           closeModal(btn.closest(".facility-modal"));
         });
       });
