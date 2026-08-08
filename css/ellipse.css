@@ -606,6 +606,61 @@ body.facilities-page #site-footer-root > footer {
   }
 }
 
+/* ——— Room details (shared template) ——— */
+body.room-details-page.has-mobile-book-bar {
+  padding-bottom: 5.5rem;
+}
+
+@media (max-width: 1023px) {
+  body.room-details-page.has-mobile-book-bar .ellipse-scroll-top {
+    bottom: 5.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  body.room-details-page.has-mobile-book-bar {
+    padding-bottom: 0;
+  }
+}
+
+.room-detail-hero__media img {
+  transform: scale(1);
+  transition: transform 20s ease-out;
+  will-change: transform;
+}
+
+.room-detail-hero:hover .room-detail-hero__media img {
+  transform: scale(1.06);
+}
+
+.room-detail-zoom {
+  transition: transform 0.7s ease-out;
+}
+
+.group:hover .room-detail-zoom {
+  transform: scale(1.04);
+}
+
+.room-detail-mobile-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-detail-hero__media img,
+  .room-detail-zoom {
+    transition: none;
+  }
+
+  .room-detail-hero:hover .room-detail-hero__media img,
+  .group:hover .room-detail-zoom {
+    transform: none;
+  }
+}
+
 /* Inner pages still using legacy content CSS */
 body.has-legacy-content {
   background: #fff;

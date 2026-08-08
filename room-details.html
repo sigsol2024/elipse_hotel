@@ -1,42 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Room Details | Ellipse Hotels</title>
-  <meta name="description" content="Room details at Ellipse Hotels, Lagos." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Room Details | Ellipse Hotels Lagos</title>
+  <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos." id="room-meta-description" />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/ellipse.css" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/pages.css" />
 </head>
-<body class="has-legacy-content bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col" data-page="rooms">
+<body class="room-details-page bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col overflow-x-hidden" data-page="rooms">
   <div id="site-header-root"></div>
 
-  <main id="main" class="legacy-main flex-grow">
-    <div id="room-detail-root">
-    <p class="container section muted">Loading room…</p>
+  <main id="main" class="flex-grow pt-[88px]">
+    <div id="room-detail-root" aria-live="polite">
+      <p class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-24 text-on-surface-variant text-center">Loading room…</p>
     </div>
   </main>
 
   <div id="site-footer-root"></div>
+
   <script src="data/booking.js"></script>
   <script src="data/rooms.js"></script>
   <script src="data/images.js"></script>
-  <script src="js/gallery.js"></script>
   <script src="js/site-chrome.js"></script>
   <script src="js/rooms.js"></script>
-  <script src="js/motion.js"></script>
-  <script>
-    document.body.setAttribute("data-header", "solid");
-    document.addEventListener("DOMContentLoaded", function () {
-      var header = document.getElementById("site-header");
-      if (header) header.classList.add("is-solid");
-    });
-  </script>
 </body>
 </html>

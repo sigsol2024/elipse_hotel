@@ -179,116 +179,343 @@
       .join("");
   }
 
+  function fallbackRoomImage() {
+    return (
+      (window.EllipseImages && window.EllipseImages.roomsHero) ||
+      "assets/images/hotel/room-lounge.jpg"
+    );
+  }
+
+  function detailGallery(room) {
+    const fromData = Array.isArray(room.gallery)
+      ? room.gallery
+          .map((item) => (typeof item === "string" ? item : item && item.src))
+          .filter(Boolean)
+      : [];
+    if (fromData.length) return fromData;
+    return roomImages(room.slug);
+  }
+
+  function detailHeroSrc(room, gallery) {
+    if (room.image) return room.image;
+    if (gallery && gallery[0]) return gallery[0];
+    return fallbackRoomImage();
+  }
+
+  function rateLabel(room, compact) {
+    if (room.priceFrom != null && room.priceFrom !== "") {
+      if (compact) {
+        return `${escapeHtml(String(room.priceFrom))} <span class="text-sm font-normal text-white/70">/ night</span>`;
+      }
+      return `From ${escapeHtml(String(room.priceFrom))} / night`;
+    }
+    return compact ? "Rate on request" : "Rate on request";
+  }
+
+  function setRoomSeo(room) {
+    document.title = `${room.name} | Ellipse Hotels Lagos`;
+    const meta =
+      document.getElementById("room-meta-description") ||
+      document.querySelector('meta[name="description"]');
+    if (meta) {
+      const desc =
+        room.tagline ||
+        room.shortDescription ||
+        room.description ||
+        `${room.name} at Ellipse Hotels, Lagos.`;
+      meta.setAttribute("content", desc);
+    }
+  }
+
+  function renderNotFound(root) {
+    document.title = "Room Not Found | Ellipse Hotels Lagos";
+    document.body.classList.remove("has-mobile-book-bar");
+    root.innerHTML = `
+<section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto py-24 md:py-32 text-center reveal active">
+  <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Rooms &amp; Suites</p>
+  <h1 class="font-headline-md text-[2rem] md:text-[2.75rem] text-deep-navy mb-6 font-light tracking-tight">Room not found</h1>
+  <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mb-10">
+    This room is unavailable or the link is incorrect. Explore our full catalogue of rooms and suites.
+  </p>
+  <a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-10 h-14 hover:bg-deep-navy/90 transition-colors" href="rooms.html">View All Rooms</a>
+</section>`;
+  }
+
+  function renderFactsStrip(room) {
+    const entries =
+      window.EllipseRooms && window.EllipseRooms.factEntries
+        ? window.EllipseRooms.factEntries(room)
+        : [];
+    if (!entries.length) return "";
+
+    const cells = entries
+      .map((entry, index) => {
+        const divider =
+          index < entries.length - 1
+            ? `<div class="hidden md:block w-px h-12 bg-accent-gold/30 self-center" aria-hidden="true"></div>`
+            : "";
+        return `
+      <div class="text-center min-w-[7rem] flex-1">
+        <p class="font-label-caps text-label-caps text-accent-gold mb-2 uppercase tracking-widest">${escapeHtml(entry.label)}</p>
+        <p class="font-body-lg text-body-lg text-deep-navy">${escapeHtml(entry.value)}</p>
+      </div>
+      ${divider}`;
+      })
+      .join("");
+
+    return `
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-10 border-y border-accent-gold/30 py-8 reveal">
+  ${cells}
+</div>`;
+  }
+
+  function renderExperience(room) {
+    const exp = room.experience || {};
+    const title = exp.title || "Your space in Lagos.";
+    const paragraphs = Array.isArray(exp.paragraphs)
+      ? exp.paragraphs.filter((p) => p && String(p).trim())
+      : [];
+    const copy =
+      paragraphs.length > 0
+        ? paragraphs
+        : [room.description, room.shortDescription].filter(Boolean);
+    if (!copy.length && !exp.image) return "";
+
+    const imageSrc = exp.image || room.image || fallbackRoomImage();
+    const paras = copy
+      .map(
+        (p, i) =>
+          `<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed${i < copy.length - 1 ? " mb-6" : ""}">${escapeHtml(p)}</p>`
+      )
+      .join("");
+
+    return `
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center reveal">
+  <div class="order-2 md:order-1">
+    <h2 class="font-headline-md text-[2rem] md:text-[2.75rem] lg:text-[3.25rem] text-deep-navy mb-8 font-light tracking-tight">${escapeHtml(title)}</h2>
+    ${paras}
+  </div>
+  <div class="order-1 md:order-2 h-[320px] md:h-[500px] bg-surface-container overflow-hidden group">
+    <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+  </div>
+</section>`;
+  }
+
+  function renderAmenities(room) {
+    const amenities = Array.isArray(room.amenities) ? room.amenities : [];
+    const items = amenities.filter((a) => a && (a.label || typeof a === "string"));
+    if (!items.length) return "";
+
+    const cells = items
+      .map((a) => {
+        const label = typeof a === "string" ? a : a.label;
+        const icon = typeof a === "string" ? "check" : a.icon || "check";
+        return `
+      <div class="flex flex-col items-center text-center">
+        <span class="material-symbols-outlined text-accent-gold text-3xl mb-4" aria-hidden="true">${escapeHtml(icon)}</span>
+        <span class="font-body-md text-deep-navy tracking-wide uppercase text-sm">${escapeHtml(label)}</span>
+      </div>`;
+      })
+      .join("");
+
+    return `
+<section class="bg-surface-container-low w-full py-20 md:py-24 mt-8 md:mt-16 reveal">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+    <h3 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-12 md:mb-16 text-center font-light tracking-tight">Amenities</h3>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
+      ${cells}
+    </div>
+  </div>
+</section>`;
+  }
+
+  function renderGallery(room, gallery) {
+    const images = (gallery || []).filter(Boolean);
+    if (!images.length) return "";
+
+    if (images.length === 1) {
+      return `
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 reveal">
+  <div class="h-[320px] md:h-[560px] overflow-hidden group bg-surface-container">
+    <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(images[0])}" alt="${escapeHtml(room.name)}" loading="lazy" />
+  </div>
+</section>`;
+    }
+
+    if (images.length === 2) {
+      return `
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 reveal">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+    ${images
+      .map(
+        (src) => `
+    <div class="h-[280px] md:h-[480px] overflow-hidden group bg-surface-container">
+      <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(src)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+    </div>`
+      )
+      .join("")}
+  </div>
+</section>`;
+    }
+
+    const primary = images[0];
+    const secondary = images[1];
+    const extras = images.slice(2, 4);
+
+    return `
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 reveal">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 md:h-[600px]">
+    <div class="md:col-span-7 h-[320px] md:h-full overflow-hidden group bg-surface-container">
+      <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(primary)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+    </div>
+    <div class="md:col-span-5 flex flex-col gap-6 md:gap-8 h-auto md:h-full">
+      <div class="h-[280px] md:flex-1 overflow-hidden group bg-surface-container">
+        <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(secondary)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+      </div>
+      ${
+        extras.length
+          ? `<div class="grid grid-cols-2 gap-6 md:gap-8 ${extras.length === 1 ? "md:grid-cols-1" : ""}">
+        ${extras
+          .map(
+            (src) => `
+        <div class="h-[160px] md:h-[180px] overflow-hidden group bg-surface-container">
+          <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(src)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+        </div>`
+          )
+          .join("")}
+      </div>`
+          : ""
+      }
+    </div>
+  </div>
+</section>`;
+  }
+
+  function renderRelated(room) {
+    const others = window.EllipseRooms.list().filter((r) => r.slug !== room.slug);
+    if (!others.length) return "";
+
+    const cards = others
+      .map((r) => {
+        const src = roomImage(r) || fallbackRoomImage();
+        return `
+<a class="group block" href="room-details.html?room=${escapeHtml(r.slug)}">
+  <div class="w-full h-[240px] md:h-[300px] bg-surface-container mb-6 overflow-hidden">
+    <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${escapeHtml(src)}" alt="${escapeHtml(r.name)}" loading="lazy" />
+  </div>
+  <h4 class="font-headline-md text-2xl text-deep-navy mb-2 group-hover:text-accent-gold transition-colors">${escapeHtml(r.name)}</h4>
+  <p class="font-body-md text-on-surface-variant mb-4">${escapeHtml(r.tagline || r.shortDescription || "")}</p>
+  <span class="font-label-caps text-label-caps text-deep-navy uppercase tracking-widest border-b border-deep-navy pb-1 group-hover:opacity-70 transition-opacity">View Details</span>
+</a>`;
+      })
+      .join("");
+
+    return `
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-20 md:py-24 reveal">
+  <h3 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-12 text-center font-light tracking-tight">More Accommodations</h3>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-8">
+    ${cards}
+  </div>
+</section>`;
+  }
+
   function renderDetail() {
     const root = document.getElementById("room-detail-root");
     if (!root || !window.EllipseRooms) return;
 
     const params = new URLSearchParams(window.location.search);
-    const slug = params.get("room") || "standard";
-    const room = window.EllipseRooms.get(slug) || window.EllipseRooms.get("standard");
-    if (!room) {
-      root.innerHTML = `<p class="container section">Room not found. <a href="rooms.html">View all rooms</a></p>`;
+    const slug = params.get("room");
+    if (!slug) {
+      renderNotFound(root);
       return;
     }
 
-    document.title = `${room.name} | Ellipse Hotels`;
-    document.body.classList.add("has-booking-bar");
+    const room = window.EllipseRooms.get(slug);
+    if (!room) {
+      renderNotFound(root);
+      return;
+    }
 
-    const imgs = roomImages(room.slug);
-    const gallery =
-      (imgs.length
-        ? imgs.map((src, i) => ({
-            ratio: i === 0 ? "16/9" : i % 2 === 0 ? "3/2" : "4/5",
-            label: "PHOTO",
-            caption: room.name,
-            src,
-            alt: `${room.name} — photo ${i + 1}`
-          }))
-        : room.gallery) || [];
-    const hero = gallery[0] || { ratio: "16/9", label: "16:9 HERO", caption: room.name };
-    const facts = factsLine(room);
+    setRoomSeo(room);
+    document.body.classList.add("has-mobile-book-bar");
+
+    const gallery = detailGallery(room);
+    const heroSrc = detailHeroSrc(room, gallery);
+    const bookCta = bookLink(
+      room,
+      "inline-flex items-center justify-center bg-accent-gold text-deep-navy px-12 py-5 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors border border-transparent hover:border-accent-gold w-full md:w-auto",
+      "Check Availability"
+    );
+    const mobileBook = bookLink(
+      room,
+      "inline-flex items-center justify-center bg-accent-gold text-deep-navy px-6 py-3 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors shrink-0",
+      "Book"
+    );
 
     root.innerHTML = `
-<section class="room-detail-hero">
-  <div class="container room-detail-hero__grid">
-    <div>
-      <div class="gallery" data-gallery>
-        <div class="gallery__stage" data-gallery-stage>
-          ${mediaSlot(hero.ratio, hero.label, hero.caption, hero.src, hero.alt)}
-        </div>
-        <div class="gallery__thumbs" data-gallery-thumbs>
-          ${gallery
-            .map(
-              (g, i) =>
-                `<button type="button" class="gallery__thumb${i === 0 ? " is-active" : ""}" data-gallery-index="${i}" aria-label="View image ${i + 1}">
-                  ${mediaSlot(g.ratio === "16/9" ? "3/2" : g.ratio, g.label, "", g.src, g.alt || "")}
-                </button>`
-            )
-            .join("")}
-        </div>
-      </div>
-    </div>
-    <aside class="booking-sticky room-detail-panel">
-      <p class="eyebrow">Rooms &amp; Suites</p>
-      <h1 class="headline">${escapeHtml(room.name)}</h1>
-      ${room.headline ? `<p class="muted" style="margin-top:0.35rem">${escapeHtml(room.headline)}</p>` : ""}
-      ${
-        priceBlock(room, "room-price") ||
-        `<p class="muted" style="margin-top:0.75rem">Rate on request</p>`
-      }
-      <p style="margin-top:1.25rem">${escapeHtml(room.shortDescription)}</p>
-      ${
-        facts
-          ? `<ul class="room-facts">${window.EllipseRooms
-              .facts(room)
-              .map((f) => `<li>${escapeHtml(f)}</li>`)
-              .join("")}</ul>`
-          : ""
-      }
-      <div class="room-preview__actions" style="margin-top:1.5rem;flex-direction:column;align-items:stretch">
-        ${bookLink(room, "btn btn-primary", "Book This Room")}
-        <a class="btn btn-secondary" href="rooms.html">All Rooms</a>
-      </div>
-    </aside>
+<section class="room-detail-hero w-full h-[55vh] md:h-[80vh] relative overflow-hidden group">
+  <div class="room-detail-hero__media absolute inset-0">
+    <img class="w-full h-full object-cover" src="${escapeHtml(heroSrc)}" alt="${escapeHtml(room.name)}" />
   </div>
-</section>
-
-<section class="section">
-  <div class="container room-detail-copy">
-    <div>
-      <h2 class="subhead">About this room</h2>
-      <p class="lede">${escapeHtml(room.description)}</p>
-    </div>
-    <div>
-      <h2 class="subhead">Amenities</h2>
-      ${
-        room.amenities && room.amenities.length
-          ? `<ul class="amenity-list">${room.amenities.map((a) => `<li>${escapeHtml(a)}</li>`).join("")}</ul>`
-          : `<p class="muted">${escapeHtml(room.amenitiesNote || "Amenity list forthcoming.")}</p>`
-      }
+  <div class="absolute inset-0 bg-deep-navy/25" aria-hidden="true"></div>
+  <div class="absolute inset-0 flex items-end">
+    <div class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-12 md:pb-16 reveal active">
+      <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-3">Rooms &amp; Suites</p>
+      <h1 class="font-headline-md text-[2.25rem] md:text-[3.5rem] lg:text-[4rem] text-white font-light tracking-tight leading-none">${escapeHtml(room.name)}</h1>
     </div>
   </div>
 </section>
 
-<div class="booking-bar-mobile">
-  ${bookLink(room, "btn btn-primary", "Book This Room")}
-  <a class="btn btn-secondary" href="rooms.html">Rooms</a>
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-16 md:pt-24 pb-12 md:pb-16">
+  <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
+    ${
+      room.tagline
+        ? `<p class="font-headline-md text-[1.25rem] md:text-[1.5rem] text-deep-navy italic font-light leading-relaxed mb-6">${escapeHtml(room.tagline)}</p>`
+        : ""
+    }
+    ${
+      room.shortDescription
+        ? `<p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant leading-relaxed">${escapeHtml(room.shortDescription)}</p>`
+        : ""
+    }
+  </div>
+  ${renderFactsStrip(room)}
+</section>
+
+${renderExperience(room)}
+${renderAmenities(room)}
+${renderGallery(room, gallery)}
+
+<section class="bg-deep-navy w-full py-20 md:py-24 reveal">
+  <div class="max-w-3xl mx-auto px-margin-mobile text-center">
+    <h3 class="font-headline-md text-[1.75rem] md:text-[2.5rem] text-white mb-4 font-light tracking-tight">Experience the ${escapeHtml(room.name)}</h3>
+    <p class="font-title-lg text-accent-gold mb-10 md:mb-12">${rateLabel(room, false)}</p>
+    ${bookCta}
+  </div>
+</section>
+
+${renderRelated(room)}
+
+<div class="room-detail-mobile-bar lg:hidden bg-deep-navy border-t border-accent-gold/30 p-4 flex justify-between items-center gap-4 shadow-2xl">
+  <div class="min-w-0">
+    <p class="font-label-caps text-[10px] text-accent-gold uppercase tracking-widest truncate">${escapeHtml(room.name)}</p>
+    <p class="font-title-lg text-lg text-white leading-tight">${rateLabel(room, true)}</p>
+  </div>
+  ${mobileBook}
 </div>`;
 
-    root.dataset.gallery = JSON.stringify(gallery);
-    if (window.EllipseGallery) {
-      window.EllipseGallery.init(root.querySelector("[data-gallery]"), gallery);
-    }
+    activateReveals(root);
   }
 
   function activateReveals(scope) {
     const root = scope || document;
+    if (window.EllipseChrome && typeof window.EllipseChrome.refreshReveals === "function") {
+      window.EllipseChrome.refreshReveals();
+      return;
+    }
     root.querySelectorAll(".reveal").forEach((el) => {
       el.classList.add("active");
     });
-    if (window.EllipseChrome && typeof window.EllipseChrome.refreshReveals === "function") {
-      window.EllipseChrome.refreshReveals();
-    }
   }
 
   function init() {
