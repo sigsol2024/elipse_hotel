@@ -4,13 +4,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Ellipse Hotels Lagos</title>
-  <meta name="description" content="Contact Ellipse Hotels — 31 Sola Adewumi Street, Bucknor, Ejigbo, Lagos. Enquiries for stays, dining, and events." />
+  <meta name="description" content="Contact Ellipse Hotels — Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos. Enquiries for stays, dining, and events." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260809c"></script>
+  <script src="js/tailwind-theme.js?v=20260809e"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260809c" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260809e" />
   <style>
     .contact-accordion__panel {
       display: grid;
@@ -82,10 +82,8 @@
         <div class="flex-1 flex flex-col items-center text-center px-4 md:px-12 md:border-r border-deep-navy/10">
           <span class="material-symbols-outlined text-accent-gold mb-6 text-4xl" aria-hidden="true">location_on</span>
           <h2 class="font-label-caps text-label-caps text-on-surface-variant mb-6 uppercase tracking-widest">Visit Us</h2>
-          <p class="font-body-md text-body-md text-deep-navy leading-loose" id="contact-address">
-            31 Sola Adewumi Street,<br />
-            Shola, Oshodi, Bucknor,<br />
-            Ejigbo, Lagos, Nigeria
+          <p class="font-body-md text-body-md text-deep-navy leading-relaxed" id="contact-address">
+            Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos
           </p>
         </div>
         <div class="flex-1 flex flex-col items-center text-center px-4 md:px-12 md:border-r border-deep-navy/10">
@@ -194,9 +192,7 @@
           <div class="mb-10">
             <p class="font-label-caps text-label-caps text-deep-navy uppercase tracking-widest mb-3">Address</p>
             <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed" id="contact-address-secondary">
-              31 Sola Adewumi Street<br />
-              Shola, Oshodi, Bucknor<br />
-              Ejigbo, Lagos, Nigeria
+              Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos
             </p>
           </div>
           <a class="inline-flex items-center text-deep-navy hover:text-accent-gold transition-colors font-label-caps text-label-caps tracking-widest uppercase border-b border-deep-navy hover:border-accent-gold pb-1" id="contact-directions" href="#" target="_blank" rel="noopener noreferrer">
@@ -280,8 +276,8 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260809c"></script>
-  <script src="js/site-chrome.js?v=20260809c"></script>
+  <script src="data/booking.js?v=20260809e"></script>
+  <script src="js/site-chrome.js?v=20260809e"></script>
   <script>
     (function () {
       function wireChrome() {
@@ -289,10 +285,9 @@
         var maps = window.EllipseChrome.mapsUrl;
         var address = window.EllipseChrome.address;
         if (address) {
-          var lines = address.split(", ").join(",<br />");
           ["contact-address", "contact-address-secondary"].forEach(function (id) {
             var el = document.getElementById(id);
-            if (el) el.innerHTML = lines;
+            if (el) el.textContent = address;
           });
         }
         ["contact-directions", "contact-map-card"].forEach(function (id) {

@@ -1,7 +1,7 @@
 (function () {
   const ADDRESS =
-    "31 Sola Adewumi Street, Shola, Oshodi, Bucknor, Ejigbo, Lagos, Nigeria";
-  const ADDRESS_SHORT = "31 Sola Adewumi Street, Lagos, Nigeria.";
+    "Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos";
+  const ADDRESS_SHORT = ADDRESS;
   const MAPS_URL =
     "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(ADDRESS);
@@ -103,8 +103,8 @@
       <a class="ellipse-logo ellipse-logo--footer inline-block mb-6 hover:opacity-90 transition-opacity" href="index.html" aria-label="Ellipse Hotels home">
         <img src="assets/brand/logo-on-dark.png" alt="Ellipse Hotels" width="200" height="68" />
       </a>
-      <p class="font-body-md text-body-md text-white/70 max-w-xs mb-6">
-        ${ADDRESS.replace(/, /g, ",<br/>")}
+      <p class="font-body-md text-body-md text-white/70 max-w-sm mb-6">
+        ${ADDRESS}
       </p>
       <a class="inline-flex items-center justify-center px-5 py-3 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white hover:text-deep-navy transition-colors" ${bookingAttrs(bookHref)}>
         Book Your Stay

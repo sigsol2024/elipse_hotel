@@ -7,10 +7,10 @@
   <meta name="description" content="Dining at Ellipse Hotels, Lagos — considered cooking in a calm setting, from breakfast through evening service." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260809c"></script>
+  <script src="js/tailwind-theme.js?v=20260809g"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260809c" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260809g" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="dining">
   <div id="site-header-root"></div>
@@ -186,34 +186,36 @@
     <!-- Restaurant information -->
     <section class="py-20 md:py-section-gap bg-surface-container-low border-t border-deep-navy/10 reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-          <div class="md:col-span-4">
-            <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-8 font-light tracking-tight">Restaurant information</h2>
+        <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-12 md:mb-16 font-light tracking-tight">
+          Restaurant information
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-gutter items-stretch">
+          <div class="flex flex-col h-full bg-white border border-deep-navy/10 p-8 md:p-10">
+            <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Opening hours</p>
+            <p class="font-body-md text-body-md text-on-surface-variant flex-grow">
+              Breakfast, lunch and dinner service times are available at reception.
+            </p>
           </div>
-          <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-y-12 gap-x-gutter">
-            <div>
-              <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Opening hours</p>
-              <p class="font-body-md text-body-md text-on-surface-variant">
-                Breakfast, lunch and dinner service times are available at reception.
-              </p>
-            </div>
-            <div>
-              <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Reservations</p>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-6">
-                We recommend booking ahead for dinner and weekend service. Contact our team to reserve a table or arrange private dining.
-              </p>
-              <a class="inline-flex items-center font-label-caps text-label-caps text-deep-navy uppercase tracking-widest group border-b border-deep-navy pb-1 hover:opacity-70 transition-opacity" href="contact.html">
-                Contact Dining
-                <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
-              </a>
-              <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 mt-10">Location</p>
+          <div class="flex flex-col h-full bg-white border border-deep-navy/10 p-8 md:p-10">
+            <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Reservations</p>
+            <p class="font-body-md text-body-md text-on-surface-variant mb-8 flex-grow">
+              We recommend booking ahead for dinner and weekend service. Contact our team to reserve a table or arrange private dining.
+            </p>
+            <a class="inline-flex items-center font-label-caps text-label-caps text-deep-navy uppercase tracking-widest group border-b border-deep-navy pb-1 hover:opacity-70 transition-opacity mt-auto self-start" href="contact.html">
+              Contact Dining
+              <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
+            </a>
+          </div>
+          <div class="flex flex-col h-full bg-white border border-deep-navy/10 p-8 md:p-10">
+            <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">Location</p>
+            <div class="flex-grow">
               <p class="font-body-md text-body-md text-on-surface-variant">Ellipse Hotels</p>
-              <p class="font-body-md text-body-md text-on-surface-variant mb-4" id="dining-address">31 Sola Adewumi Street, Lagos, Nigeria</p>
-              <a class="inline-flex items-center font-label-caps text-label-caps text-deep-navy uppercase tracking-widest group border-b border-deep-navy pb-1 hover:opacity-70 transition-opacity" id="dining-directions" href="contact.html">
-                Get Directions
-                <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
-              </a>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-8" id="dining-address">Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos</p>
             </div>
+            <a class="inline-flex items-center font-label-caps text-label-caps text-deep-navy uppercase tracking-widest group border-b border-deep-navy pb-1 hover:opacity-70 transition-opacity mt-auto self-start" id="dining-directions" href="contact.html">
+              Get Directions
+              <span class="material-symbols-outlined ml-2 text-[18px] group-hover:translate-x-1 transition-transform" aria-hidden="true">arrow_forward</span>
+            </a>
           </div>
         </div>
       </div>
@@ -250,8 +252,8 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260809c"></script>
-  <script src="js/site-chrome.js?v=20260809c"></script>
+  <script src="data/booking.js?v=20260809g"></script>
+  <script src="js/site-chrome.js?v=20260809g"></script>
   <script>
     (function () {
       if (!window.EllipseChrome) return;
