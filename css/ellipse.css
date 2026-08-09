@@ -494,12 +494,13 @@ body.facilities-page #site-footer-root > footer {
   position: relative;
   width: 100%;
   height: 100%;
+  isolation: isolate;
 }
 
 .facility-modal__slides {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .facility-modal__slide {
@@ -508,11 +509,11 @@ body.facilities-page #site-footer-root > footer {
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
+  z-index: 1;
 }
 
 .facility-modal__slide.is-active {
   opacity: 1;
-  pointer-events: auto;
 }
 
 .facility-modal__slide img {
@@ -525,25 +526,34 @@ body.facilities-page #site-footer-root > footer {
 .facility-modal__nav {
   position: absolute;
   inset: 0;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.65rem;
+  padding: 0 0.75rem;
   pointer-events: none;
 }
 
 .facility-modal__nav-btn {
   pointer-events: auto;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: none;
   border-radius: 9999px;
-  background: rgba(27, 43, 58, 0.72);
+  background: rgba(27, 43, 58, 0.82);
   color: #fff;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+
+.facility-modal__nav-btn .material-symbols-outlined {
+  font-size: 1.35rem;
+  line-height: 1;
+  color: #fff;
 }
 
 .facility-modal__dots {
@@ -552,13 +562,14 @@ body.facilities-page #site-footer-root > footer {
   bottom: 0.85rem;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.4rem;
-  z-index: 5;
+  gap: 0.45rem;
+  z-index: 20;
+  pointer-events: auto;
 }
 
 .facility-modal__dot {
-  width: 0.45rem;
-  height: 0.45rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 9999px;
   border: none;
   padding: 0;
