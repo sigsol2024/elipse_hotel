@@ -278,8 +278,8 @@
 
 /* ——— Facilities stacked storytelling ——— */
 html.facilities-page {
-  scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  /* Soft snap only — free scrolling, gentle settle near section starts */
+  scroll-snap-type: y proximity;
   scroll-padding-top: 0;
 }
 
@@ -306,7 +306,7 @@ body.facilities-page {
   align-items: flex-end;
   pointer-events: none;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-stop: normal;
 }
 
 .facilities-stack .stacked-section:nth-child(1) {
@@ -680,8 +680,11 @@ body.facilities-page #site-footer-root > footer {
 
 @media (prefers-reduced-motion: reduce) {
   html.facilities-page {
-    scroll-behavior: auto;
-    scroll-snap-type: y proximity;
+    scroll-snap-type: none;
+  }
+
+  .facilities-stack .stacked-section {
+    scroll-snap-align: none;
   }
 
   .facilities-stack .stacked-section__media img {
