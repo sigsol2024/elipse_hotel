@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="light ellipse-loading" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ellipse Hotels - A Refined Stay in Lagos</title>
   <meta name="description" content="Ellipse Hotels — a refined contemporary stay in the heart of Lagos. Comfort, thoughtful hospitality and calm guest experiences." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
+  <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260809e"></script>
+  <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260809e" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260810k" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
@@ -18,41 +19,53 @@
   <main id="main" class="flex-grow pt-[88px]">
     <!-- Hero -->
     <div class="home-hero-block relative">
-      <section class="relative h-[calc(100svh-88px)] min-h-[520px] max-h-[760px] w-full bg-surface-container flex items-center justify-center">
-        <div class="absolute inset-0 z-0">
-          <div class="w-full h-full bg-cover bg-center" style="background-image: url('assets/images/home/hero-lobby.jpg')" role="img" aria-label="Ellipse Hotels exterior in Lagos"></div>
-          <div class="absolute inset-0 bg-gradient-to-b from-deep-navy/70 via-deep-navy/55 to-deep-navy/80"></div>
+      <section class="home-hero relative h-[calc(100svh-88px)] min-h-[520px] max-h-[760px] w-full bg-surface-container flex items-center justify-center overflow-hidden" aria-roledescription="carousel" aria-label="Hotel highlights">
+        <div class="home-hero-slider absolute inset-0 z-0" data-home-hero-slider>
+          <div class="home-hero-slide is-active" style="background-image: url('assets/images/home/hero-lobby.jpg')" role="img" aria-label="Ellipse Hotels exterior and courtyard" aria-hidden="false"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/home/DJI_0978.jpg')" role="img" aria-label="Ellipse Hotels aerial view by day" aria-hidden="true"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/home/DJI_0994.jpg')" role="img" aria-label="Ellipse Hotels courtyard at night" aria-hidden="true"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8362.jpg')" role="img" aria-label="Hotel lounge and seating" aria-hidden="true"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8274.jpg')" role="img" aria-label="Suite living space" aria-hidden="true"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8375.jpg')" role="img" aria-label="Hotel interior detail" aria-hidden="true"></div>
+          <div class="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/82 to-deep-navy/92 pointer-events-none"></div>
         </div>
-        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-10 lg:pb-20">
-          <div class="w-12 h-px bg-accent-gold mx-auto mb-6"></div>
-          <h1 class="font-headline-md text-[2rem] leading-tight md:text-[2.75rem] md:leading-[1.15] lg:text-[3.25rem] text-white mb-5 drop-shadow-md max-w-3xl mx-auto font-light tracking-tight">A refined stay in<span class="hidden lg:inline"> </span><br class="lg:hidden" /><span class="whitespace-nowrap">the heart of Lagos.</span></h1>
-          <p class="font-body-md text-body-md md:text-body-lg text-white/85 max-w-lg mx-auto drop-shadow-sm">
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-20 lg:pb-20">
+          <h1 class="home-hero-title font-headline-md text-[2rem] leading-tight md:text-[2.75rem] md:leading-[1.15] lg:text-[3.25rem] text-white mb-5 drop-shadow-md max-w-3xl mx-auto font-light tracking-tight">A refined stay in<span class="hidden lg:inline"> </span><br class="lg:hidden" /><span class="whitespace-nowrap">the heart of Lagos.</span></h1>
+          <p class="home-hero-sub font-body-md text-body-md md:text-body-lg text-white/85 max-w-lg mx-auto drop-shadow-sm">
             Contemporary comfort and attentive hospitality in a calm city sanctuary.
           </p>
         </div>
       </section>
 
-      <!-- Booking panel: stacked section on mobile/tablet; bridged overlay on desktop only -->
+      <!-- Booking panel: bridged into hero on all breakpoints; stays in flow below lg so expand pushes content -->
       <div class="home-booking-wrap px-margin-mobile lg:px-margin-desktop">
-        <form class="max-w-5xl mx-auto bg-white border-t-2 border-accent-gold shadow-2xl p-6 flex flex-col lg:flex-row items-center gap-6 justify-between" id="home-booking-panel" action="#" method="get">
-          <div class="flex flex-col flex-1 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-4 lg:pb-0 lg:pr-4">
-            <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-in">Check-In</label>
-            <input id="check-in" name="check_in" class="border-none p-0 focus:ring-0 text-deep-navy font-body-md bg-transparent cursor-pointer" type="date" />
+        <form class="home-booking-panel max-w-5xl mx-auto bg-white border-t-2 border-accent-gold shadow-2xl p-4 sm:p-5 lg:p-6 flex flex-col lg:flex-row items-stretch lg:items-center gap-3 lg:gap-6 justify-between" id="home-booking-panel" action="#" method="get">
+          <div class="home-booking-dates">
+            <div class="home-booking-field flex flex-col flex-1 min-w-0 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:pr-4">
+              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-in">Check-In</label>
+              <input id="check-in" name="check_in" class="home-booking-date border-none p-0 focus:ring-0 text-deep-navy bg-transparent cursor-pointer w-full min-w-0" type="date" />
+            </div>
+            <div class="home-booking-field flex flex-col flex-1 min-w-0 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:px-4">
+              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-out">Check-Out</label>
+              <input id="check-out" name="check_out" class="home-booking-date border-none p-0 focus:ring-0 text-deep-navy bg-transparent cursor-pointer w-full min-w-0" type="date" />
+            </div>
           </div>
-          <div class="flex flex-col flex-1 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-4 lg:pb-0 lg:px-4">
-            <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-out">Check-Out</label>
-            <input id="check-out" name="check_out" class="border-none p-0 focus:ring-0 text-deep-navy font-body-md bg-transparent cursor-pointer" type="date" />
+          <div class="home-booking-extra" id="home-booking-extra">
+            <div class="home-booking-field flex flex-col flex-1 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:px-4">
+              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="guests">Guests &amp; Rooms</label>
+              <select id="guests" name="guests" class="border-none p-0 focus:ring-0 text-deep-navy font-body-md bg-transparent cursor-pointer">
+                <option>1 Room, 2 Guests</option>
+                <option>1 Room, 1 Guest</option>
+                <option>2 Rooms, 4 Guests</option>
+              </select>
+            </div>
           </div>
-          <div class="flex flex-col flex-1 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-4 lg:pb-0 lg:px-4">
-            <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="guests">Guests &amp; Rooms</label>
-            <select id="guests" name="guests" class="border-none p-0 focus:ring-0 text-deep-navy font-body-md bg-transparent cursor-pointer">
-              <option>1 Room, 2 Guests</option>
-              <option>1 Room, 1 Guest</option>
-              <option>2 Rooms, 4 Guests</option>
-            </select>
-          </div>
-          <div class="flex-none w-full lg:w-auto lg:pl-4">
-            <a class="inline-flex w-full lg:w-auto items-center justify-center px-8 py-4 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-14" href="#book" data-book-general>
+          <div class="home-booking-actions flex-none w-full lg:w-auto lg:pl-4 flex items-stretch gap-3">
+            <button type="button" class="home-booking-toggle" id="home-booking-toggle" aria-expanded="false" aria-controls="home-booking-extra">
+              <span class="material-symbols-outlined home-booking-toggle__icon" aria-hidden="true">expand_more</span>
+              <span class="sr-only">Show guests and rooms</span>
+            </button>
+            <a class="inline-flex flex-1 lg:flex-none w-full lg:w-auto items-center justify-center px-6 sm:px-8 py-4 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-12 lg:h-14" href="#book" data-book-general>
               Check Availability
             </a>
           </div>
@@ -61,15 +74,15 @@
     </div>
 
     <!-- Welcome -->
-    <section class="home-welcome pt-16 pb-24 lg:pt-48 lg:pb-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section class="home-welcome pb-12 md:pb-24 lg:pb-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
         <div>
           <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Welcome to Ellipse</p>
           <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] leading-snug text-deep-navy mb-5">A place to stay, unwind and experience Lagos</h2>
-          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-8">
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-0 md:mb-8">
             Ellipse Hotels brings together contemporary spaces, thoughtful comfort and attentive hospitality. We have created a sanctuary in the city, where every detail is considered to offer you a genuinely restful and inspiring stay.
           </p>
-          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="about.html">
+          <a class="hidden md:inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="about.html">
             Discover Our Story
             <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
           </a>
@@ -85,6 +98,10 @@
             loading="lazy"
           ></iframe>
         </div>
+        <a class="inline-flex md:hidden items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="about.html">
+          Discover Our Story
+          <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+        </a>
       </div>
     </section>
 
@@ -121,29 +138,35 @@
     </section>
 
     <!-- The Ellipse Experience -->
-    <section class="py-section-gap bg-warm-grey reveal">
+    <section class="py-12 md:py-24 lg:py-section-gap bg-warm-grey reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
-          <div class="md:col-span-5 md:col-start-1 order-2 md:order-1 mt-12 md:mt-0">
+          <div class="md:col-span-5 md:col-start-1 order-2 md:order-1 mt-8 md:mt-0">
             <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>The Ellipse Experience</p>
             <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-8 leading-snug">Designed for the modern traveler.</h2>
             <div class="space-y-6 mb-8">
-              <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-accent-gold mt-1">architecture</span>
+              <div class="flex items-start gap-3.5">
+                <span class="experience-icon shrink-0" aria-hidden="true">
+                  <span class="material-symbols-outlined">architecture</span>
+                </span>
                 <div>
                   <h4 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-1">Thoughtful Design</h4>
                   <p class="font-body-md text-on-surface-variant text-sm">Architectural restraint and generous volumes prioritize natural light.</p>
                 </div>
               </div>
-              <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-accent-gold mt-1">concierge</span>
+              <div class="flex items-start gap-3.5">
+                <span class="experience-icon shrink-0" aria-hidden="true">
+                  <span class="material-symbols-outlined">concierge</span>
+                </span>
                 <div>
                   <h4 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-1">Attentive Hospitality</h4>
                   <p class="font-body-md text-on-surface-variant text-sm">Intuitive, unobtrusive service tailored to your needs.</p>
                 </div>
               </div>
-              <div class="flex items-start gap-4">
-                <span class="material-symbols-outlined text-accent-gold mt-1">restaurant_menu</span>
+              <div class="flex items-start gap-3.5">
+                <span class="experience-icon shrink-0" aria-hidden="true">
+                  <span class="material-symbols-outlined">restaurant_menu</span>
+                </span>
                 <div>
                   <h4 class="font-title-lg text-[0.95rem] md:text-[1rem] lg:text-[1.125rem] font-medium tracking-wide text-deep-navy mb-1">Exceptional Dining</h4>
                   <p class="font-body-md text-on-surface-variant text-sm">Culinary experiences with local and global flavors.</p>
@@ -156,11 +179,11 @@
             </a>
           </div>
           <div class="md:col-span-6 md:col-start-7 order-1 md:order-2 relative">
-            <div class="aspect-[4/5] bg-surface-variant overflow-hidden group">
-              <img class="w-full h-full object-cover hover-zoom" alt="Hotel lounge and seating area" src="assets/images/home/experience-main.jpg" />
+            <div class="aspect-[4/3] md:aspect-[5/4] bg-surface-variant overflow-hidden group">
+              <img class="w-full h-full object-cover hover-zoom" alt="Hotel lounge and seating area" src="assets/images/home/_DSC8362.jpg" />
             </div>
             <div class="absolute -bottom-12 -left-12 w-64 aspect-square bg-white p-4 hidden md:block shadow-xl">
-              <img class="w-full h-full object-cover" alt="Hotel interior detail" src="assets/images/home/experience-detail.jpg" />
+              <img class="w-full h-full object-cover" alt="Hotel interior detail" src="assets/images/home/_DSC8375.jpg" />
             </div>
           </div>
         </div>
@@ -168,58 +191,106 @@
     </section>
 
     <!-- Rooms & Suites -->
-    <section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white">
-      <div class="text-center mb-20 reveal">
+    <section class="py-12 md:py-24 lg:py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white">
+      <div class="text-center mb-10 md:mb-20 reveal">
         <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Stay Your Way</p>
         <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Rooms &amp; Suites</h2>
       </div>
       <div id="home-rooms"></div>
-      <div class="mt-16 text-center reveal">
-        <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="rooms.html">
+      <div class="mt-10 md:mt-16 text-center reveal">
+        <a class="inline-flex items-center justify-center gap-2 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-10 h-14 hover:bg-deep-navy/90 transition-colors" href="rooms.html">
           View All Rooms
-          <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+          <span class="material-symbols-outlined text-[20px]" aria-hidden="true">arrow_right_alt</span>
         </a>
       </div>
     </section>
 
     <!-- Facilities -->
-    <section class="py-section-gap bg-warm-grey reveal">
+    <section class="py-12 md:py-24 bg-warm-grey reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="text-center mb-16">
+        <div class="text-center mb-10 md:mb-16">
           <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Facilities &amp; Amenities</h2>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <a href="facilities.html" class="col-span-2 md:col-span-2 row-span-2 relative group overflow-hidden bg-surface-container aspect-square md:aspect-auto md:min-h-[28rem]">
-            <img class="w-full h-full object-cover hover-zoom" alt="Hotel pool" src="assets/images/home/facility-pool.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end p-6">
-              <h4 class="font-title-lg text-[1.05rem] md:text-[1.125rem] lg:text-title-lg text-white">Infinity Pool</h4>
-            </div>
-          </a>
-          <a href="facilities.html" class="relative group overflow-hidden bg-surface-container aspect-square">
-            <img class="w-full h-full object-cover hover-zoom" alt="Fitness center" src="assets/images/home/facility-fitness.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end p-4">
-              <h4 class="font-title-lg text-white text-sm md:text-base">Fitness Center</h4>
-            </div>
-          </a>
-          <a href="facilities.html" class="relative group overflow-hidden bg-surface-container aspect-square">
-            <img class="w-full h-full object-cover hover-zoom" alt="Wellness spa" src="assets/images/home/facility-spa.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end p-4">
-              <h4 class="font-title-lg text-white text-sm md:text-base">Wellness Spa</h4>
-            </div>
-          </a>
-          <a href="facilities.html" class="relative group overflow-hidden bg-surface-container aspect-square">
-            <img class="w-full h-full object-cover hover-zoom" alt="Meeting facilities" src="assets/images/home/facility-meeting.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end p-4">
-              <h4 class="font-title-lg text-white text-sm md:text-base">Meeting Facilities</h4>
-            </div>
-          </a>
-          <a href="facilities.html" class="relative group overflow-hidden bg-surface-container aspect-square">
-            <img class="w-full h-full object-cover hover-zoom" alt="Room service" src="assets/images/home/facility-service.jpg" />
-            <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end p-4">
-              <h4 class="font-title-lg text-white text-sm md:text-base">24/7 Room Service</h4>
-            </div>
-          </a>
-        </div>
+        <div class="home-facilities-grid grid grid-cols-2 md:grid-cols-4 gap-4" id="home-facilities-grid"></div>
+        <script>
+          (function () {
+            var STORAGE_KEY = "ellipse-home-facility-feature-index";
+            var featuredable = [
+              {
+                id: "infinity-pool",
+                href: "facilities.html#infinity-pool",
+                src: "assets/images/home/hero-lobby.jpg",
+                alt: "Hotel pool",
+                label: "Infinity Pool"
+              },
+              {
+                id: "restaurant",
+                href: "facilities.html#restaurant",
+                src: "assets/images/dining/_DSC8178.jpg",
+                alt: "Restaurant",
+                label: "Restaurant"
+              },
+              {
+                id: "bar",
+                href: "facilities.html#bar",
+                src: "assets/images/facilities/_DSC8169.jpg",
+                alt: "Hotel bar",
+                label: "Bar"
+              },
+              {
+                id: "reception",
+                href: "facilities.html#reception",
+                src: "assets/images/hotel/_DSC8189.jpg",
+                alt: "Reception",
+                label: "Reception"
+              }
+            ];
+            var roomService = {
+              id: "service",
+              href: "facilities.html#room-service",
+              src: "assets/images/hotel/_DSC8380.jpg",
+              alt: "Room service",
+              label: "24/7 Room Service"
+            };
+
+            var index = 0;
+            try {
+              var stored = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10);
+              if (!isNaN(stored) && stored >= 0) index = stored % featuredable.length;
+              localStorage.setItem(STORAGE_KEY, String((index + 1) % featuredable.length));
+            } catch (e) {
+              index = 0;
+            }
+
+            var featured = featuredable[index];
+            var rest = featuredable.filter(function (_, i) { return i !== index; }).concat([roomService]);
+
+            function tileHtml(tile, isFeatured) {
+              var classes = isFeatured
+                ? "home-facility-tile home-facility-tile--featured col-span-2 row-span-2 relative group overflow-hidden bg-surface-container"
+                : "home-facility-tile relative group overflow-hidden bg-surface-container";
+              var pad = isFeatured ? "p-6" : "p-4";
+              var titleClass = isFeatured
+                ? "font-title-lg text-[1.05rem] md:text-[1.125rem] lg:text-title-lg text-white"
+                : "font-title-lg text-white text-sm md:text-base";
+              return (
+                '<a href="' + tile.href + '" class="' + classes + '">' +
+                  '<img class="absolute inset-0 w-full h-full object-cover hover-zoom" alt="' + tile.alt + '" src="' + tile.src + '" loading="lazy" />' +
+                  '<div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 to-transparent flex items-end ' + pad + '">' +
+                    '<h4 class="' + titleClass + '">' + tile.label + "</h4>" +
+                  "</div>" +
+                "</a>"
+              );
+            }
+
+            var root = document.getElementById("home-facilities-grid");
+            if (!root) return;
+            root.className = "home-facilities-grid grid grid-cols-2 md:grid-cols-4 gap-4";
+            root.innerHTML = tileHtml(featured, true) + rest.map(function (tile) {
+              return tileHtml(tile, false);
+            }).join("");
+          })();
+        </script>
       </div>
     </section>
 
@@ -239,7 +310,7 @@
     </section>
 
     <!-- Why Ellipse -->
-    <section class="py-section-gap bg-deep-navy text-white reveal">
+    <section class="py-12 md:py-24 bg-deep-navy text-white reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="text-center mb-16">
           <div class="w-12 h-px bg-accent-gold mx-auto mb-6"></div>
@@ -271,10 +342,10 @@
     </section>
 
     <!-- Location -->
-    <section class="py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
+    <section class="py-12 md:py-24 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
         <a class="aspect-square md:aspect-[4/3] bg-surface-container relative group overflow-hidden block" href="https://www.google.com/maps/search/?api=1&query=Shola%2C%2031%20Sola%20Adewumi%20St%2C%20Oshodi%2C%20Bucknor%2C%20Ejigbo%20100261%2C%20Lagos" target="_blank" rel="noopener noreferrer" aria-label="Open location in Google Maps">
-          <div class="absolute inset-0 bg-cover bg-center hover-zoom" style="background-image: url('assets/images/home/location.jpg')"></div>
+          <div class="absolute inset-0 bg-cover bg-center hover-zoom" style="background-image: url('assets/images/home/DJI_0978.jpg')"></div>
           <div class="absolute inset-0 bg-deep-navy/10"></div>
           <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-deep-navy text-accent-gold rounded-full flex items-center justify-center shadow-xl">
             <span class="material-symbols-outlined">location_on</span>
@@ -296,7 +367,7 @@
     </section>
 
     <!-- Guest Experiences -->
-    <section class="py-24 bg-warm-grey reveal">
+    <section class="py-12 md:py-20 bg-warm-grey reveal">
       <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
         <span class="material-symbols-outlined text-accent-gold text-4xl mb-8">format_quote</span>
         <h3 class="font-display-lg text-title-lg md:text-display-lg-mobile text-deep-navy mb-8 leading-snug">
@@ -309,7 +380,7 @@
     <!-- Final CTA -->
     <section class="relative py-32 w-full bg-deep-navy flex items-center text-center reveal">
       <div class="absolute inset-0 z-0">
-        <div class="w-full h-full bg-cover bg-center opacity-30" style="background-image: url('assets/images/home/cta-bg.jpg')"></div>
+        <div class="w-full h-full bg-cover bg-center opacity-30" style="background-image: url('assets/images/hotel/_DSC8380.jpg')"></div>
         <div class="absolute inset-0 bg-deep-navy/80"></div>
       </div>
       <div class="relative z-10 max-w-3xl mx-auto px-margin-mobile md:px-margin-desktop w-full">
@@ -323,10 +394,13 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260809e"></script>
-  <script src="data/rooms.js?v=20260809e"></script>
-  <script src="js/site-chrome.js?v=20260809e"></script>
-  <script src="js/rooms.js?v=20260809e"></script>
+  <script src="data/booking.js?v=20260809l"></script>
+  <script src="data/rooms.js?v=20260810i"></script>
+  <script src="data/room-images.js?v=20260810i"></script>
+  <script src="api/room-images.php"></script>
+  <script src="data/images.js?v=20260810i"></script>
+  <script src="js/site-chrome.js?v=20260810i"></script>
+  <script src="js/rooms.js?v=20260810i"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
@@ -340,6 +414,83 @@
           el.setAttribute("rel", "noopener noreferrer");
         }
       });
+
+      (function initHomeHeroSlider() {
+        var root = document.querySelector("[data-home-hero-slider]");
+        if (!root) return;
+        var slides = Array.prototype.slice.call(root.querySelectorAll(".home-hero-slide"));
+        if (slides.length < 2) return;
+
+        var index = 0;
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function show(nextIndex) {
+          index = (nextIndex + slides.length) % slides.length;
+          slides.forEach(function (slide, i) {
+            var active = i === index;
+            slide.classList.toggle("is-active", active);
+            slide.setAttribute("aria-hidden", active ? "false" : "true");
+          });
+        }
+
+        show(0);
+        if (reduceMotion) return;
+
+        setInterval(function () {
+          show(index + 1);
+        }, 5000);
+      })();
+
+      var panel = document.getElementById("home-booking-panel");
+      var toggle = document.getElementById("home-booking-toggle");
+      var extra = document.getElementById("home-booking-extra");
+      var heroBlock = document.querySelector(".home-hero-block");
+      if (panel && toggle && extra) {
+        var labelEl = toggle.querySelector(".sr-only");
+        function isDesktopBooking() {
+          return window.matchMedia("(min-width: 1024px)").matches;
+        }
+        function syncBridge() {
+          if (!heroBlock || isDesktopBooking()) {
+            if (heroBlock) heroBlock.style.removeProperty("--home-booking-bridge");
+            return;
+          }
+          /* Half of the collapsed panel height — derived without toggling open state */
+          var panelH = panel.getBoundingClientRect().height;
+          var extraH = panel.classList.contains("is-expanded")
+            ? extra.getBoundingClientRect().height
+            : 0;
+          var collapsedHeight = Math.max(0, panelH - extraH);
+          var bridge = Math.max(56, Math.round(collapsedHeight * 0.5));
+          heroBlock.style.setProperty("--home-booking-bridge", bridge + "px");
+        }
+        function setExpanded(expanded) {
+          panel.classList.toggle("is-expanded", expanded);
+          var open = expanded || isDesktopBooking();
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          extra.setAttribute("aria-hidden", open ? "false" : "true");
+          if ("inert" in extra) extra.inert = !open;
+          if (labelEl) {
+            labelEl.textContent = expanded ? "Hide guests and rooms" : "Show guests and rooms";
+          }
+        }
+        setExpanded(false);
+        syncBridge();
+        toggle.addEventListener("click", function () {
+          setExpanded(!panel.classList.contains("is-expanded"));
+        });
+        window.addEventListener("resize", function () {
+          if (isDesktopBooking()) {
+            extra.setAttribute("aria-hidden", "false");
+            if ("inert" in extra) extra.inert = false;
+          } else {
+            var open = panel.classList.contains("is-expanded");
+            extra.setAttribute("aria-hidden", open ? "false" : "true");
+            if ("inert" in extra) extra.inert = !open;
+          }
+          syncBridge();
+        });
+      }
     });
   </script>
 </body>

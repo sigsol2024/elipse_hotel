@@ -7,20 +7,20 @@
       .replace(/"/g, "&quot;");
   }
 
-  function roomImage(room) {
-    if (room && room.image) return room.image;
-    const map = (window.EllipseImages && window.EllipseImages.rooms) || {};
-    const list = map[room && room.slug] || [];
-    return list[0] || "";
+  /** Room galleries: folder-discovered list from EllipseRoomImages (not hardcoded URLs). */
+  function roomImages(slug) {
+    const catalog = window.EllipseRoomImages;
+    const list =
+      (catalog && catalog.bySlug && catalog.bySlug[slug]) ||
+      [];
+    return list.slice();
   }
 
-  function roomImages(slug) {
-    const room = window.EllipseRooms && window.EllipseRooms.get(slug);
-    const primary = room && room.image ? [room.image] : [];
-    const map = (window.EllipseImages && window.EllipseImages.rooms) || {};
-    const extras = map[slug] || [];
-    const merged = primary.concat(extras.filter((src) => src && src !== primary[0]));
-    return merged;
+  function roomImage(room) {
+    const slug = room && room.slug;
+    const images = roomImages(slug);
+    if (images.length) return images[0];
+    return fallbackRoomImage();
   }
 
   function roomBookingHref(room) {
@@ -98,22 +98,44 @@
               ${escapeHtml(viewLabel)}
               <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
             </a>
-            ${bookLink(room, "font-label-caps text-label-caps text-accent-gold uppercase tracking-widest border-b border-accent-gold hover:opacity-80 transition-opacity", "Book Now")}
           </div>
         </div>`;
 
         return `
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center ${index < rooms.length - 1 ? "mb-24" : ""} reveal">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center ${index < rooms.length - 1 ? "mb-14 md:mb-24" : ""} reveal">
         ${imageLeft ? media + body : body + media}
       </div>`;
       })
       .join("");
   }
 
-  function renderFeatured(room, index) {
+  function renderHighlights(room) {
+    const items = Array.isArray(room.highlights)
+      ? room.highlights.filter((item) => item && item.label).slice(0, 6)
+      : [];
+    if (!items.length) return "";
+
+    return `
+  <div class="room-highlights grid grid-cols-3 gap-x-4 gap-y-4 w-full max-w-md mb-8" role="list">
+    ${items
+      .map(
+        (item) => `
+    <div class="flex flex-col items-start text-left" role="listitem">
+      <span class="material-symbols-outlined text-accent-gold text-[1.125rem] mb-1.5" aria-hidden="true">${escapeHtml(item.icon || "check")}</span>
+      <span class="font-label-caps text-[8px] md:text-[9px] text-deep-navy uppercase tracking-wider leading-snug">${escapeHtml(item.label)}</span>
+    </div>`
+      )
+      .join("")}
+  </div>`;
+  }
+
+  function viewDetailsButton(room) {
+    return `<a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-8 h-14 hover:bg-deep-navy/90 transition-colors" href="room-details.html?room=${escapeHtml(room.slug)}">View Details</a>`;
+  }
+
+  function renderFeatured(room) {
     const src = roomImage(room);
     const facts = factsLine(room);
-    const num = String(index + 1).padStart(2, "0");
     return `
 <article class="flex flex-col gap-12 reveal">
   <div class="w-full aspect-video md:aspect-[21/9] bg-surface-container relative overflow-hidden group">
@@ -121,36 +143,33 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
     <div class="col-span-1 md:col-span-8 pr-0 md:pr-12">
-      <span class="block font-label-caps text-label-caps text-accent-gold mb-4">${num}</span>
       <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">${escapeHtml(room.name)}</h2>
       ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl">${escapeHtml(room.description || room.shortDescription)}</p>
-    </div>
-    <div class="col-span-1 md:col-span-4 flex flex-col mt-8 md:mt-0 items-start md:items-end justify-center md:pt-10">
-      ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy mb-6")}
-      <div class="flex flex-col sm:flex-row gap-6 items-center w-full md:w-auto md:justify-end">
-        <a class="font-label-caps text-label-caps text-deep-navy hover:opacity-70 transition-opacity border-b border-deep-navy pb-1" href="room-details.html?room=${escapeHtml(room.slug)}">View Details</a>
-        ${bookLink(room, "inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps px-8 h-14 hover:opacity-80 transition-opacity w-full sm:w-auto", "Check Availability")}
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
+      ${renderHighlights(room)}
+      <div class="flex items-start">
+        ${viewDetailsButton(room)}
       </div>
+    </div>
+    <div class="col-span-1 md:col-span-4 flex flex-col mt-8 md:mt-0 items-start md:items-end justify-center md:pt-2">
+      ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy")}
     </div>
   </div>
 </article>`;
   }
 
-  function renderSplit(room, index, imageRight) {
+  function renderSplit(room, imageRight) {
     const src = roomImage(room);
     const facts = factsLine(room);
-    const num = String(index + 1).padStart(2, "0");
     const text = `
 <div class="col-span-1 md:col-span-5 ${imageRight ? "md:col-start-1 order-2 md:order-1" : "md:col-start-8 order-2"} flex flex-col justify-center">
-  <span class="block font-label-caps text-label-caps text-accent-gold mb-4">${num}</span>
   <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">${escapeHtml(room.name)}</h2>
   ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
   <p class="font-body-md text-body-md text-on-surface-variant mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
   ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy mb-8")}
-  <div class="flex flex-wrap items-center gap-8">
-    <a class="font-label-caps text-label-caps text-deep-navy hover:opacity-70 transition-opacity border-b border-deep-navy pb-1" href="room-details.html?room=${escapeHtml(room.slug)}">View Details</a>
-    ${bookLink(room, "inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps px-8 h-14 hover:opacity-80 transition-opacity", "Check Availability")}
+  ${renderHighlights(room)}
+  <div class="flex items-start">
+    ${viewDetailsButton(room)}
   </div>
 </div>`;
     const media = `
@@ -170,36 +189,26 @@
     if (!root || !window.EllipseRooms) return;
     const rooms = window.EllipseRooms.list();
     root.innerHTML = rooms
-      .map((room, index) => {
+      .map((room) => {
         const layout = room.catalogueLayout || "split-left";
-        if (layout === "featured") return renderFeatured(room, index);
-        if (layout === "split-right") return renderSplit(room, index, true);
-        return renderSplit(room, index, false);
+        if (layout === "featured") return renderFeatured(room);
+        if (layout === "split-right") return renderSplit(room, true);
+        return renderSplit(room, false);
       })
       .join("");
   }
 
   function fallbackRoomImage() {
-    return (
-      (window.EllipseImages && window.EllipseImages.roomsHero) ||
-      "assets/images/hotel/room-lounge.jpg"
-    );
+    return (window.EllipseImages && window.EllipseImages.roomsHero) || "";
   }
 
   function detailGallery(room) {
-    const fromData = Array.isArray(room.gallery)
-      ? room.gallery
-          .map((item) => (typeof item === "string" ? item : item && item.src))
-          .filter(Boolean)
-      : [];
-    if (fromData.length) return fromData;
-    return roomImages(room.slug);
+    return roomImages(room && room.slug);
   }
 
   function detailHeroSrc(room, gallery) {
-    if (room.image) return room.image;
     if (gallery && gallery[0]) return gallery[0];
-    return fallbackRoomImage();
+    return roomImage(room);
   }
 
   function rateLabel(room, compact) {
@@ -279,9 +288,9 @@
       paragraphs.length > 0
         ? paragraphs
         : [room.description, room.shortDescription].filter(Boolean);
-    if (!copy.length && !exp.image) return "";
-
-    const imageSrc = exp.image || room.image || fallbackRoomImage();
+    const gallery = roomImages(room.slug);
+    const imageSrc = gallery[1] || gallery[0] || fallbackRoomImage();
+    if (!copy.length && !imageSrc) return "";
     const paras = copy
       .map(
         (p, i) =>
@@ -360,7 +369,21 @@
 
     const primary = images[0];
     const secondary = images[1];
-    const extras = images.slice(2, 4);
+    const mosaicExtras = images.slice(2, 4);
+    const remaining = images.slice(4);
+
+    const remainingGrid = remaining.length
+      ? `<div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mt-6 md:mt-8">
+    ${remaining
+      .map(
+        (src) => `
+    <div class="aspect-[4/3] overflow-hidden group bg-surface-container">
+      <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(src)}" alt="${escapeHtml(room.name)}" loading="lazy" />
+    </div>`
+      )
+      .join("")}
+  </div>`
+      : "";
 
     return `
 <section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 reveal">
@@ -373,9 +396,9 @@
         <img class="w-full h-full object-cover room-detail-zoom" src="${escapeHtml(secondary)}" alt="${escapeHtml(room.name)}" loading="lazy" />
       </div>
       ${
-        extras.length
-          ? `<div class="grid grid-cols-2 gap-6 md:gap-8 ${extras.length === 1 ? "md:grid-cols-1" : ""}">
-        ${extras
+        mosaicExtras.length
+          ? `<div class="grid grid-cols-2 gap-6 md:gap-8 ${mosaicExtras.length === 1 ? "md:grid-cols-1" : ""}">
+        ${mosaicExtras
           .map(
             (src) => `
         <div class="h-[160px] md:h-[180px] overflow-hidden group bg-surface-container">
@@ -388,6 +411,7 @@
       }
     </div>
   </div>
+  ${remainingGrid}
 </section>`;
   }
 

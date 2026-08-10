@@ -1,7 +1,10 @@
 /**
  * Shared room catalogue — single source for homepage, rooms page, and room details.
- * Update this file (not HTML) when names, copy, photos, rates, or booking IDs change.
- * Do not invent unconfirmed facts (size, view, price, amenities, booking IDs).
+ * Update this file (not HTML) when names, copy, rates, or booking IDs change.
+ *
+ * Room photography is NOT listed here. Galleries are discovered from
+ * assets/images/hotel/{Standard Room|Deluxe Room|Executive Suite}/ via
+ * data/room-images.js (or api/room-images.php on PHP hosts).
  */
 window.EllipseRooms = {
   /** Rooms page / general catalogue order */
@@ -22,7 +25,6 @@ window.EllipseRooms = {
         "Essential comfort executed with precision. An intimate space designed purely for rest, stripping away the unnecessary to focus on quality sleep and clarity.",
       tagline: "Intelligent comfort for the practical traveler.",
       priceFrom: null,
-      image: "assets/images/home/room-standard.jpg",
       facts: {
         size: "",
         bed: "",
@@ -34,15 +36,16 @@ window.EllipseRooms = {
         paragraphs: [
           "Essential comfort executed with precision. An intimate space designed purely for rest, stripping away the unnecessary to focus on quality sleep and clarity.",
           "A focused, intelligent room for the practical traveler — fine linens and a dedicated work area bathed in natural light."
-        ],
-        image: "assets/images/hotel/room-a.jpg"
+        ]
       },
       amenities: [],
-      gallery: [
-        "assets/images/hotel/room-a.jpg",
-        "assets/images/hotel/room-lounge.jpg",
-        "assets/images/hotel/corridor.jpg",
-        "assets/images/hotel/interior-a.jpg"
+      highlights: [
+        { icon: "bed", label: "Comfort Bed" },
+        { icon: "desk", label: "Work Area" },
+        { icon: "wifi", label: "Hi-Speed Wi-Fi" },
+        { icon: "shower", label: "Private Bath" },
+        { icon: "ac_unit", label: "Climate Control" },
+        { icon: "light_mode", label: "Natural Light" }
       ],
       bookingRoomId: "",
       bookingUrl: "",
@@ -60,7 +63,6 @@ window.EllipseRooms = {
         "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced amenities for a truly restful experience.",
       tagline: "Expanded volume and considered materiality.",
       priceFrom: null,
-      image: "assets/images/home/room-deluxe.jpg",
       facts: {
         size: "",
         bed: "",
@@ -72,15 +74,16 @@ window.EllipseRooms = {
         paragraphs: [
           "A refined retreat balancing comfort and considered design — expanded seating and a calmer sense of volume for a truly restful stay.",
           "Elevated materiality and curated architectural details give the Deluxe a broader perspective without excess."
-        ],
-        image: "assets/images/hotel/room-c.jpg"
+        ]
       },
       amenities: [],
-      gallery: [
-        "assets/images/hotel/room-c.jpg",
-        "assets/images/hotel/room-b.jpg",
-        "assets/images/hotel/room-lounge.jpg",
-        "assets/images/hotel/interior-b.jpg"
+      highlights: [
+        { icon: "weekend", label: "Seating Lounge" },
+        { icon: "king_bed", label: "Bedroom Comfort" },
+        { icon: "desktop_windows", label: "Work Space" },
+        { icon: "restaurant", label: "In-Room Dining" },
+        { icon: "wifi", label: "Hi-Speed Wi-Fi" },
+        { icon: "shower", label: "Private Bath" }
       ],
       bookingRoomId: "",
       bookingUrl: "",
@@ -98,7 +101,6 @@ window.EllipseRooms = {
         "Our most expansive offering. The Executive Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
       tagline: "Space, privacy and understated comfort in the heart of Lagos.",
       priceFrom: null,
-      image: "assets/images/home/room-executive.jpg",
       facts: {
         size: "",
         bed: "",
@@ -110,15 +112,16 @@ window.EllipseRooms = {
         paragraphs: [
           "Our most expansive offering. The Executive Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
           "A distinct living space and quiet materiality create sanctuary — composed, generous, and ready for both rest and focused work."
-        ],
-        image: "assets/images/hotel/room-e.jpg"
+        ]
       },
       amenities: [],
-      gallery: [
-        "assets/images/hotel/room-e.jpg",
-        "assets/images/hotel/room-f.jpg",
-        "assets/images/hotel/corridor.jpg",
-        "assets/images/hotel/interior-c.jpg"
+      highlights: [
+        { icon: "weekend", label: "Living Lounge" },
+        { icon: "king_bed", label: "Bedroom Comfort" },
+        { icon: "countertops", label: "Kitchenette" },
+        { icon: "restaurant", label: "Dining Corner" },
+        { icon: "wifi", label: "Hi-Speed Wi-Fi" },
+        { icon: "shower", label: "Private Bath" }
       ],
       bookingRoomId: "",
       bookingUrl: "",
@@ -137,12 +140,15 @@ window.EllipseRooms = {
   },
 
   get(slug) {
-    if (!slug) return null;
     return this.items[slug] || null;
   },
 
+  facts(room) {
+    return this.factEntries(room).map((entry) => entry.value);
+  },
+
   /**
-   * Returns labelled facts for the detail strip / catalogue.
+   * Facts for the detail strip / catalogue.
    * Empty values are omitted.
    */
   factEntries(room) {
@@ -154,12 +160,6 @@ window.EllipseRooms = {
       { key: "guests", label: "Guests", value: f.guests || room.occupancy || "" },
       { key: "view", label: "View", value: f.view || "" }
     ];
-    return entries.filter(
-      (entry) => entry.value && String(entry.value).trim() && entry.value !== "To be confirmed"
-    );
-  },
-
-  facts(room) {
-    return this.factEntries(room).map((entry) => entry.value);
+    return entries.filter((entry) => entry.value && String(entry.value).trim());
   }
 };

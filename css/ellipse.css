@@ -42,6 +42,214 @@
   transform: translateY(0);
 }
 
+/* Site-wide page loader — white overlay + dotted circle (fade chase) */
+html.ellipse-loading {
+  overflow: hidden;
+}
+
+html.ellipse-loading::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 99998;
+  background: #ffffff;
+}
+
+.ellipse-page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.ellipse-page-loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.ellipse-page-loader__ring {
+  --loader-r: 1.05rem;
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ellipse-page-loader__ring {
+    --loader-r: 1.4rem;
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+}
+
+.ellipse-page-loader__ring span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin: -0.175rem 0 0 -0.175rem;
+  border-radius: 50%;
+  background: #d4af37;
+  opacity: 0.2;
+  transform: rotate(calc(var(--i) * 45deg)) translateY(calc(var(--loader-r) * -1));
+  animation: ellipse-loader-dot 0.9s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.1125s);
+}
+
+@media (min-width: 1024px) {
+  .ellipse-page-loader__ring span {
+    width: 0.48rem;
+    height: 0.48rem;
+    margin: -0.24rem 0 0 -0.24rem;
+  }
+}
+
+@keyframes ellipse-loader-dot {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: rotate(calc(var(--i) * 45deg)) translateY(calc(var(--loader-r) * -1)) scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(calc(var(--i) * 45deg)) translateY(calc(var(--loader-r) * -1)) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ellipse-page-loader__ring span {
+    animation: none;
+    opacity: 0.75;
+  }
+}
+
+html:not(.ellipse-loading) .ellipse-page-loader {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Home hero title: fade + rise on page load */
+.home-hero-title {
+  opacity: 0;
+  animation: home-hero-fade-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.12s forwards;
+}
+
+.home-hero-sub {
+  opacity: 0;
+  animation: home-hero-fade-in 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+}
+
+@keyframes home-hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Home hero image slider */
+.home-hero-slider {
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 1.1s ease, transform 6.5s ease-out;
+  will-change: opacity, transform;
+}
+
+.home-hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+/* Facilities mosaic: featured tile stretches to match stacked small tiles */
+.home-facilities-grid {
+  grid-auto-rows: minmax(0, auto);
+}
+
+.home-facility-tile {
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.home-facility-tile img {
+  object-position: center;
+}
+
+@media (min-width: 768px) {
+  .home-facilities-grid {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    height: clamp(28rem, 42vw, 34rem);
+  }
+
+  .home-facility-tile {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  .home-facility-tile--featured {
+    height: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-title,
+  .home-hero-sub {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+
+  .home-hero-slide {
+    transition: opacity 0.35s ease;
+    transform: none;
+  }
+
+  .home-hero-slide.is-active {
+    transform: none;
+  }
+}
+
+/* Ellipse Experience list icons — compact round darker-gold base */
+.experience-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background: #a88828;
+  color: #fff8e7;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.experience-icon .material-symbols-outlined {
+  font-size: 1.15rem;
+  line-height: 1;
+  color: inherit;
+}
+
 .hover-zoom {
   transition: transform 0.7s ease-in-out;
 }
@@ -102,13 +310,27 @@
   }
 }
 
-/* Home booking: own section on mobile/tablet; desktop keeps bridged overlay */
+/*
+ * Home booking bridge:
+ * - Below lg: negative margin pulls ~half the closed panel onto the hero while
+ *   keeping the widget in document flow so expand still pushes Welcome down.
+ * - lg+: absolute overlay centered on the hero edge (existing desktop behavior).
+ */
+.home-hero-block {
+  --home-booking-bridge: 5.25rem;
+}
+
 .home-booking-wrap {
   position: relative;
-  z-index: 10;
-  padding-top: 1.25rem;
-  padding-bottom: 0.5rem;
-  background: #fff;
+  z-index: 20;
+  margin-top: calc(-1 * var(--home-booking-bridge));
+  padding-top: 0;
+  padding-bottom: 0.75rem;
+  background: transparent;
+}
+
+.home-welcome {
+  padding-top: 1.75rem;
 }
 
 @media (min-width: 1024px) {
@@ -117,11 +339,153 @@
     left: 0;
     right: 0;
     bottom: 0;
+    margin-top: 0;
     transform: translateY(50%);
     z-index: 20;
     padding-top: 0;
     padding-bottom: 0;
     background: transparent;
+  }
+
+  .home-welcome {
+    padding-top: 12rem;
+  }
+}
+
+/* Mobile/tablet: Check-in + Check-out share one row */
+.home-booking-dates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.home-booking-dates .home-booking-field {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.home-booking-dates .home-booking-field + .home-booking-field {
+  border-left: 1px solid rgba(27, 43, 58, 0.12);
+  padding-left: 0.75rem;
+}
+
+.home-booking-panel .home-booking-date {
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.home-booking-panel .home-booking-date::-webkit-calendar-picker-indicator {
+  margin-left: 0;
+  padding: 0;
+  width: 1rem;
+  height: 1rem;
+}
+
+.home-booking-panel .home-booking-date::-webkit-datetime-edit,
+.home-booking-panel .home-booking-date::-webkit-datetime-edit-fields-wrapper,
+.home-booking-panel .home-booking-date::-webkit-datetime-edit-text,
+.home-booking-panel .home-booking-date::-webkit-datetime-edit-month-field,
+.home-booking-panel .home-booking-date::-webkit-datetime-edit-day-field,
+.home-booking-panel .home-booking-date::-webkit-datetime-edit-year-field {
+  font-size: 0.8125rem;
+  padding: 0;
+}
+
+/* Guests field collapses below lg */
+.home-booking-extra {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  margin: 0;
+}
+
+.home-booking-panel.is-expanded .home-booking-extra {
+  max-height: 8rem;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.home-booking-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid rgba(27, 43, 58, 0.18);
+  background: #fff;
+  color: #1b2b3a;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.home-booking-toggle:hover {
+  background: rgba(27, 43, 58, 0.04);
+  border-color: rgba(27, 43, 58, 0.35);
+}
+
+.home-booking-toggle__icon {
+  transition: transform 0.25s ease;
+}
+
+.home-booking-panel.is-expanded .home-booking-toggle__icon {
+  transform: rotate(180deg);
+}
+
+.home-booking-panel .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  .home-booking-dates {
+    display: contents;
+  }
+
+  .home-booking-dates .home-booking-field + .home-booking-field {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .home-booking-panel .home-booking-date {
+    font-size: 1rem;
+  }
+
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit,
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit-fields-wrapper,
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit-text,
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit-month-field,
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit-day-field,
+  .home-booking-panel .home-booking-date::-webkit-datetime-edit-year-field {
+    font-size: 1rem;
+  }
+
+  .home-booking-extra {
+    display: contents;
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    margin: 0;
+    transition: none;
+  }
+
+  .home-booking-toggle {
+    display: none;
   }
 }
 
@@ -302,6 +666,20 @@ body.facilities-page {
   overflow: hidden;
   display: flex;
   align-items: flex-end;
+  pointer-events: none;
+  scroll-margin-top: 0;
+}
+
+.facility-hash-alias {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
   pointer-events: none;
 }
 

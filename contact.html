@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html class="light ellipse-loading" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Ellipse Hotels Lagos</title>
   <meta name="description" content="Contact Ellipse Hotels — Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos. Enquiries for stays, dining, and events." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
+  <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260809e"></script>
+  <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260809e" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260810h" />
   <style>
     .contact-accordion__panel {
       display: grid;
@@ -29,31 +30,36 @@
     .contact-accordion__icon {
       transition: transform 0.3s ease;
     }
-    .contact-field input,
-    .contact-field select,
-    .contact-field textarea {
+    .contact-map {
+      position: relative;
       width: 100%;
-      background: transparent;
+      height: 20rem;
+      overflow: hidden;
+      border: 1px solid rgba(27, 43, 58, 0.1);
+      background: #ffffff;
+      padding: 0.75rem;
+      box-sizing: border-box;
+    }
+    @media (min-width: 768px) {
+      .contact-map {
+        height: 500px;
+        padding: 1rem;
+      }
+    }
+    .contact-map iframe {
+      position: absolute;
+      inset: 0.75rem;
+      width: calc(100% - 1.5rem);
+      height: calc(100% - 1.5rem);
       border: 0;
-      border-bottom: 1px solid rgba(27, 43, 58, 0.2);
-      color: #1b2b3a;
-      padding: 0.5rem 0;
-      outline: none;
-      border-radius: 0;
-      font-family: inherit;
-      font-size: 1rem;
-      line-height: 1.6;
+      background: #ffffff;
     }
-    .contact-field input:focus,
-    .contact-field select:focus,
-    .contact-field textarea:focus {
-      border-bottom-color: #d4af37;
-    }
-    .contact-field select {
-      cursor: pointer;
-    }
-    .contact-field textarea {
-      resize: none;
+    @media (min-width: 768px) {
+      .contact-map iframe {
+        inset: 1rem;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
+      }
     }
   </style>
 </head>
@@ -133,57 +139,9 @@
       </div>
     </section>
 
-    <!-- Inquiry form -->
-    <section class="py-20 md:py-28 bg-surface-container-low px-margin-mobile md:px-margin-desktop reveal" id="enquiry">
-      <div class="max-w-[1000px] mx-auto bg-white p-8 md:p-16 border border-deep-navy/5">
-        <div class="text-center mb-12">
-          <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-4 font-light tracking-tight">Send an inquiry</h2>
-          <p class="font-body-md text-body-md text-on-surface-variant">Please fill out the form below and we will respond when email handling is connected.</p>
-        </div>
-        <form class="space-y-10" id="contact-form" novalidate>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="contact-field">
-              <label class="font-label-caps text-label-caps text-on-surface-variant block mb-3 uppercase tracking-widest" for="name">Full Name</label>
-              <input id="name" name="name" type="text" autocomplete="name" placeholder="Enter your full name" required />
-            </div>
-            <div class="contact-field">
-              <label class="font-label-caps text-label-caps text-on-surface-variant block mb-3 uppercase tracking-widest" for="email">Email Address</label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="Enter your email address" required />
-            </div>
-          </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <div class="contact-field">
-              <label class="font-label-caps text-label-caps text-on-surface-variant block mb-3 uppercase tracking-widest" for="phone">Phone Number (Optional)</label>
-              <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+234 …" />
-            </div>
-            <div class="contact-field">
-              <label class="font-label-caps text-label-caps text-on-surface-variant block mb-3 uppercase tracking-widest" for="inquiry-type">Enquiry Type</label>
-              <select id="inquiry-type" name="inquiry-type" required>
-                <option disabled selected value="">Select an option</option>
-                <option value="reservation">Room Reservation</option>
-                <option value="events">Events &amp; Meetings</option>
-                <option value="dining">Dining &amp; Restaurant</option>
-                <option value="other">Other Inquiry</option>
-              </select>
-            </div>
-          </div>
-          <div class="contact-field">
-            <label class="font-label-caps text-label-caps text-on-surface-variant block mb-3 uppercase tracking-widest" for="message">Message</label>
-            <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
-          </div>
-          <div class="text-center pt-2">
-            <button class="inline-flex items-center justify-center bg-deep-navy text-white px-12 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-accent-gold hover:text-deep-navy transition-colors w-full md:w-auto" type="submit">
-              Submit Inquiry
-            </button>
-            <p class="font-body-md text-body-md text-on-surface-variant mt-6" id="form-status" role="status" aria-live="polite"></p>
-          </div>
-        </form>
-      </div>
-    </section>
-
     <!-- Plan your visit -->
-    <section class="py-20 md:py-24 px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto reveal">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+    <section class="py-20 md:py-28 bg-surface-container-low px-margin-mobile md:px-margin-desktop reveal" id="location">
+      <div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
         <div>
           <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-6 font-light tracking-tight">Easy to find. Easy to reach.</h2>
           <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-8 leading-relaxed">
@@ -195,21 +153,21 @@
               Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos
             </p>
           </div>
-          <a class="inline-flex items-center text-deep-navy hover:text-accent-gold transition-colors font-label-caps text-label-caps tracking-widest uppercase border-b border-deep-navy hover:border-accent-gold pb-1" id="contact-directions" href="#" target="_blank" rel="noopener noreferrer">
+          <a class="inline-flex items-center text-deep-navy hover:text-accent-gold transition-colors font-label-caps text-label-caps tracking-widest uppercase border-b border-deep-navy hover:border-accent-gold pb-1" id="contact-directions" href="https://www.google.com/maps/search/?api=1&amp;query=Shola%2C%2031%20Sola%20Adewumi%20St%2C%20Oshodi%2C%20Bucknor%2C%20Ejigbo%20100261%2C%20Lagos" target="_blank" rel="noopener noreferrer">
             View on Google Maps
             <span class="material-symbols-outlined ml-2 text-[18px]" aria-hidden="true">arrow_forward</span>
           </a>
         </div>
-        <a class="bg-surface-container-low h-80 md:h-[500px] w-full relative overflow-hidden group border border-deep-navy/10 block" id="contact-map-card" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open location in Google Maps">
-          <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Ellipse Hotels location context" src="assets/images/home/location.jpg" />
-          <div class="absolute inset-0 bg-deep-navy/25 group-hover:bg-deep-navy/15 transition-colors"></div>
-          <div class="absolute inset-0 flex items-center justify-center">
-            <div class="text-center p-6 bg-white/90 px-6 py-5">
-              <span class="material-symbols-outlined text-deep-navy text-4xl mb-2 block" aria-hidden="true">map</span>
-              <p class="font-label-caps text-label-caps tracking-widest text-deep-navy uppercase">Open Map</p>
-            </div>
-          </div>
-        </a>
+        <div class="contact-map" id="contact-map">
+          <iframe
+            id="contact-map-embed"
+            title="Ellipse Hotels location on Google Maps"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            src="https://maps.google.com/maps?q=Shola%2C%2031%20Sola%20Adewumi%20St%2C%20Oshodi%2C%20Bucknor%2C%20Ejigbo%20100261%2C%20Lagos&amp;z=16&amp;output=embed"
+          ></iframe>
+        </div>
       </div>
     </section>
 
@@ -276,10 +234,18 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260809e"></script>
-  <script src="js/site-chrome.js?v=20260809e"></script>
+  <script src="data/booking.js?v=20260810e"></script>
+  <script src="js/site-chrome.js?v=20260810h"></script>
   <script>
     (function () {
+      function mapsEmbedUrl(address) {
+        return (
+          "https://maps.google.com/maps?q=" +
+          encodeURIComponent(address) +
+          "&z=16&output=embed"
+        );
+      }
+
       function wireChrome() {
         if (!window.EllipseChrome) return;
         var maps = window.EllipseChrome.mapsUrl;
@@ -289,13 +255,11 @@
             var el = document.getElementById(id);
             if (el) el.textContent = address;
           });
+          var embed = document.getElementById("contact-map-embed");
+          if (embed) embed.src = mapsEmbedUrl(address);
         }
-        ["contact-directions", "contact-map-card"].forEach(function (id) {
-          var el = document.getElementById(id);
-          if (el && maps) {
-            el.href = maps;
-          }
-        });
+        var directions = document.getElementById("contact-directions");
+        if (directions && maps) directions.href = maps;
         var book = document.getElementById("contact-book");
         if (book && typeof window.EllipseChrome.bookingGeneralHref === "function") {
           var href = window.EllipseChrome.bookingGeneralHref();
@@ -323,23 +287,6 @@
           }
         });
       });
-
-      var form = document.getElementById("contact-form");
-      var status = document.getElementById("form-status");
-      if (form) {
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-          }
-          if (status) {
-            status.textContent =
-              "Thank you. Message handling will connect to the hotel’s inbox when email is configured. Your details were not sent yet.";
-          }
-          form.reset();
-        });
-      }
 
       if (document.readyState === "loading") {
         document.addEventListener("DOMContentLoaded", wireChrome);

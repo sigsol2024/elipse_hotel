@@ -1,94 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="light ellipse-loading" lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Terms &amp; Conditions | Ellipse Hotels</title>
-  <meta name="description" content="Terms and conditions for Ellipse Hotels — placeholder policy framework pending hotel confirmation." />
+  <meta name="description" content="Terms and conditions for staying at Ellipse Hotels, Lagos — reservations, payments, guest responsibilities, and more." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
+  <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260809e"></script>
+  <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260809e" />
-  <link rel="stylesheet" href="css/tokens.css?v=20260809e" />
-  <link rel="stylesheet" href="css/pages.css?v=20260809e" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260810h" />
 </head>
-<body class="has-legacy-content bg-background text-on-surface font-body-md antialiased min-h-screen flex flex-col" data-page="terms">
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="terms">
   <div id="site-header-root"></div>
 
-  <main id="main" class="legacy-main flex-grow">
-    <header class="section" style="padding-top:calc(var(--header-h) + 2.5rem);padding-bottom:1rem">
-      <div class="container" style="max-width:42rem">
-        <p class="eyebrow">Legal</p>
-        <h1 class="headline">Terms &amp; Conditions</h1>
-        <p class="muted" style="margin-top:1rem">These sections are structural placeholders. They are not the hotel’s official policies until Ellipse Hotels supplies and approves final legal text.</p>
-        <span class="placeholder-note">Policy content pending</span>
-      </div>
-    </header>
+  <main id="main" class="flex-grow pt-[88px]">
+    <section class="py-16 md:py-24 px-margin-mobile md:px-margin-desktop max-w-[1000px] mx-auto text-center reveal">
+      <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center gap-4">
+        <span class="w-12 h-px bg-accent-gold/50" aria-hidden="true"></span>
+        Legal
+        <span class="w-12 h-px bg-accent-gold/50" aria-hidden="true"></span>
+      </p>
+      <h1 class="font-headline-md text-[2.25rem] leading-tight md:text-[3.25rem] text-deep-navy mb-6 font-light tracking-tight">
+        Terms &amp; Conditions
+      </h1>
+      <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+        These terms govern your stay and use of services at Ellipse Hotels, Lagos. By making a reservation or staying with us, you agree to the following.
+      </p>
+    </section>
 
-    <section class="section" style="padding-top:1.5rem">
-      <div class="container legal-layout">
-        <nav class="legal-toc" aria-label="Terms sections">
-          <a href="#s1">1. Introduction</a>
-          <a href="#s2">2. Reservations</a>
-          <a href="#s3">3. Check-in and Check-out</a>
-          <a href="#s4">4. Payment</a>
-          <a href="#s5">5. Cancellation</a>
-          <a href="#s6">6. Hotel Policies</a>
-          <a href="#s7">7. Guest Responsibilities</a>
-          <a href="#s8">8. Liability</a>
-          <a href="#s9">9. Privacy</a>
-          <a href="#s10">10. Changes to Terms</a>
-          <a href="#s11">11. Contact Information</a>
+    <section class="pb-20 md:pb-28 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+        <nav class="lg:col-span-3 lg:sticky lg:top-28 self-start space-y-3" aria-label="Terms sections">
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#introduction">1. Introduction</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#reservations">2. Reservations</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#check-in">3. Check-in &amp; Check-out</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#payment">4. Payment</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#cancellation">5. Cancellation</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#policies">6. Hotel Policies</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#responsibilities">7. Guest Responsibilities</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#liability">8. Liability</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#privacy">9. Privacy</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#changes">10. Changes</a>
+          <a class="block font-label-caps text-[11px] uppercase tracking-widest text-on-surface-variant hover:text-deep-navy transition-colors" href="#contact">11. Contact</a>
         </nav>
 
-        <div class="legal-content">
-          <section id="s1">
-            <h2>1. Introduction</h2>
-            <p>[Placeholder] This section will introduce the agreement between Ellipse Hotels and guests once legal counsel or hotel management provides approved wording.</p>
+        <div class="lg:col-span-9 space-y-12 md:space-y-14 text-deep-navy">
+          <section id="introduction" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">1. Introduction</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Welcome to Ellipse Hotels. These Terms &amp; Conditions apply to all guests, visitors, and users of our website and hotel services at our Lagos property.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Ellipse Hotels is located at Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos. References to “we”, “us”, or “the hotel” mean Ellipse Hotels. References to “you” or “guest” mean the person making a reservation or staying at the hotel.
+            </p>
           </section>
-          <section id="s2">
-            <h2>2. Reservations</h2>
-            <p>[Placeholder] Reservation rules, confirmation process and the role of the external booking engine will be described here.</p>
+
+          <section id="reservations" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">2. Reservations</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Room reservations may be made through Ellipse Hotels’ website, authorised booking partners, or by contacting our team. A reservation is confirmed only when you receive a confirmation with a reservation reference.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              You are responsible for providing accurate guest details, stay dates, and contact information. Special requests (such as early arrival, late departure, or accessibility needs) should be shared in advance and are subject to availability.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              When online booking is completed through a third-party booking engine, that provider’s confirmation and payment terms also apply in addition to these Terms.
+            </p>
           </section>
-          <section id="s3">
-            <h2>3. Check-in and Check-out</h2>
-            <p>[Placeholder] Official check-in and check-out times and related procedures — to be confirmed by the hotel.</p>
+
+          <section id="check-in" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">3. Check-in &amp; Check-out</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Standard check-in and check-out times are stated on your reservation confirmation. Early check-in or late check-out may be requested and will be accommodated where possible, sometimes subject to an additional charge.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              At check-in, guests may be asked to present a valid government-issued photo ID and a payment card for incidentals. The name on the reservation should match the ID of the lead guest unless otherwise arranged with the hotel.
+            </p>
           </section>
-          <section id="s4">
-            <h2>4. Payment</h2>
-            <p>[Placeholder] Accepted payment methods, deposits and billing practices — to be confirmed.</p>
+
+          <section id="payment" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">4. Payment</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Room rates, taxes, and any applicable fees will be shown during booking or confirmed by our reservations team. Payment may be required at the time of booking, upon arrival, or as otherwise stated in your confirmation.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Ellipse Hotels accepts major payment methods as advised at booking or reception. Any extras during your stay (dining, laundry, or other services) will be charged to your guest account and settled before departure unless otherwise agreed.
+            </p>
           </section>
-          <section id="s5">
-            <h2>5. Cancellation</h2>
-            <p>[Placeholder] Cancellation windows, fees and no-show terms — to be confirmed. Do not treat this page as current cancellation policy.</p>
+
+          <section id="cancellation" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">5. Cancellation &amp; No-Shows</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Cancellation and amendment rules depend on the rate and booking channel selected. Please review the cancellation policy shown on your confirmation before completing payment.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Failure to arrive on the scheduled check-in date without prior notice may be treated as a no-show. In that case, the hotel may charge according to the applicable rate rules and release the room for other guests.
+            </p>
           </section>
-          <section id="s6">
-            <h2>6. Hotel Policies</h2>
-            <p>[Placeholder] House rules, smoking, pets, visitors and similar policies — to be confirmed.</p>
+
+          <section id="policies" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">6. Hotel Policies</h2>
+            <ul class="space-y-3 font-body-md text-body-md text-on-surface-variant leading-relaxed list-disc pl-5">
+              <li>Ellipse Hotels is a non-smoking property in guest rooms and indoor public areas. Smoking is permitted only where clearly designated, if available.</li>
+              <li>Pets are not permitted unless expressly agreed in writing by the hotel in advance.</li>
+              <li>Visitors to guest rooms may be received in line with reception guidance and house rules.</li>
+              <li>Quiet hours and respectful use of facilities help all guests enjoy a calm stay.</li>
+              <li>Use of the pool, fitness, dining, and meeting spaces is subject to any posted guidelines and staff instructions.</li>
+            </ul>
           </section>
-          <section id="s7">
-            <h2>7. Guest Responsibilities</h2>
-            <p>[Placeholder] Expectations of guests regarding conduct, property care and compliance with local law — to be confirmed.</p>
+
+          <section id="responsibilities" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">7. Guest Responsibilities</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Guests agree to treat Ellipse Hotels’ property, staff, and other guests with care and respect. You are responsible for the conduct of anyone staying in or visiting your room under your reservation.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Damage to rooms, furnishings, or facilities beyond normal wear and tear may be charged to the lead guest. Illegal activity, harassment, or behaviour that endangers others may result in immediate termination of the stay without refund of unused nights, where permitted by applicable law.
+            </p>
           </section>
-          <section id="s8">
-            <h2>8. Liability</h2>
-            <p>[Placeholder] Limitation of liability and related notices — to be drafted and approved professionally.</p>
+
+          <section id="liability" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">8. Liability</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              Ellipse Hotels takes reasonable care to provide a safe and comfortable stay. To the fullest extent permitted by Nigerian law, we are not liable for loss of or damage to personal belongings left unattended in public areas, vehicles, or rooms when a safe or secure storage option was available and unused.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              We are not responsible for delays, interruptions, or failures caused by events outside our reasonable control, including utility outages, severe weather, civil disruption, or third-party service failures. Nothing in these Terms limits liability for death or personal injury caused by our negligence, or any other liability that cannot be limited by law.
+            </p>
           </section>
-          <section id="s9">
-            <h2>9. Privacy</h2>
-            <p>[Placeholder] How guest information is collected and used — to be aligned with a formal privacy statement when available.</p>
+
+          <section id="privacy" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">9. Privacy</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              We collect guest information needed to manage reservations, stays, payments, and guest services. This may include your name, contact details, identification presented at check-in, and stay preferences.
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Information is used for hotel operations and, where relevant, shared with trusted service providers such as payment processors or booking partners. For privacy questions or requests about your personal data, please contact us through the <a class="underline hover:text-accent-gold" href="contact.html">Contact</a> page.
+            </p>
           </section>
-          <section id="s10">
-            <h2>10. Changes to Terms</h2>
-            <p>[Placeholder] How updates to these terms will be communicated — to be confirmed.</p>
+
+          <section id="changes" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">10. Changes to These Terms</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              Ellipse Hotels may update these Terms &amp; Conditions from time to time. The version published on this website applies to new reservations made after the update. Material changes affecting an existing confirmed stay will be communicated where reasonably possible.
+            </p>
           </section>
-          <section id="s11">
-            <h2>11. Contact Information</h2>
-            <p>Ellipse Hotels<br />
-              Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos</p>
-            <p class="muted">Phone and email for formal notices will be added when supplied. For general enquiries, use the <a href="contact.html">Contact</a> page.</p>
+
+          <section id="contact" class="scroll-mt-28">
+            <h2 class="font-headline-md text-[1.5rem] md:text-[1.75rem] text-deep-navy mb-4 font-light tracking-tight">11. Contact Information</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-4">
+              <strong class="text-deep-navy font-medium">Ellipse Hotels</strong><br />
+              Shola, 31 Sola Adewumi St<br />
+              Oshodi, Bucknor, Ejigbo 100261<br />
+              Lagos, Nigeria
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              For reservations, stay enquiries, or questions about these Terms, visit our <a class="underline hover:text-accent-gold" href="contact.html">Contact</a> page or speak with reception during your stay.
+            </p>
           </section>
         </div>
       </div>
@@ -96,14 +167,8 @@
   </main>
 
   <div id="site-footer-root"></div>
-  <script src="data/booking.js?v=20260809e"></script>
-  <script src="js/site-chrome.js?v=20260809e"></script>
-  <script src="js/motion.js?v=20260809e"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var header = document.getElementById("site-header");
-      if (header) header.classList.add("is-solid");
-    });
-  </script>
+
+  <script src="data/booking.js?v=20260810f"></script>
+  <script src="js/site-chrome.js?v=20260810h"></script>
 </body>
 </html>

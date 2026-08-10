@@ -60,8 +60,8 @@
     <a class="hidden lg:inline-flex items-center justify-center px-6 py-3 bg-deep-navy text-on-secondary font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-12" ${bookingAttrs(bookHref)}>
       Book Your Stay
     </a>
-    <button class="lg:hidden text-deep-navy" type="button" aria-label="Open menu" data-menu-open>
-      <span class="material-symbols-outlined text-2xl" aria-hidden="true">menu</span>
+    <button class="lg:hidden inline-flex items-center justify-center text-deep-navy p-1 -mr-1" type="button" aria-label="Open menu" data-menu-open>
+      <span class="material-symbols-outlined text-[1.875rem] leading-none" aria-hidden="true">menu</span>
     </button>
   </div>
 </nav>
@@ -70,8 +70,8 @@
     <a class="ellipse-logo ellipse-logo--header" href="index.html" aria-label="Ellipse Hotels home">
       <img src="assets/brand/logo-on-light.png" alt="Ellipse Hotels" width="180" height="61" />
     </a>
-    <button class="text-deep-navy" type="button" aria-label="Close menu" data-menu-close>
-      <span class="material-symbols-outlined text-2xl" aria-hidden="true">close</span>
+    <button class="inline-flex items-center justify-center text-deep-navy p-1 -mr-1" type="button" aria-label="Close menu" data-menu-close>
+      <span class="material-symbols-outlined text-[1.875rem] leading-none" aria-hidden="true">close</span>
     </button>
   </div>
   <div class="ellipse-mobile-nav__body">
@@ -84,7 +84,7 @@
     <div class="ellipse-mobile-nav__divider" aria-hidden="true"></div>
     <div class="ellipse-mobile-nav__aside">
       <div class="ellipse-mobile-nav__media">
-        <img src="assets/images/home/experience-main.jpg" alt="" />
+        <img src="assets/images/home/_DSC8362.jpg" alt="" />
       </div>
       <a class="ellipse-mobile-nav__cta inline-flex items-center justify-center px-5 py-3.5 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest" ${bookingAttrs(bookHref)}>
         Book Your Stay
@@ -97,13 +97,13 @@
   function renderFooter() {
     const bookHref = bookingGeneralHref();
     return `
-<footer class="bg-deep-navy text-white py-section-gap border-t border-white/10">
-  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-gutter">
+<footer class="bg-deep-navy text-white py-12 md:py-section-gap border-t border-white/10">
+  <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-gutter">
     <div class="md:col-span-4">
-      <a class="ellipse-logo ellipse-logo--footer inline-block mb-6 hover:opacity-90 transition-opacity" href="index.html" aria-label="Ellipse Hotels home">
+      <a class="ellipse-logo ellipse-logo--footer inline-block mb-5 md:mb-6 hover:opacity-90 transition-opacity" href="index.html" aria-label="Ellipse Hotels home">
         <img src="assets/brand/logo-on-dark.png" alt="Ellipse Hotels" width="200" height="68" />
       </a>
-      <p class="font-body-md text-body-md text-white/70 max-w-sm mb-6">
+      <p class="font-body-md text-body-md text-white/70 max-w-sm mb-5 md:mb-6">
         ${ADDRESS}
       </p>
       <a class="inline-flex items-center justify-center px-5 py-3 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white hover:text-deep-navy transition-colors" ${bookingAttrs(bookHref)}>
@@ -111,8 +111,8 @@
       </a>
     </div>
     <div class="md:col-span-2">
-      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-6">Explore</h4>
-      <ul class="space-y-4">
+      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-4 md:mb-6">Explore</h4>
+      <ul class="space-y-3 md:space-y-4">
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="index.html">Home</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="about.html">About Us</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="rooms.html">Rooms &amp; Suites</a></li>
@@ -120,29 +120,29 @@
       </ul>
     </div>
     <div class="md:col-span-2">
-      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-6">Contact</h4>
-      <ul class="space-y-4">
+      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-4 md:mb-6">Contact</h4>
+      <ul class="space-y-3 md:space-y-4">
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="contact.html">Get in Touch</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="${MAPS_URL}" target="_blank" rel="noopener noreferrer">Location</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="terms.html">Terms</a></li>
       </ul>
     </div>
     <div class="md:col-span-2">
-      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-6">Reservations</h4>
-      <ul class="space-y-4">
+      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-4 md:mb-6">Reservations</h4>
+      <ul class="space-y-3 md:space-y-4">
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" ${bookingAttrs(bookHref)}>Book a Room</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="rooms.html">Rooms &amp; Suites</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="contact.html">Enquire</a></li>
       </ul>
     </div>
     <div class="md:col-span-2">
-      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-6">Visit</h4>
-      <ul class="space-y-4">
+      <h4 class="font-label-caps text-label-caps uppercase tracking-widest text-white mb-4 md:mb-6">Visit</h4>
+      <ul class="space-y-3 md:space-y-4">
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="${MAPS_URL}" target="_blank" rel="noopener noreferrer">Get Directions</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="contact.html">Contact</a></li>
       </ul>
     </div>
-    <div class="md:col-span-12 mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="md:col-span-12 mt-6 md:mt-12 pt-5 md:pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-4">
       <p class="font-body-md text-body-md text-white/50">
         © Ellipse Hotels. Quiet Hospitality in Lagos.
       </p>
@@ -262,6 +262,59 @@
       note.focus();
       setTimeout(() => note.remove(), 4200);
     });
+  }
+
+  function ensurePageLoader() {
+    if (document.getElementById("ellipse-page-loader")) return;
+    const el = document.createElement("div");
+    el.id = "ellipse-page-loader";
+    el.className = "ellipse-page-loader";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML =
+      '<div class="ellipse-page-loader__ring" aria-hidden="true">' +
+      [0, 1, 2, 3, 4, 5, 6, 7]
+        .map((i) => `<span style="--i:${i}"></span>`)
+        .join("") +
+      "</div>";
+    if (document.body) {
+      document.body.insertBefore(el, document.body.firstChild);
+    }
+  }
+
+  function hidePageLoader() {
+    const root = document.documentElement;
+    const loader = document.getElementById("ellipse-page-loader");
+    root.classList.remove("ellipse-loading");
+    root.classList.add("ellipse-loaded");
+    if (loader) {
+      loader.classList.add("is-done");
+      window.setTimeout(() => {
+        if (loader.parentNode) loader.parentNode.removeChild(loader);
+      }, 400);
+    }
+  }
+
+  function initPageLoader() {
+    ensurePageLoader();
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      hidePageLoader();
+      return;
+    }
+    const finish = () => {
+      window.setTimeout(hidePageLoader, 120);
+    };
+    if (document.readyState === "complete") {
+      finish();
+    } else {
+      window.addEventListener("load", finish, { once: true });
+    }
+    window.setTimeout(hidePageLoader, 6000);
+  }
+
+  if (document.body) {
+    initPageLoader();
+  } else {
+    document.addEventListener("DOMContentLoaded", initPageLoader);
   }
 
   if (document.readyState === "loading") {
