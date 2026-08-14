@@ -24,7 +24,7 @@ window.EllipseRooms = {
       description:
         "Superior rooms focus on clarity and comfort. Clean lines, considered lighting, and a quiet atmosphere make an easy base for business or leisure stays.",
       tagline: "Calm comfort for everyday travel.",
-      priceFrom: "₦55,000",
+      priceFrom: "\u20A655,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -44,6 +44,10 @@ window.EllipseRooms = {
       ],
       bookingRoomId: "superior",
       bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/superior",
+      catalogueLayout: "split-left",
+      homeLayout: "image-left"
+    },
+    deluxe: {
       slug: "deluxe",
       name: "Deluxe",
       headline: "Expanded Perspectives",
@@ -53,7 +57,7 @@ window.EllipseRooms = {
       description:
         "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced appointments for a truly restful experience.",
       tagline: "Expanded volume and considered materiality.",
-      priceFrom: "₦60,000",
+      priceFrom: "\u20A660,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -86,7 +90,7 @@ window.EllipseRooms = {
       description:
         "Super Deluxe rooms extend the Ellipse language of calm materiality with added space and upgraded appointments for guests who want more room to unwind.",
       tagline: "More space. More composure.",
-      priceFrom: "₦65,000",
+      priceFrom: "\u20A665,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -119,7 +123,7 @@ window.EllipseRooms = {
       description:
         "Executive Rooms are shaped for travelers who need rest and focus in equal measure — a composed interior with elevated appointments and a calm atmosphere.",
       tagline: "Composed for work and rest.",
-      priceFrom: "₦70,000",
+      priceFrom: "\u20A670,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -152,7 +156,7 @@ window.EllipseRooms = {
       description:
         "The Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
       tagline: "Space, privacy and understated comfort.",
-      priceFrom: "₦110,000",
+      priceFrom: "\u20A6110,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",

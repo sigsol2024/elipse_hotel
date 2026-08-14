@@ -328,7 +328,11 @@
 
   function renderAmenities(room) {
     const amenities = Array.isArray(room.amenities) ? room.amenities : [];
-    const items = amenities.filter((a) => a && (a.label || typeof a === "string"));
+    const highlights = Array.isArray(room.highlights) ? room.highlights : [];
+    // Detail pages use amenities when set; otherwise fall back to the same
+    // highlights shown on the rooms catalogue.
+    const source = amenities.length ? amenities : highlights;
+    const items = source.filter((a) => a && (a.label || typeof a === "string"));
     if (!items.length) return "";
 
     const cells = items
