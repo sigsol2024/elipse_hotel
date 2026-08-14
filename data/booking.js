@@ -13,9 +13,9 @@ window.EllipseBooking = {
 
   /**
    * Optional template for room-specific URLs.
-   * Leave empty until StayEazi documents room deep-links.
+   * Room pages use bookingUrl on each room in data/rooms.js.
    */
-  roomUrlTemplate: "",
+  roomUrlTemplate: "https://app.stayeazi.com/reservation/ellipse-hotels/{bookingRoomId}",
 
   getGeneralUrl() {
     const url = (this.generalBookingUrl || "").trim();

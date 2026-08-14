@@ -39,7 +39,7 @@
     if (!href) {
       return 'href="#book" aria-disabled="true" title="Booking engine URL pending configuration"';
     }
-    return `href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer"`;
+    return `href="${escapeHtml(href)}"`;
   }
 
   function bookLink(room, className, label) {
@@ -97,7 +97,8 @@
               ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
               : ""
           }
-          <p class="font-body-md text-body-md text-on-surface-variant mb-8">${escapeHtml(room.shortDescription)}</p>
+          <p class="font-body-md text-body-md text-on-surface-variant mb-6">${escapeHtml(room.shortDescription)}</p>
+          ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] text-deep-navy mb-8")}
           <div class="flex items-center gap-6">
             <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=${escapeHtml(room.slug)}">
               ${escapeHtml(viewLabel)}

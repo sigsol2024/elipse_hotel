@@ -11,7 +11,7 @@
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260814b" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260814c" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
@@ -38,12 +38,53 @@
           </p>
         </div>
       </section>
-
-      <!-- StayEazi Booking Widget (direct embed) -->
-      <div class="home-booking-wrap px-margin-mobile lg:px-margin-desktop" id="book">
-        <div id="stayeazi-widget-ellipse-hotels" class="stayeazi-booking-widget" data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"></div>
-      </div>
     </div>
+
+    <!-- StayEazi Booking Widget -->
+    <div id="book" class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full py-6 md:py-8">
+      <div id="stayeazi-widget-ellipse-hotels" class="stayeazi-booking-widget" data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"></div>
+    </div>
+    <script>
+      (function () {
+        // Wait for DOM to be ready
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", initStayEaziWidgets);
+        } else {
+          initStayEaziWidgets();
+        }
+
+        function initStayEaziWidgets() {
+          // Find all StayEazi widget containers
+          const containers = document.querySelectorAll(".stayeazi-booking-widget[data-widget-token]");
+
+          containers.forEach(function (container) {
+            const token = container.getAttribute("data-widget-token");
+            if (!token) return;
+
+            // Load widget script for this container
+            loadWidgetScript(token, container);
+          });
+        }
+
+        function loadWidgetScript(token, container) {
+          // Check if script already loaded
+          const scriptId = "stayeazi-widget-script-" + token;
+          if (document.getElementById(scriptId)) return;
+
+          // Dynamically generate widget URL from token (supports multiple widgets on same page)
+          var widgetUrl = "https://app.stayeazi.com/widget/load/" + token;
+
+          var script = document.createElement("script");
+          script.id = scriptId;
+          script.src = widgetUrl;
+          script.async = true;
+          script.onload = function () {
+            // Script loaded, widget should initialize
+          };
+          document.head.appendChild(script);
+        }
+      })();
+    </script>
 
     <!-- Welcome -->
     <section class="home-welcome pb-12 md:pb-24 lg:pb-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
@@ -61,8 +102,9 @@
         </div>
         <div class="relative w-full aspect-video bg-surface-container overflow-hidden shadow-lg">
           <iframe
+            id="home-welcome-video"
             class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/d8BPUr41hjo"
+            src="https://www.youtube.com/embed/d8BPUr41hjo?enablejsapi=1&mute=1&playsinline=1&rel=0"
             title="Ellipse Hotels video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -367,43 +409,12 @@
   <div id="site-footer-root"></div>
 
   <script src="data/booking.js?v=20260814a"></script>
-  <script src="data/rooms.js?v=20260813a"></script>
+  <script src="data/rooms.js?v=20260814a"></script>
   <script src="data/room-images.js?v=20260812g"></script>
   <script src="api/room-images.php"></script>
   <script src="data/images.js?v=20260812g"></script>
   <script src="js/site-chrome.js?v=20260814a"></script>
-  <script src="js/rooms.js?v=20260813d"></script>
-  <!-- StayEazi Booking Widget -->
-  <script>
-    (function () {
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initStayEaziWidgets);
-      } else {
-        initStayEaziWidgets();
-      }
-
-      function initStayEaziWidgets() {
-        var containers = document.querySelectorAll(".stayeazi-booking-widget[data-widget-token]");
-        containers.forEach(function (container) {
-          var token = container.getAttribute("data-widget-token");
-          if (!token) return;
-          loadWidgetScript(token, container);
-        });
-      }
-
-      function loadWidgetScript(token, container) {
-        var scriptId = "stayeazi-widget-script-" + token;
-        if (document.getElementById(scriptId)) return;
-
-        var widgetUrl = "https://app.stayeazi.com/widget/load/" + token;
-        var script = document.createElement("script");
-        script.id = scriptId;
-        script.src = widgetUrl;
-        script.async = true;
-        document.head.appendChild(script);
-      }
-    })();
-  </script>
+  <script src="js/rooms.js?v=20260814a"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
@@ -447,33 +458,32 @@
         }, 5000);
       })();
 
-      (function syncBookingBridge() {
-        var panel = document.querySelector("#book .stayeazi-booking-widget") || document.getElementById("book");
-        var heroBlock = document.querySelector(".home-hero-block");
-        if (!panel || !heroBlock) return;
+      (function initWelcomeVideo() {
+        var iframe = document.getElementById("home-welcome-video");
+        if (!iframe || !("IntersectionObserver" in window)) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        function isDesktopBooking() {
-          return window.matchMedia("(min-width: 1024px)").matches;
+        function post(cmd) {
+          if (!iframe.contentWindow) return;
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: "command", func: cmd, args: [] }),
+            "*"
+          );
         }
 
-        function syncBridge() {
-          if (isDesktopBooking()) {
-            heroBlock.style.removeProperty("--home-booking-bridge");
-            return;
-          }
-          var panelH = panel.getBoundingClientRect().height || 84;
-          var bridge = Math.max(56, Math.round(panelH * 0.5));
-          heroBlock.style.setProperty("--home-booking-bridge", bridge + "px");
-        }
-
-        syncBridge();
-        window.addEventListener("resize", syncBridge, { passive: true });
-        window.setTimeout(syncBridge, 400);
-        window.setTimeout(syncBridge, 1200);
-        window.setTimeout(syncBridge, 2500);
-        if ("ResizeObserver" in window) {
-          new ResizeObserver(syncBridge).observe(panel);
-        }
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+                post("playVideo");
+              } else {
+                post("pauseVideo");
+              }
+            });
+          },
+          { threshold: [0, 0.45, 0.75] }
+        );
+        observer.observe(iframe);
       })();
     });
   </script>

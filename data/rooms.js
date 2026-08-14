@@ -18,13 +18,13 @@ window.EllipseRooms = {
       slug: "superior",
       name: "Superior",
       headline: "Thoughtful Essentials",
-      provisional: true,
+      provisional: false,
       shortDescription:
         "A composed guest room with the essentials done well — calm finishes, a restful bed, and space to reset after the city day.",
       description:
         "Superior rooms focus on clarity and comfort. Clean lines, considered lighting, and a quiet atmosphere make an easy base for business or leisure stays.",
       tagline: "Calm comfort for everyday travel.",
-      priceFrom: null,
+      priceFrom: "₦55,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -42,22 +42,18 @@ window.EllipseRooms = {
         { icon: "ac_unit", label: "Climate Control" },
         { icon: "light_mode", label: "Natural Light" }
       ],
-      bookingRoomId: "",
-      bookingUrl: "",
-      catalogueLayout: "split-left",
-      homeLayout: "image-left"
-    },
-    deluxe: {
+      bookingRoomId: "superior",
+      bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/superior",
       slug: "deluxe",
       name: "Deluxe",
       headline: "Expanded Perspectives",
-      provisional: true,
+      provisional: false,
       shortDescription:
         "Expanded volume and enhanced materiality. The Deluxe offers a broader perspective with elevated seating and curated architectural details.",
       description:
         "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced appointments for a truly restful experience.",
       tagline: "Expanded volume and considered materiality.",
-      priceFrom: null,
+      priceFrom: "₦60,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -75,8 +71,8 @@ window.EllipseRooms = {
         { icon: "wifi", label: "Hi-Speed Wi-Fi" },
         { icon: "shower", label: "Private Bath" }
       ],
-      bookingRoomId: "",
-      bookingUrl: "",
+      bookingRoomId: "deluxe",
+      bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/deluxe",
       catalogueLayout: "split-right",
       homeLayout: "image-right"
     },
@@ -84,13 +80,13 @@ window.EllipseRooms = {
       slug: "super-deluxe",
       name: "Super Deluxe",
       headline: "Elevated Comfort",
-      provisional: true,
+      provisional: false,
       shortDescription:
         "A step beyond Deluxe — more generous proportions, richer finishes, and a quieter sense of arrival for longer or more considered stays.",
       description:
         "Super Deluxe rooms extend the Ellipse language of calm materiality with added space and upgraded appointments for guests who want more room to unwind.",
       tagline: "More space. More composure.",
-      priceFrom: null,
+      priceFrom: "₦65,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -108,8 +104,8 @@ window.EllipseRooms = {
         { icon: "wifi", label: "Hi-Speed Wi-Fi" },
         { icon: "shower", label: "Private Bath" }
       ],
-      bookingRoomId: "",
-      bookingUrl: "",
+      bookingRoomId: "super-deluxe",
+      bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/super-deluxe",
       catalogueLayout: "split-left",
       homeLayout: "image-left"
     },
@@ -117,13 +113,13 @@ window.EllipseRooms = {
       slug: "executive",
       name: "Executive Room",
       headline: "Focused Refinement",
-      provisional: true,
+      provisional: false,
       shortDescription:
         "A refined executive stay with composed work space, premium comfort, and the quiet confidence of well-considered detail.",
       description:
         "Executive Rooms are shaped for travelers who need rest and focus in equal measure — a composed interior with elevated appointments and a calm atmosphere.",
       tagline: "Composed for work and rest.",
-      priceFrom: null,
+      priceFrom: "₦70,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -141,22 +137,22 @@ window.EllipseRooms = {
         { icon: "shower", label: "Private Bath" },
         { icon: "ac_unit", label: "Climate Control" }
       ],
-      bookingRoomId: "",
-      bookingUrl: "",
+      bookingRoomId: "executive-room",
+      bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/executive-room",
       catalogueLayout: "split-right",
       homeLayout: "image-right"
     },
     suite: {
       slug: "suite",
-      name: "Suite",
+      name: "Luxury Suite",
       headline: "Ultimate Refinement",
-      provisional: true,
+      provisional: false,
       shortDescription:
         "Our most generous offering. The Suite features a distinct living space, premium appointments, and a profound sense of calm.",
       description:
         "The Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
       tagline: "Space, privacy and understated comfort.",
-      priceFrom: null,
+      priceFrom: "₦110,000",
       facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
@@ -174,8 +170,8 @@ window.EllipseRooms = {
         { icon: "wifi", label: "Hi-Speed Wi-Fi" },
         { icon: "shower", label: "Private Bath" }
       ],
-      bookingRoomId: "",
-      bookingUrl: "",
+      bookingRoomId: "suite",
+      bookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels/suite",
       catalogueLayout: "featured",
       homeLayout: "image-left"
     }
