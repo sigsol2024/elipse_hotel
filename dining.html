@@ -4,25 +4,30 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dining | Ellipse Hotels Lagos</title>
-  <meta name="description" content="Dining at Ellipse Hotels, Lagos — considered cooking in a calm setting, from breakfast through evening service." />
+  <meta name="description" content="Dining at Ellipse Hotels, Lagos â€” considered cooking in a calm setting, from breakfast through evening service." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260810h" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260813c" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="dining">
   <div id="site-header-root"></div>
 
   <main id="main" class="flex-grow pt-[88px]">
-    <!-- Hero -->
-    <section class="relative w-full h-[65vh] min-h-[500px] flex flex-col justify-end">
-      <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover" alt="Dining at Ellipse Hotels" src="assets/images/dining/_DSC8163.jpg" />
-        <div class="absolute inset-0 bg-gradient-to-t from-deep-navy via-deep-navy/55 to-deep-navy/35"></div>
+    <!-- Hero (auto slider) -->
+    <section class="relative w-full h-[65vh] min-h-[500px] flex flex-col justify-end overflow-hidden" aria-roledescription="carousel" aria-label="Dining highlights">
+      <div class="dining-hero-slider absolute inset-0 z-0" data-dining-hero-slider>
+        <div class="dining-hero-slide is-active" style="background-image: url('assets/images/dining/DSC8163.jpg')" role="img" aria-label="Restaurant dining room" aria-hidden="false"></div>
+        <div class="dining-hero-slide" style="background-image: url('assets/images/dining/DSC8165.jpg')" role="img" aria-label="Dining tables and setting" aria-hidden="true"></div>
+        <div class="dining-hero-slide" style="background-image: url('assets/images/dining/DSC8169.jpg')" role="img" aria-label="Restaurant lounge seating" aria-hidden="true"></div>
+        <div class="dining-hero-slide" style="background-image: url('assets/images/dining/DSC8177.jpg')" role="img" aria-label="Evening dining atmosphere" aria-hidden="true"></div>
+        <div class="dining-hero-slide" style="background-image: url('assets/images/dining/DSC8200.jpg')" role="img" aria-label="Hotel restaurant interior" aria-hidden="true"></div>
+        <div class="dining-hero-slide" style="background-image: url('assets/images/dining/DSC8205.jpg')" role="img" aria-label="Dining room detail" aria-hidden="true"></div>
       </div>
+      <div class="absolute inset-0 z-[1] bg-gradient-to-t from-deep-navy via-deep-navy/55 to-deep-navy/35" aria-hidden="true"></div>
       <div class="relative z-10 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pb-16 md:pb-24">
         <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-6">Dining at Ellipse</p>
         <h1 class="font-headline-md text-[2.25rem] leading-tight md:text-[3.25rem] lg:text-[4rem] text-white mb-8 md:mb-10 max-w-4xl font-light tracking-tight">
@@ -32,8 +37,8 @@
           <a class="inline-flex items-center justify-center bg-accent-gold text-deep-navy px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors" href="contact.html">
             Reserve a Table
           </a>
-          <a class="inline-flex items-center justify-center border border-white text-white px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors" href="#menu">
-            View Menu
+          <a class="inline-flex items-center justify-center border border-white text-white px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors" href="#atmosphere">
+            See the Room
           </a>
         </div>
       </div>
@@ -45,7 +50,7 @@
         <div class="md:border-r border-deep-navy/10 md:pr-6">
           <span class="material-symbols-outlined text-accent-gold mb-4 text-3xl" aria-hidden="true">wb_twilight</span>
           <h2 class="font-label-caps text-label-caps text-deep-navy uppercase tracking-widest mb-3">Breakfast</h2>
-          <p class="font-body-md text-body-md text-on-surface-variant">A calm start — considered morning service in a composed setting.</p>
+          <p class="font-body-md text-body-md text-on-surface-variant">A calm start â€” considered morning service in a composed setting.</p>
         </div>
         <div class="md:border-r border-deep-navy/10 md:pr-6">
           <span class="material-symbols-outlined text-accent-gold mb-4 text-3xl" aria-hidden="true">restaurant</span>
@@ -60,18 +65,18 @@
         <div>
           <span class="material-symbols-outlined text-accent-gold mb-4 text-3xl" aria-hidden="true">groups</span>
           <h2 class="font-label-caps text-label-caps text-deep-navy uppercase tracking-widest mb-3">Private Dining</h2>
-          <p class="font-body-md text-body-md text-on-surface-variant">Spaces for gatherings and celebrations — arranged with our team.</p>
+          <p class="font-body-md text-body-md text-on-surface-variant">Spaces for gatherings and celebrations â€” arranged with our team.</p>
         </div>
       </div>
     </section>
 
     <!-- Signature split -->
-    <section class="py-20 md:py-section-gap reveal">
+    <section class="py-20 md:py-section-gap bg-surface-container-low border-y border-deep-navy/10 reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
           <div class="md:col-span-6">
-            <div class="aspect-[4/5] bg-surface-container overflow-hidden group">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Dining at Ellipse Hotels" src="assets/images/dining/_DSC8164.jpg" />
+            <div class="dining-signature-frame aspect-[6/7] bg-surface-container overflow-hidden group">
+              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Dining at Ellipse Hotels" src="assets/images/dining/DSC8164.jpg" />
             </div>
           </div>
           <div class="md:col-span-5 md:col-start-8 mt-10 md:mt-0">
@@ -91,69 +96,29 @@
       </div>
     </section>
 
-    <!-- Menu preview (no invented dishes or prices) -->
-    <section class="py-20 md:py-section-gap bg-surface-container-low border-y border-deep-navy/10 reveal" id="menu">
-      <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="text-center mb-12 md:mb-16">
-          <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4">A Taste of the Menu</p>
-          <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy font-light tracking-tight">Seasonal offerings</h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 max-w-4xl mx-auto">
-          <div class="border-t border-deep-navy/15 pt-6">
-            <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Breakfast</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Morning classics and lighter plates — the full breakfast selection is available in the restaurant.</p>
-          </div>
-          <div class="border-t border-deep-navy/15 pt-6">
-            <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Starters</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Small plates and opening courses that follow the day’s kitchen focus.</p>
-          </div>
-          <div class="border-t border-deep-navy/15 pt-6">
-            <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Main courses</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Thoughtfully prepared mains for lunch and dinner service.</p>
-          </div>
-          <div class="border-t border-deep-navy/15 pt-6">
-            <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Desserts</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">A short close to the meal — ask your server for today’s selection.</p>
-          </div>
-        </div>
-        <p class="text-center font-body-md text-body-md text-on-surface-variant mt-12 max-w-2xl mx-auto">
-          Menus and pricing are confirmed at the restaurant. For dietary needs or private dining, speak with our team.
-        </p>
-        <div class="text-center mt-10">
-          <a class="inline-flex items-center justify-center border border-deep-navy text-deep-navy px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy hover:text-white transition-colors" href="contact.html">
-            Enquire About Dining
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- Atmosphere gallery -->
-    <section class="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
-      <div class="text-center mb-12">
+    <section class="py-20 md:py-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal" id="atmosphere">
         <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy font-light tracking-tight">The atmosphere</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-        <div class="md:col-span-8 flex flex-col gap-gutter">
-          <div class="aspect-[16/9] bg-surface-container overflow-hidden group">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Restaurant dining room" src="assets/images/dining/_DSC8166.jpg" />
-          </div>
-          <div class="grid grid-cols-2 gap-gutter">
-            <div class="aspect-square bg-surface-container overflow-hidden group">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Dining detail" src="assets/images/dining/_DSC8178.jpg" />
-            </div>
-            <div class="aspect-square bg-surface-container overflow-hidden group">
-              <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Hotel dining setting" src="assets/images/dining/_DSC8179.jpg" />
-            </div>
-          </div>
-        </div>
-        <div class="md:col-span-4 flex flex-col gap-gutter">
-          <div class="aspect-[3/4] bg-surface-container overflow-hidden group">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Bar and lounge" src="assets/images/dining/_DSC8204.jpg" />
-          </div>
-          <div class="aspect-square bg-surface-container overflow-hidden group hidden md:block">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Interior detail" src="assets/images/dining/_DSC8163.jpg" />
-          </div>
-        </div>
+      <div class="dining-mosaic" aria-label="Restaurant atmosphere">
+        <figure class="dining-mosaic__cell dining-mosaic__cell--wide">
+          <img src="assets/images/dining/DSC8166.jpg" alt="Restaurant dining room" loading="lazy" />
+        </figure>
+        <figure class="dining-mosaic__cell dining-mosaic__cell--tall">
+          <img src="assets/images/dining/DSC8204.jpg" alt="Bar and lounge" loading="lazy" />
+        </figure>
+        <figure class="dining-mosaic__cell">
+          <img src="assets/images/dining/DSC8178.jpg" alt="Dining detail" loading="lazy" />
+        </figure>
+        <figure class="dining-mosaic__cell">
+          <img src="assets/images/dining/DSC8179.jpg" alt="Hotel dining setting" loading="lazy" />
+        </figure>
+        <figure class="dining-mosaic__cell dining-mosaic__cell--offset">
+          <img src="assets/images/dining/DSC8207.jpg" alt="Interior detail" loading="lazy" />
+        </figure>
+        <figure class="dining-mosaic__cell dining-mosaic__cell--wide dining-mosaic__cell--low">
+          <img src="assets/images/dining/DSC8205.jpg" alt="Restaurant ambience" loading="lazy" />
+        </figure>
       </div>
     </section>
 
@@ -166,7 +131,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-gutter text-center">
           <div class="p-4 md:p-6">
             <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Hotel guests</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Dining that complements your stay — arranged with reception when needed.</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">Dining that complements your stay â€” arranged with reception when needed.</p>
           </div>
           <div class="p-4 md:p-6">
             <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Business dining</h3>
@@ -178,7 +143,7 @@
           </div>
           <div class="p-4 md:p-6">
             <h3 class="font-title-lg text-title-lg text-deep-navy mb-3">Casual elegance</h3>
-            <p class="font-body-md text-body-md text-on-surface-variant">Refined food without formality — welcoming for every occasion.</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">Refined food without formality â€” welcoming for every occasion.</p>
           </div>
         </div>
       </div>
@@ -233,8 +198,8 @@
           <a class="inline-flex items-center justify-center bg-accent-gold text-deep-navy px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors" href="contact.html">
             Reserve a Table
           </a>
-          <a class="inline-flex items-center justify-center border border-white text-white px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors" href="#menu">
-            View Menu
+          <a class="inline-flex items-center justify-center border border-white text-white px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors" href="#atmosphere">
+            See the Room
           </a>
         </div>
       </div>
@@ -254,20 +219,45 @@
   <div id="site-footer-root"></div>
 
   <script src="data/booking.js?v=20260809g"></script>
-  <script src="js/site-chrome.js?v=20260810h"></script>
+  <script src="js/site-chrome.js?v=20260813c"></script>
   <script>
     (function () {
-      if (!window.EllipseChrome) return;
-      var addr = document.getElementById("dining-address");
-      var link = document.getElementById("dining-directions");
-      if (addr && window.EllipseChrome.addressShort) {
-        addr.textContent = window.EllipseChrome.addressShort;
+      if (window.EllipseChrome) {
+        var addr = document.getElementById("dining-address");
+        var link = document.getElementById("dining-directions");
+        if (addr && window.EllipseChrome.addressShort) {
+          addr.textContent = window.EllipseChrome.addressShort;
+        }
+        if (link && window.EllipseChrome.mapsUrl) {
+          link.href = window.EllipseChrome.mapsUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        }
       }
-      if (link && window.EllipseChrome.mapsUrl) {
-        link.href = window.EllipseChrome.mapsUrl;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-      }
+
+      (function initDiningHero() {
+        var root = document.querySelector("[data-dining-hero-slider]");
+        if (!root) return;
+        var slides = Array.prototype.slice.call(root.querySelectorAll(".dining-hero-slide"));
+        if (slides.length < 2) return;
+        var index = 0;
+        var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        function show(nextIndex) {
+          index = (nextIndex + slides.length) % slides.length;
+          slides.forEach(function (slide, i) {
+            var active = i === index;
+            slide.classList.toggle("is-active", active);
+            slide.setAttribute("aria-hidden", active ? "false" : "true");
+          });
+        }
+
+        show(0);
+        if (reduceMotion) return;
+        setInterval(function () {
+          show(index + 1);
+        }, 5000);
+      })();
     })();
   </script>
 </body>

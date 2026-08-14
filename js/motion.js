@@ -13,11 +13,12 @@
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add("is-visible");
+            entry.target.classList.add("active");
             io.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.05, rootMargin: "220px 0px 220px 0px" }
     );
 
     nodes.forEach((n) => io.observe(n));

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="light ellipse-loading" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | Ellipse Hotels</title>
+  <meta name="description" content="Explore photography from Ellipse Hotels, Lagos â€” rooms, dining, facilities, and the property." />
+  <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
+  <script>document.documentElement.classList.add("ellipse-loading");</script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="js/tailwind-theme.js?v=20260811a"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260813c" />
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="gallery">
+  <div id="site-header-root"></div>
+
+  <main id="main" class="flex-grow pt-[88px]">
+    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pt-12 md:pt-16 pb-8 md:pb-10 reveal">
+      <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center">
+        <span class="w-6 h-px bg-accent-gold mr-4" aria-hidden="true"></span>Photography
+      </p>
+      <h1 class="font-headline-md text-[2rem] md:text-[2.75rem] lg:text-[3.25rem] text-deep-navy font-light tracking-tight mb-4">Gallery</h1>
+      <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant max-w-2xl">
+        A look inside Ellipse â€” rooms, dining, facilities, and the quieter corners of the hotel.
+      </p>
+    </section>
+
+    <div id="gallery-root" class="pb-20 md:pb-28" aria-live="polite"></div>
+  </main>
+
+  <div id="site-footer-root"></div>
+
+  <!-- Media library modal -->
+  <div class="gallery-modal" id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title" aria-hidden="true" hidden>
+    <div class="gallery-modal__backdrop" data-gallery-close></div>
+    <div class="gallery-modal__panel">
+      <header class="gallery-modal__header">
+        <div class="min-w-0">
+          <p class="font-label-caps text-[10px] text-accent-gold uppercase tracking-widest mb-1" id="gallery-modal-section"></p>
+          <h2 class="font-headline-md text-xl md:text-2xl text-white font-light tracking-tight truncate" id="gallery-modal-title">Gallery</h2>
+        </div>
+        <button type="button" class="gallery-modal__close" data-gallery-close aria-label="Close gallery">
+          <span class="material-symbols-outlined text-[28px]" aria-hidden="true">close</span>
+        </button>
+      </header>
+
+      <div class="gallery-modal__stage">
+        <button type="button" class="gallery-modal__nav gallery-modal__nav--prev" data-gallery-prev aria-label="Previous image">
+          <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_left</span>
+        </button>
+        <div class="gallery-modal__figure">
+          <img id="gallery-modal-image" alt="" />
+        </div>
+        <button type="button" class="gallery-modal__nav gallery-modal__nav--next" data-gallery-next aria-label="Next image">
+          <span class="material-symbols-outlined text-[28px]" aria-hidden="true">chevron_right</span>
+        </button>
+      </div>
+
+      <div class="gallery-modal__meta">
+        <p class="font-label-caps text-[10px] text-white/60 uppercase tracking-widest" id="gallery-modal-count"></p>
+      </div>
+
+      <div class="gallery-modal__library" id="gallery-modal-library" tabindex="0" aria-label="Scrollable image library"></div>
+    </div>
+  </div>
+
+  <script src="data/booking.js?v=20260811a"></script>
+  <script src="data/gallery-images.js?v=20260813a"></script>
+  <script src="js/site-chrome.js?v=20260813c"></script>
+  <script src="js/gallery-page.js?v=20260811c"></script>
+</body>
+</html>

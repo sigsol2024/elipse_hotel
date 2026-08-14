@@ -3,39 +3,34 @@
  * Update this file (not HTML) when names, copy, rates, or booking IDs change.
  *
  * Room photography is NOT listed here. Galleries are discovered from
- * assets/images/hotel/{Standard Room|Deluxe Room|Executive Suite}/ via
+ * assets/images/hotel/rooms/{SUPERIOR|DELUXE|SUPERDELUXE|EXECUTIVE RM|SUITE}/ via
  * data/room-images.js (or api/room-images.php on PHP hosts).
  */
 window.EllipseRooms = {
   /** Rooms page / general catalogue order */
-  order: ["executive", "deluxe", "standard"],
+  order: ["suite", "executive", "super-deluxe", "deluxe", "superior"],
 
   /** Homepage teaser order */
-  homeOrder: ["standard", "deluxe", "executive"],
+  homeOrder: ["suite", "executive", "deluxe"],
 
   items: {
-    standard: {
-      slug: "standard",
-      name: "Standard Room",
-      headline: "Intelligent Comfort",
+    superior: {
+      slug: "superior",
+      name: "Superior",
+      headline: "Thoughtful Essentials",
       provisional: true,
       shortDescription:
-        "A focused, intelligent space designed for the practical traveler. Featuring essential comforts, fine linens, and a dedicated work area bathed in natural light.",
+        "A composed guest room with the essentials done well — calm finishes, a restful bed, and space to reset after the city day.",
       description:
-        "Essential comfort executed with precision. An intimate space designed purely for rest, stripping away the unnecessary to focus on quality sleep and clarity.",
-      tagline: "Intelligent comfort for the practical traveler.",
+        "Superior rooms focus on clarity and comfort. Clean lines, considered lighting, and a quiet atmosphere make an easy base for business or leisure stays.",
+      tagline: "Calm comfort for everyday travel.",
       priceFrom: null,
-      facts: {
-        size: "",
-        bed: "",
-        guests: "",
-        view: ""
-      },
+      facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
         paragraphs: [
-          "Essential comfort executed with precision. An intimate space designed purely for rest, stripping away the unnecessary to focus on quality sleep and clarity.",
-          "A focused, intelligent room for the practical traveler — fine linens and a dedicated work area bathed in natural light."
+          "Superior rooms focus on clarity and comfort — clean lines, considered lighting, and a quiet atmosphere.",
+          "An easy, composed base for business or leisure stays in the city."
         ]
       },
       amenities: [],
@@ -54,26 +49,21 @@ window.EllipseRooms = {
     },
     deluxe: {
       slug: "deluxe",
-      name: "Deluxe Room",
+      name: "Deluxe",
       headline: "Expanded Perspectives",
       provisional: true,
       shortDescription:
-        "Expanded volume and enhanced materiality. The Deluxe offers a broader perspective with elevated seating arrangements and curated architectural details.",
+        "Expanded volume and enhanced materiality. The Deluxe offers a broader perspective with elevated seating and curated architectural details.",
       description:
-        "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced amenities for a truly restful experience.",
+        "A refined retreat balancing comfort and considered design. Features an expanded seating area and enhanced appointments for a truly restful experience.",
       tagline: "Expanded volume and considered materiality.",
       priceFrom: null,
-      facts: {
-        size: "",
-        bed: "",
-        guests: "",
-        view: ""
-      },
+      facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
         paragraphs: [
-          "A refined retreat balancing comfort and considered design — expanded seating and a calmer sense of volume for a truly restful stay.",
-          "Elevated materiality and curated architectural details give the Deluxe a broader perspective without excess."
+          "A refined retreat balancing comfort and considered design — expanded seating and a calmer sense of volume.",
+          "Elevated materiality and curated details give the Deluxe a broader perspective without excess."
         ]
       },
       amenities: [],
@@ -90,28 +80,89 @@ window.EllipseRooms = {
       catalogueLayout: "split-right",
       homeLayout: "image-right"
     },
-    executive: {
-      slug: "executive",
-      name: "Executive Suite",
-      headline: "Ultimate Refinement",
+    "super-deluxe": {
+      slug: "super-deluxe",
+      name: "Super Deluxe",
+      headline: "Elevated Comfort",
       provisional: true,
       shortDescription:
-        "Our most generous offering. The Executive Suite features a distinct living space, premium appointments, and a profound sense of calm.",
+        "A step beyond Deluxe — more generous proportions, richer finishes, and a quieter sense of arrival for longer or more considered stays.",
       description:
-        "Our most expansive offering. The Executive Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
-      tagline: "Space, privacy and understated comfort in the heart of Lagos.",
+        "Super Deluxe rooms extend the Ellipse language of calm materiality with added space and upgraded appointments for guests who want more room to unwind.",
+      tagline: "More space. More composure.",
       priceFrom: null,
-      facts: {
-        size: "",
-        bed: "",
-        guests: "",
-        view: ""
-      },
+      facts: { size: "", bed: "", guests: "", view: "" },
       experience: {
         title: "Your space in Lagos.",
         paragraphs: [
-          "Our most expansive offering. The Executive Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
-          "A distinct living space and quiet materiality create sanctuary — composed, generous, and ready for both rest and focused work."
+          "Super Deluxe rooms extend calm materiality with added space and upgraded appointments.",
+          "Designed for guests who want more room to unwind without losing clarity or restraint."
+        ]
+      },
+      amenities: [],
+      highlights: [
+        { icon: "weekend", label: "Lounge Seating" },
+        { icon: "king_bed", label: "Bedroom Comfort" },
+        { icon: "desk", label: "Work Area" },
+        { icon: "restaurant", label: "In-Room Dining" },
+        { icon: "wifi", label: "Hi-Speed Wi-Fi" },
+        { icon: "shower", label: "Private Bath" }
+      ],
+      bookingRoomId: "",
+      bookingUrl: "",
+      catalogueLayout: "split-left",
+      homeLayout: "image-left"
+    },
+    executive: {
+      slug: "executive",
+      name: "Executive Room",
+      headline: "Focused Refinement",
+      provisional: true,
+      shortDescription:
+        "A refined executive stay with composed work space, premium comfort, and the quiet confidence of well-considered detail.",
+      description:
+        "Executive Rooms are shaped for travelers who need rest and focus in equal measure — a composed interior with elevated appointments and a calm atmosphere.",
+      tagline: "Composed for work and rest.",
+      priceFrom: null,
+      facts: { size: "", bed: "", guests: "", view: "" },
+      experience: {
+        title: "Your space in Lagos.",
+        paragraphs: [
+          "Executive Rooms balance rest and focus — composed interiors with elevated appointments.",
+          "A calm atmosphere for travelers who need clarity as much as comfort."
+        ]
+      },
+      amenities: [],
+      highlights: [
+        { icon: "desktop_windows", label: "Work Space" },
+        { icon: "king_bed", label: "Bedroom Comfort" },
+        { icon: "weekend", label: "Seating Area" },
+        { icon: "wifi", label: "Hi-Speed Wi-Fi" },
+        { icon: "shower", label: "Private Bath" },
+        { icon: "ac_unit", label: "Climate Control" }
+      ],
+      bookingRoomId: "",
+      bookingUrl: "",
+      catalogueLayout: "split-right",
+      homeLayout: "image-right"
+    },
+    suite: {
+      slug: "suite",
+      name: "Suite",
+      headline: "Ultimate Refinement",
+      provisional: true,
+      shortDescription:
+        "Our most generous offering. The Suite features a distinct living space, premium appointments, and a profound sense of calm.",
+      description:
+        "The Suite provides a profound sense of space and tranquility, featuring a separate living area and considered appointments designed to elevate your stay.",
+      tagline: "Space, privacy and understated comfort.",
+      priceFrom: null,
+      facts: { size: "", bed: "", guests: "", view: "" },
+      experience: {
+        title: "Your space in Lagos.",
+        paragraphs: [
+          "The Suite provides space and tranquility, with a separate living area and considered appointments.",
+          "A distinct living space and quiet materiality create sanctuary — composed, generous, and ready for rest or focused work."
         ]
       },
       amenities: [],

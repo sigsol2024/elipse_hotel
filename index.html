@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ellipse Hotels - A Refined Stay in Lagos</title>
-  <meta name="description" content="Ellipse Hotels — a refined contemporary stay in the heart of Lagos. Comfort, thoughtful hospitality and calm guest experiences." />
+  <meta name="description" content="Ellipse Hotels â€” a refined contemporary stay in the heart of Lagos. Comfort, thoughtful hospitality and calm guest experiences." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260810k" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260814a" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
@@ -27,7 +27,9 @@
           <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8362.jpg')" role="img" aria-label="Hotel lounge and seating" aria-hidden="true"></div>
           <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8274.jpg')" role="img" aria-label="Suite living space" aria-hidden="true"></div>
           <div class="home-hero-slide" style="background-image: url('assets/images/home/_DSC8375.jpg')" role="img" aria-label="Hotel interior detail" aria-hidden="true"></div>
-          <div class="absolute inset-0 bg-gradient-to-b from-deep-navy/90 via-deep-navy/82 to-deep-navy/92 pointer-events-none"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/facilities/pool/_DSC8600.jpg')" role="img" aria-label="Infinity pool at Ellipse Hotels" aria-hidden="true"></div>
+          <div class="home-hero-slide" style="background-image: url('assets/images/facilities/Bar%20and%20Lounge/_DSC8546.jpg')" role="img" aria-label="Bar and lounge at Ellipse Hotels" aria-hidden="true"></div>
+          <div class="home-hero-overlay" aria-hidden="true"></div>
         </div>
         <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-20 lg:pb-20">
           <h1 class="home-hero-title font-headline-md text-[2rem] leading-tight md:text-[2.75rem] md:leading-[1.15] lg:text-[3.25rem] text-white mb-5 drop-shadow-md max-w-3xl mx-auto font-light tracking-tight">A refined stay in<span class="hidden lg:inline"> </span><br class="lg:hidden" /><span class="whitespace-nowrap">the heart of Lagos.</span></h1>
@@ -37,39 +39,15 @@
         </div>
       </section>
 
-      <!-- Booking panel: bridged into hero on all breakpoints; stays in flow below lg so expand pushes content -->
-      <div class="home-booking-wrap px-margin-mobile lg:px-margin-desktop">
-        <form class="home-booking-panel max-w-5xl mx-auto bg-white border-t-2 border-accent-gold shadow-2xl p-4 sm:p-5 lg:p-6 flex flex-col lg:flex-row items-stretch lg:items-center gap-3 lg:gap-6 justify-between" id="home-booking-panel" action="#" method="get">
-          <div class="home-booking-dates">
-            <div class="home-booking-field flex flex-col flex-1 min-w-0 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:pr-4">
-              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-in">Check-In</label>
-              <input id="check-in" name="check_in" class="home-booking-date border-none p-0 focus:ring-0 text-deep-navy bg-transparent cursor-pointer w-full min-w-0" type="date" />
-            </div>
-            <div class="home-booking-field flex flex-col flex-1 min-w-0 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:px-4">
-              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="check-out">Check-Out</label>
-              <input id="check-out" name="check_out" class="home-booking-date border-none p-0 focus:ring-0 text-deep-navy bg-transparent cursor-pointer w-full min-w-0" type="date" />
-            </div>
-          </div>
-          <div class="home-booking-extra" id="home-booking-extra">
-            <div class="home-booking-field flex flex-col flex-1 w-full border-b lg:border-b-0 lg:border-r border-surface-variant pb-3 lg:pb-0 lg:px-4">
-              <label class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-widest mb-1" for="guests">Guests &amp; Rooms</label>
-              <select id="guests" name="guests" class="border-none p-0 focus:ring-0 text-deep-navy font-body-md bg-transparent cursor-pointer">
-                <option>1 Room, 2 Guests</option>
-                <option>1 Room, 1 Guest</option>
-                <option>2 Rooms, 4 Guests</option>
-              </select>
-            </div>
-          </div>
-          <div class="home-booking-actions flex-none w-full lg:w-auto lg:pl-4 flex items-stretch gap-3">
-            <button type="button" class="home-booking-toggle" id="home-booking-toggle" aria-expanded="false" aria-controls="home-booking-extra">
-              <span class="material-symbols-outlined home-booking-toggle__icon" aria-hidden="true">expand_more</span>
-              <span class="sr-only">Show guests and rooms</span>
-            </button>
-            <a class="inline-flex flex-1 lg:flex-none w-full lg:w-auto items-center justify-center px-6 sm:px-8 py-4 bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-deep-navy/90 transition-colors h-12 lg:h-14" href="#book" data-book-general>
-              Check Availability
-            </a>
-          </div>
-        </form>
+      <!-- StayEazi booking widget — keeps the existing panel chrome -->
+      <div class="home-booking-wrap px-margin-mobile lg:px-margin-desktop" id="book">
+        <div class="home-booking-panel home-booking-panel--stayeazi max-w-5xl mx-auto bg-white border-t-2 border-accent-gold shadow-2xl p-4 sm:p-5 lg:p-6" id="home-booking-panel">
+          <div
+            id="stayeazi-widget-ellipse-hotels"
+            class="stayeazi-booking-widget"
+            data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"
+          ></div>
+        </div>
       </div>
     </div>
 
@@ -125,8 +103,8 @@
           </div>
           <div class="hidden lg:block w-px h-6 bg-surface-variant shrink-0" aria-hidden="true"></div>
           <div class="flex items-center gap-2 lg:gap-3 min-w-0">
-            <span class="material-symbols-outlined text-accent-gold shrink-0 text-[1.35rem] lg:text-[1.5rem]">fitness_center</span>
-            <span class="font-label-caps text-[10px] lg:text-xs text-deep-navy uppercase tracking-widest leading-snug">Fitness &amp; Wellness</span>
+            <span class="material-symbols-outlined text-accent-gold shrink-0 text-[1.35rem] lg:text-[1.5rem]">local_bar</span>
+            <span class="font-label-caps text-[10px] lg:text-xs text-deep-navy uppercase tracking-widest leading-snug">Bar and Lounge</span>
           </div>
           <div class="hidden lg:block w-px h-6 bg-surface-variant shrink-0" aria-hidden="true"></div>
           <div class="flex items-center gap-2 lg:gap-3 min-w-0">
@@ -219,28 +197,28 @@
               {
                 id: "infinity-pool",
                 href: "facilities.html#infinity-pool",
-                src: "assets/images/home/hero-lobby.jpg",
+                src: "assets/images/facilities/pool/_DSC8715.jpg",
                 alt: "Hotel pool",
                 label: "Infinity Pool"
               },
               {
                 id: "restaurant",
                 href: "facilities.html#restaurant",
-                src: "assets/images/dining/_DSC8178.jpg",
+                src: "assets/images/dining/DSC8178.jpg",
                 alt: "Restaurant",
                 label: "Restaurant"
               },
               {
                 id: "bar",
                 href: "facilities.html#bar",
-                src: "assets/images/facilities/_DSC8169.jpg",
+                src: "assets/images/facilities/Bar%20and%20Lounge/_DSC8169.jpg",
                 alt: "Hotel bar",
-                label: "Bar"
+                label: "Bar and Lounge"
               },
               {
                 id: "reception",
                 href: "facilities.html#reception",
-                src: "assets/images/hotel/_DSC8189.jpg",
+                src: "assets/images/facilities/Reception/_DSC8189.jpg",
                 alt: "Reception",
                 label: "Reception"
               }
@@ -248,7 +226,7 @@
             var roomService = {
               id: "service",
               href: "facilities.html#room-service",
-              src: "assets/images/hotel/_DSC8380.jpg",
+              src: "assets/images/facilities/Reception/_DSC8380.jpg",
               alt: "Room service",
               label: "24/7 Room Service"
             };
@@ -356,7 +334,7 @@
           <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-6 leading-snug">In the heart of Lagos.</h2>
           <p class="font-body-md text-body-md md:text-body-lg text-deep-navy font-medium mb-8">Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos</p>
           <p class="font-body-md text-on-surface-variant mb-8 max-w-md">
-            Ideally positioned for both business and leisure, offering easy access to the city’s major commercial districts and cultural landmarks.
+            Ideally positioned for both business and leisure, offering easy access to the cityâ€™s major commercial districts and cultural landmarks.
           </p>
           <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="https://www.google.com/maps/search/?api=1&query=Shola%2C%2031%20Sola%20Adewumi%20St%2C%20Oshodi%2C%20Bucknor%2C%20Ejigbo%20100261%2C%20Lagos" target="_blank" rel="noopener noreferrer">
             Get Directions
@@ -371,7 +349,7 @@
       <div class="max-w-4xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
         <span class="material-symbols-outlined text-accent-gold text-4xl mb-8">format_quote</span>
         <h3 class="font-display-lg text-title-lg md:text-display-lg-mobile text-deep-navy mb-8 leading-snug">
-          “A truly remarkable stay. The attention to detail in the design and the impeccable service made Ellipse feel like an oasis in the city.”
+          â€œA truly remarkable stay. The attention to detail in the design and the impeccable service made Ellipse feel like an oasis in the city.â€
         </h3>
         <p class="font-label-caps text-label-caps text-deep-navy uppercase tracking-widest">Guest Experience</p>
       </div>
@@ -394,24 +372,28 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260809l"></script>
-  <script src="data/rooms.js?v=20260810i"></script>
-  <script src="data/room-images.js?v=20260810i"></script>
+  <script src="data/booking.js?v=20260814a"></script>
+  <script src="data/rooms.js?v=20260813a"></script>
+  <script src="data/room-images.js?v=20260812g"></script>
   <script src="api/room-images.php"></script>
-  <script src="data/images.js?v=20260810i"></script>
-  <script src="js/site-chrome.js?v=20260810i"></script>
-  <script src="js/rooms.js?v=20260810i"></script>
+  <script src="data/images.js?v=20260812g"></script>
+  <script src="js/site-chrome.js?v=20260814a"></script>
+  <script src="js/rooms.js?v=20260813d"></script>
+  <script src="js/stayeazi-widget.js?v=20260814a"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
         window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
           ? window.EllipseChrome.bookingGeneralHref()
-          : "#book";
+          : "index.html#book";
       document.querySelectorAll("[data-book-general]").forEach(function (el) {
-        if (bookHref !== "#book") {
-          el.setAttribute("href", bookHref);
+        el.setAttribute("href", bookHref);
+        if (/^https?:\/\//i.test(bookHref)) {
           el.setAttribute("target", "_blank");
           el.setAttribute("rel", "noopener noreferrer");
+        } else {
+          el.removeAttribute("target");
+          el.removeAttribute("rel");
         }
       });
 
@@ -441,56 +423,35 @@
         }, 5000);
       })();
 
-      var panel = document.getElementById("home-booking-panel");
-      var toggle = document.getElementById("home-booking-toggle");
-      var extra = document.getElementById("home-booking-extra");
-      var heroBlock = document.querySelector(".home-hero-block");
-      if (panel && toggle && extra) {
-        var labelEl = toggle.querySelector(".sr-only");
+      (function syncBookingBridge() {
+        var panel = document.getElementById("home-booking-panel");
+        var heroBlock = document.querySelector(".home-hero-block");
+        if (!panel || !heroBlock) return;
+
         function isDesktopBooking() {
           return window.matchMedia("(min-width: 1024px)").matches;
         }
+
         function syncBridge() {
-          if (!heroBlock || isDesktopBooking()) {
-            if (heroBlock) heroBlock.style.removeProperty("--home-booking-bridge");
+          if (isDesktopBooking()) {
+            heroBlock.style.removeProperty("--home-booking-bridge");
             return;
           }
-          /* Half of the collapsed panel height — derived without toggling open state */
           var panelH = panel.getBoundingClientRect().height;
-          var extraH = panel.classList.contains("is-expanded")
-            ? extra.getBoundingClientRect().height
-            : 0;
-          var collapsedHeight = Math.max(0, panelH - extraH);
-          var bridge = Math.max(56, Math.round(collapsedHeight * 0.5));
+          var bridge = Math.max(56, Math.round(panelH * 0.5));
           heroBlock.style.setProperty("--home-booking-bridge", bridge + "px");
         }
-        function setExpanded(expanded) {
-          panel.classList.toggle("is-expanded", expanded);
-          var open = expanded || isDesktopBooking();
-          toggle.setAttribute("aria-expanded", open ? "true" : "false");
-          extra.setAttribute("aria-hidden", open ? "false" : "true");
-          if ("inert" in extra) extra.inert = !open;
-          if (labelEl) {
-            labelEl.textContent = expanded ? "Hide guests and rooms" : "Show guests and rooms";
-          }
-        }
-        setExpanded(false);
+
         syncBridge();
-        toggle.addEventListener("click", function () {
-          setExpanded(!panel.classList.contains("is-expanded"));
-        });
-        window.addEventListener("resize", function () {
-          if (isDesktopBooking()) {
-            extra.setAttribute("aria-hidden", "false");
-            if ("inert" in extra) extra.inert = false;
-          } else {
-            var open = panel.classList.contains("is-expanded");
-            extra.setAttribute("aria-hidden", open ? "false" : "true");
-            if ("inert" in extra) extra.inert = !open;
-          }
-          syncBridge();
-        });
-      }
+        window.addEventListener("resize", syncBridge, { passive: true });
+        // Widget may inject late — remeasure a few times
+        window.setTimeout(syncBridge, 400);
+        window.setTimeout(syncBridge, 1200);
+        window.setTimeout(syncBridge, 2500);
+        if ("ResizeObserver" in window) {
+          new ResizeObserver(syncBridge).observe(panel);
+        }
+      })();
     });
   </script>
 </body>

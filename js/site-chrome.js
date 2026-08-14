@@ -6,27 +6,74 @@
     "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(ADDRESS);
 
-  const NAV = [
+  const SOCIAL = [
+    {
+      id: "facebook",
+      label: "Facebook",
+      href: "https://www.facebook.com/61592485867726/"
+    },
+    {
+      id: "instagram",
+      label: "Instagram",
+      href: "https://www.instagram.com/ellipsehotel/"
+    },
+    {
+      id: "tiktok",
+      label: "TikTok",
+      href: "https://www.tiktok.com/"
+    }
+  ];
+
+  function socialIcon(id) {
+    if (id === "facebook") {
+      return `<svg class="ellipse-social__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14 13.5h2.5l1-4H14v-2c0-1.03 0-2 2-2h1.5V2.14C17.18 2.09 16.02 2 14.79 2 11.7 2 9.5 3.88 9.5 7.15V9.5H7v4h2.5V22h4.5v-8.5z"/></svg>`;
+    }
+    if (id === "instagram") {
+      return `<svg class="ellipse-social__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5M12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10m0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>`;
+    }
+    if (id === "tiktok") {
+      return `<svg class="ellipse-social__svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.6 5.82A4.27 4.27 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z"/></svg>`;
+    }
+    return "";
+  }
+
+  function socialLinks() {
+    return `
+<nav class="ellipse-social" aria-label="Social media">
+  ${SOCIAL.map(
+    (item) => `
+  <a class="ellipse-social__link" href="${item.href}" target="_blank" rel="noopener noreferrer" aria-label="${item.label}">
+    ${socialIcon(item.id)}
+  </a>`
+  ).join("")}
+</nav>`;
+  }
+
+    const NAV = [
     { id: "home", label: "Home", href: "index.html" },
     { id: "about", label: "About", href: "about.html" },
     { id: "rooms", label: "Rooms", href: "rooms.html" },
     { id: "facilities", label: "Facilities", href: "facilities.html" },
+    { id: "gallery", label: "Gallery", href: "gallery.html" },
     { id: "contact", label: "Contact", href: "contact.html" }
   ];
 
   function bookingGeneralHref() {
-    const url =
-      window.EllipseBooking && window.EllipseBooking.getGeneralUrl
-        ? window.EllipseBooking.getGeneralUrl()
-        : null;
-    return url || "#book";
+    if (window.EllipseBooking && typeof window.EllipseBooking.getGeneralUrl === "function") {
+      const url = window.EllipseBooking.getGeneralUrl();
+      if (url) return url;
+    }
+    return "index.html#book";
   }
 
   function bookingAttrs(href) {
-    if (href === "#book") {
-      return 'href="#book" aria-disabled="true" title="Booking engine URL pending configuration"';
+    if (!href || href === "#book") {
+      return 'href="rooms.html"';
     }
-    return `href="${href}" target="_blank" rel="noopener noreferrer"`;
+    if (/^https?:\/\//i.test(href)) {
+      return `href="${href}" target="_blank" rel="noopener noreferrer"`;
+    }
+    return `href="${href}"`;
   }
 
   function navLinkClass(page, item) {
@@ -106,7 +153,8 @@
       <p class="font-body-md text-body-md text-white/70 max-w-sm mb-5 md:mb-6">
         ${ADDRESS}
       </p>
-      <a class="inline-flex items-center justify-center px-5 py-3 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white hover:text-deep-navy transition-colors" ${bookingAttrs(bookHref)}>
+      ${socialLinks()}
+      <a class="inline-flex items-center justify-center px-5 py-3 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white hover:text-deep-navy transition-colors mt-5 md:mt-6" ${bookingAttrs(bookHref)}>
         Book Your Stay
       </a>
     </div>
@@ -117,6 +165,7 @@
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="about.html">About Us</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="rooms.html">Rooms &amp; Suites</a></li>
         <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="facilities.html">Facilities</a></li>
+        <li><a class="font-body-md text-white/70 hover:text-accent-gold transition-colors" href="gallery.html">Gallery</a></li>
       </ul>
     </div>
     <div class="md:col-span-2">
@@ -226,24 +275,76 @@
       });
     });
 
-    // Reveal on scroll (re-query each time so dynamically injected rooms appear)
+    // Reveal early while scrolling: activate ~1 viewport ahead and warm images
+    // so sections (esp. photos) aren't blank when they enter view.
+    function warmRevealMedia(el) {
+      el.querySelectorAll("img").forEach((img) => {
+        if (img.getAttribute("loading") === "lazy") {
+          img.setAttribute("loading", "eager");
+        }
+        try {
+          if (typeof img.decode === "function" && !img.complete) {
+            img.decode().catch(function () {});
+          }
+        } catch (err) {}
+      });
+    }
+
+    function activateReveal(el) {
+      if (!el || el.classList.contains("active")) return;
+      warmRevealMedia(el);
+      el.classList.add("active");
+    }
+
     function reveal() {
-      const windowHeight = window.innerHeight;
-      document.querySelectorAll(".reveal").forEach((el) => {
-        if (el.getBoundingClientRect().top < windowHeight - 100) {
-          el.classList.add("active");
+      const triggerAt = window.innerHeight * 2;
+      document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
+        if (el.getBoundingClientRect().top < triggerAt) {
+          activateReveal(el);
         }
       });
     }
-    window.addEventListener("scroll", reveal, { passive: true });
-    reveal();
-    window.EllipseChrome = window.EllipseChrome || {};
-    window.EllipseChrome.refreshReveals = reveal;
+
+    if ("IntersectionObserver" in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            activateReveal(entry.target);
+            io.unobserve(entry.target);
+          });
+        },
+        {
+          // Start fade + image load a full screen before the section is visible
+          root: null,
+          rootMargin: "25% 0px 110% 0px",
+          threshold: 0.01
+        }
+      );
+      function observeReveals() {
+        document.querySelectorAll(".reveal:not(.active)").forEach((el) => {
+          io.observe(el);
+        });
+        reveal();
+      }
+      observeReveals();
+      window.addEventListener("scroll", reveal, { passive: true });
+      window.addEventListener("resize", reveal, { passive: true });
+      window.EllipseChrome = window.EllipseChrome || {};
+      window.EllipseChrome.refreshReveals = observeReveals;
+    } else {
+      window.addEventListener("scroll", reveal, { passive: true });
+      window.addEventListener("resize", reveal, { passive: true });
+      reveal();
+      window.EllipseChrome = window.EllipseChrome || {};
+      window.EllipseChrome.refreshReveals = reveal;
+    }
 
     // Soft notice when booking not configured
     document.addEventListener("click", (e) => {
       const link = e.target.closest && e.target.closest('a[href="#book"]');
       if (!link) return;
+      if (window.EllipseBooking && window.EllipseBooking.isConfigured()) return;
       e.preventDefault();
       const existing = document.getElementById("booking-pending-note");
       if (existing) {
@@ -290,8 +391,14 @@
       loader.classList.add("is-done");
       window.setTimeout(() => {
         if (loader.parentNode) loader.parentNode.removeChild(loader);
-      }, 400);
+      }, 280);
     }
+    // Content may already be in view — reveal immediately after overlay clears
+    window.requestAnimationFrame(function () {
+      if (window.EllipseChrome && typeof window.EllipseChrome.refreshReveals === "function") {
+        window.EllipseChrome.refreshReveals();
+      }
+    });
   }
 
   function initPageLoader() {
@@ -300,15 +407,29 @@
       hidePageLoader();
       return;
     }
-    const finish = () => {
-      window.setTimeout(hidePageLoader, 120);
-    };
-    if (document.readyState === "complete") {
-      finish();
-    } else {
-      window.addEventListener("load", finish, { once: true });
+
+    var finished = false;
+    function finish() {
+      if (finished) return;
+      finished = true;
+      window.setTimeout(hidePageLoader, 60);
     }
-    window.setTimeout(hidePageLoader, 6000);
+
+    // Don't wait for every image (window.load) — that left a long white screen.
+    // Show the page as soon as the DOM is ready, with a short polish delay.
+    if (document.readyState === "interactive" || document.readyState === "complete") {
+      window.setTimeout(finish, 160);
+    } else {
+      document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+          window.setTimeout(finish, 160);
+        },
+        { once: true }
+      );
+    }
+    // Safety net
+    window.setTimeout(finish, 1400);
   }
 
   if (document.body) {

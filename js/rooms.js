@@ -80,18 +80,23 @@
     root.innerHTML = rooms
       .map((room, index) => {
         const src = roomImage(room);
-        const imageLeft = room.homeLayout !== "image-right";
-        const viewLabel = room.slug === "executive" ? "View Suite" : "View Room";
+        // Always zigzag on the homepage: left, right, left…
+        const imageLeft = index % 2 === 0;
+        const viewLabel = room.slug === "suite" ? "View Suite" : "View Room";
         const media = `
         <div class="md:col-span-7 group ${imageLeft ? "" : "md:col-start-6 order-1 md:order-2"}">
           <div class="aspect-[16/9] bg-surface-container overflow-hidden">
-            <img class="w-full h-full object-cover hover-zoom" alt="${escapeHtml(room.name)}" src="${escapeHtml(src)}" loading="lazy" />
+            <img class="w-full h-full object-cover hover-zoom" alt="${escapeHtml(room.name)}" src="${escapeHtml(src)}" loading="eager" decoding="async" />
           </div>
         </div>`;
         const body = `
         <div class="md:col-span-4 ${imageLeft ? "md:col-start-9" : "md:col-start-1 order-2 md:order-1"} flex flex-col justify-center mt-8 md:mt-0">
-          <p class="font-label-caps text-label-caps text-accent-gold mb-2 uppercase tracking-widest">${escapeHtml(room.name)}</p>
-          <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">${escapeHtml(room.headline || room.name)}</h3>
+          <h3 class="font-headline-md text-[1.75rem] md:text-[2.25rem] lg:text-[2.75rem] text-deep-navy mb-3 font-light tracking-tight leading-snug">${escapeHtml(room.name)}</h3>
+          ${
+            room.headline
+              ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
+              : ""
+          }
           <p class="font-body-md text-body-md text-on-surface-variant mb-8">${escapeHtml(room.shortDescription)}</p>
           <div class="flex items-center gap-6">
             <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=${escapeHtml(room.slug)}">
@@ -143,7 +148,12 @@
   </div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-start">
     <div class="col-span-1 md:col-span-8 pr-0 md:pr-12">
-      <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">${escapeHtml(room.name)}</h2>
+      <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] lg:text-[2.75rem] text-deep-navy mb-3 font-light tracking-tight leading-snug">${escapeHtml(room.name)}</h2>
+      ${
+        room.headline
+          ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
+          : ""
+      }
       ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
       <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
       ${renderHighlights(room)}
@@ -163,7 +173,12 @@
     const facts = factsLine(room);
     const text = `
 <div class="col-span-1 md:col-span-5 ${imageRight ? "md:col-start-1 order-2 md:order-1" : "md:col-start-8 order-2"} flex flex-col justify-center">
-  <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">${escapeHtml(room.name)}</h2>
+  <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] lg:text-[2.75rem] text-deep-navy mb-3 font-light tracking-tight leading-snug">${escapeHtml(room.name)}</h2>
+  ${
+    room.headline
+      ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
+      : ""
+  }
   ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
   <p class="font-body-md text-body-md text-on-surface-variant mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
   ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy mb-8")}

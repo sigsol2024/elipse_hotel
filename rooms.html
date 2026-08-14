@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rooms &amp; Suites | Ellipse Hotels</title>
-  <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos — thoughtfully designed spaces for rest, work, and everything in between." />
+  <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos â€” thoughtfully designed spaces for rest, work, and everything in between." />
   <link rel="icon" href="assets/brand/logo-on-light.png" type="image/png" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260810h" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260813c" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col overflow-x-hidden" data-page="rooms">
   <div id="site-header-root"></div>
@@ -36,7 +36,7 @@
 
     <!-- Dynamic catalogue from data/rooms.js -->
     <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-20 md:pb-section-gap space-y-24 md:space-y-32" id="rooms-catalogue" aria-live="polite">
-      <p class="text-on-surface-variant text-center">Loading rooms…</p>
+      <p class="text-on-surface-variant text-center">Loading roomsâ€¦</p>
     </section>
 
     <!-- CTA -->
@@ -57,25 +57,23 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260810i"></script>
-  <script src="data/rooms.js?v=20260810i"></script>
-  <script src="data/room-images.js?v=20260810i"></script>
+  <script src="data/booking.js?v=20260812g"></script>
+  <script src="data/rooms.js?v=20260812g"></script>
+  <script src="data/room-images.js?v=20260812g"></script>
   <script src="api/room-images.php"></script>
-  <script src="data/images.js?v=20260810i"></script>
-  <script src="js/site-chrome.js?v=20260810i"></script>
-  <script src="js/rooms.js?v=20260810i"></script>
+  <script src="data/images.js?v=20260812g"></script>
+  <script src="js/site-chrome.js?v=20260813c"></script>
+  <script src="js/rooms.js?v=20260813c"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
         window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
           ? window.EllipseChrome.bookingGeneralHref()
-          : "#book";
+          : "rooms.html";
       document.querySelectorAll("[data-book-general]").forEach(function (el) {
-        if (bookHref !== "#book") {
-          el.setAttribute("href", bookHref);
-          el.setAttribute("target", "_blank");
-          el.setAttribute("rel", "noopener noreferrer");
-        }
+        el.setAttribute("href", bookHref || "rooms.html");
+        el.removeAttribute("target");
+        el.removeAttribute("rel");
       });
     });
   </script>
