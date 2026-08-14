@@ -11,7 +11,7 @@
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260814a" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260814b" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
@@ -39,15 +39,9 @@
         </div>
       </section>
 
-      <!-- StayEazi booking widget — keeps the existing panel chrome -->
+      <!-- StayEazi Booking Widget (direct embed) -->
       <div class="home-booking-wrap px-margin-mobile lg:px-margin-desktop" id="book">
-        <div class="home-booking-panel home-booking-panel--stayeazi max-w-5xl mx-auto bg-white border-t-2 border-accent-gold shadow-2xl p-4 sm:p-5 lg:p-6" id="home-booking-panel">
-          <div
-            id="stayeazi-widget-ellipse-hotels"
-            class="stayeazi-booking-widget"
-            data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"
-          ></div>
-        </div>
+        <div id="stayeazi-widget-ellipse-hotels" class="stayeazi-booking-widget" data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"></div>
       </div>
     </div>
 
@@ -379,7 +373,37 @@
   <script src="data/images.js?v=20260812g"></script>
   <script src="js/site-chrome.js?v=20260814a"></script>
   <script src="js/rooms.js?v=20260813d"></script>
-  <script src="js/stayeazi-widget.js?v=20260814a"></script>
+  <!-- StayEazi Booking Widget -->
+  <script>
+    (function () {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initStayEaziWidgets);
+      } else {
+        initStayEaziWidgets();
+      }
+
+      function initStayEaziWidgets() {
+        var containers = document.querySelectorAll(".stayeazi-booking-widget[data-widget-token]");
+        containers.forEach(function (container) {
+          var token = container.getAttribute("data-widget-token");
+          if (!token) return;
+          loadWidgetScript(token, container);
+        });
+      }
+
+      function loadWidgetScript(token, container) {
+        var scriptId = "stayeazi-widget-script-" + token;
+        if (document.getElementById(scriptId)) return;
+
+        var widgetUrl = "https://app.stayeazi.com/widget/load/" + token;
+        var script = document.createElement("script");
+        script.id = scriptId;
+        script.src = widgetUrl;
+        script.async = true;
+        document.head.appendChild(script);
+      }
+    })();
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =
@@ -424,7 +448,7 @@
       })();
 
       (function syncBookingBridge() {
-        var panel = document.getElementById("home-booking-panel");
+        var panel = document.querySelector("#book .stayeazi-booking-widget") || document.getElementById("book");
         var heroBlock = document.querySelector(".home-hero-block");
         if (!panel || !heroBlock) return;
 
@@ -437,14 +461,13 @@
             heroBlock.style.removeProperty("--home-booking-bridge");
             return;
           }
-          var panelH = panel.getBoundingClientRect().height;
+          var panelH = panel.getBoundingClientRect().height || 84;
           var bridge = Math.max(56, Math.round(panelH * 0.5));
           heroBlock.style.setProperty("--home-booking-bridge", bridge + "px");
         }
 
         syncBridge();
         window.addEventListener("resize", syncBridge, { passive: true });
-        // Widget may inject late — remeasure a few times
         window.setTimeout(syncBridge, 400);
         window.setTimeout(syncBridge, 1200);
         window.setTimeout(syncBridge, 2500);

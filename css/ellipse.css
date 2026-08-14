@@ -555,27 +555,12 @@ html:not(.ellipse-loading) .ellipse-page-loader {
   }
 }
 
-/* StayEazi widget sits inside the existing booking panel chrome */
-.home-booking-panel--stayeazi {
-  display: block;
+/* StayEazi widget — no custom chrome; only placement in the hero bridge */
+.home-booking-wrap .stayeazi-booking-widget {
   width: 100%;
-  overflow: visible;
-}
-
-.home-booking-panel--stayeazi .stayeazi-booking-widget {
-  width: 100%;
-  min-height: 4.5rem;
-}
-
-.home-booking-panel--stayeazi .stayeazi-booking-widget iframe,
-.home-booking-panel--stayeazi .stayeazi-booking-widget > * {
-  max-width: 100%;
-}
-
-/* Soften common third-party widget chrome so it sits in our panel */
-.home-booking-panel--stayeazi .stayeazi-booking-widget,
-.home-booking-panel--stayeazi .stayeazi-booking-widget * {
-  box-sizing: border-box;
+  max-width: 72rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Mobile / tablet nav overlay */
