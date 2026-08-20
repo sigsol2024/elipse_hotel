@@ -12,16 +12,16 @@
   <script src="js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260814c" />
+  <link rel="stylesheet" href="css/ellipse.css?v=20260820a" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
 
   <main id="main" class="flex-grow pt-[88px]">
     <!-- Hero -->
-    <div class="home-hero-block relative">
-      <section class="home-hero relative h-[calc(100svh-88px)] min-h-[520px] max-h-[760px] w-full bg-surface-container flex items-center justify-center overflow-hidden" aria-roledescription="carousel" aria-label="Hotel highlights">
-        <div class="home-hero-slider absolute inset-0 z-0" data-home-hero-slider>
+    <div class="home-hero-block relative" id="book">
+      <section class="home-hero relative h-[calc(100svh-88px)] min-h-[520px] max-h-[860px] w-full bg-surface-container flex items-center justify-center overflow-hidden md:overflow-visible" aria-roledescription="carousel" aria-label="Hotel highlights">
+        <div class="home-hero-slider absolute inset-0 z-0 overflow-hidden" data-home-hero-slider>
           <div class="home-hero-slide is-active" style="background-image: url('assets/images/home/hero-lobby.jpg')" role="img" aria-label="Ellipse Hotels exterior and courtyard" aria-hidden="false"></div>
           <div class="home-hero-slide" style="background-image: url('assets/images/home/DJI_0978.jpg')" role="img" aria-label="Ellipse Hotels aerial view by day" aria-hidden="true"></div>
           <div class="home-hero-slide" style="background-image: url('assets/images/home/DJI_0994.jpg')" role="img" aria-label="Ellipse Hotels courtyard at night" aria-hidden="true"></div>
@@ -32,63 +32,75 @@
           <div class="home-hero-slide" style="background-image: url('assets/images/facilities/Bar%20and%20Lounge/_DSC8546.jpg')" role="img" aria-label="Bar and lounge at Ellipse Hotels" aria-hidden="true"></div>
           <div class="home-hero-overlay" aria-hidden="true"></div>
         </div>
-        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-20 lg:pb-20">
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-10 md:pb-8 lg:pb-10">
           <h1 class="home-hero-title font-headline-md text-[2rem] leading-tight md:text-[2.75rem] md:leading-[1.15] lg:text-[3.25rem] text-white mb-5 drop-shadow-md max-w-3xl mx-auto font-light tracking-tight">A refined stay in<span class="hidden lg:inline"> </span><br class="lg:hidden" /><span class="whitespace-nowrap">the heart of Lagos.</span></h1>
           <p class="home-hero-sub font-body-md text-body-md md:text-body-lg text-white/85 max-w-lg mx-auto drop-shadow-sm">
             Contemporary comfort and attentive hospitality in a calm city sanctuary.
           </p>
+          <!-- Desktop: booking widget sits inside the hero, right after the description -->
+          <div class="home-hero-booking hidden md:block mt-7 md:mt-8 mx-auto w-full max-w-3xl" data-booking-slot="desktop"></div>
         </div>
       </section>
+      <!-- Mobile: keep widget under the hero (unchanged placement) -->
+      <div class="home-booking-mobile md:hidden px-margin-mobile max-w-container-max mx-auto w-full py-6" data-booking-slot="mobile"></div>
     </div>
 
-    <!-- StayEazi Booking Widget -->
-    <div id="book" class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full py-6 md:py-8">
-      <div id="stayeazi-widget-ellipse-hotels" class="stayeazi-booking-widget" data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6"></div>
-    </div>
+    <div id="stayeazi-widget-ellipse-hotels" class="stayeazi-booking-widget" data-widget-token="SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6" hidden></div>
     <script>
       (function () {
-        // Wait for DOM to be ready
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", initStayEaziWidgets);
-        } else {
-          initStayEaziWidgets();
+        var widget = document.getElementById("stayeazi-widget-ellipse-hotels");
+        var desktopSlot = document.querySelector('[data-booking-slot="desktop"]');
+        var mobileSlot = document.querySelector('[data-booking-slot="mobile"]');
+        var mq = window.matchMedia("(min-width: 768px)");
+        var scriptLoaded = false;
+
+        function placeWidget() {
+          if (!widget || !desktopSlot || !mobileSlot) return;
+          var slot = mq.matches ? desktopSlot : mobileSlot;
+          if (widget.parentNode !== slot) {
+            widget.hidden = false;
+            slot.appendChild(widget);
+          }
         }
 
-        function initStayEaziWidgets() {
-          // Find all StayEazi widget containers
-          const containers = document.querySelectorAll(".stayeazi-booking-widget[data-widget-token]");
-
-          containers.forEach(function (container) {
-            const token = container.getAttribute("data-widget-token");
-            if (!token) return;
-
-            // Load widget script for this container
-            loadWidgetScript(token, container);
-          });
-        }
-
-        function loadWidgetScript(token, container) {
-          // Check if script already loaded
-          const scriptId = "stayeazi-widget-script-" + token;
-          if (document.getElementById(scriptId)) return;
-
-          // Dynamically generate widget URL from token (supports multiple widgets on same page)
-          var widgetUrl = "https://app.stayeazi.com/widget/load/" + token;
-
+        function loadWidgetScript() {
+          if (!widget || scriptLoaded) return;
+          var token = widget.getAttribute("data-widget-token");
+          if (!token) return;
+          var scriptId = "stayeazi-widget-script-" + token;
+          if (document.getElementById(scriptId)) {
+            scriptLoaded = true;
+            return;
+          }
           var script = document.createElement("script");
           script.id = scriptId;
-          script.src = widgetUrl;
+          script.src = "https://app.stayeazi.com/widget/load/" + token;
           script.async = true;
-          script.onload = function () {
-            // Script loaded, widget should initialize
-          };
           document.head.appendChild(script);
+          scriptLoaded = true;
+        }
+
+        function init() {
+          placeWidget();
+          loadWidgetScript();
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", init);
+        } else {
+          init();
+        }
+
+        if (typeof mq.addEventListener === "function") {
+          mq.addEventListener("change", placeWidget);
+        } else if (typeof mq.addListener === "function") {
+          mq.addListener(placeWidget);
         }
       })();
     </script>
 
     <!-- Welcome -->
-    <section class="home-welcome pb-12 md:pb-24 lg:pb-32 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
+    <section class="home-welcome pb-8 md:pb-12 lg:pb-14 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
         <div>
           <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Welcome to Ellipse</p>
@@ -105,7 +117,7 @@
           <iframe
             id="home-welcome-video"
             class="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/d8BPUr41hjo?enablejsapi=1&mute=1&playsinline=1&rel=0"
+            src="https://www.youtube.com/embed/Vw7-cXEuDwo?enablejsapi=1&mute=1&playsinline=1&rel=0"
             title="Ellipse Hotels video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerpolicy="strict-origin-when-cross-origin"
@@ -121,7 +133,7 @@
     </section>
 
     <!-- Property Highlights -->
-    <section class="py-12 bg-surface-container border-y border-surface-variant reveal">
+    <section class="py-8 md:py-10 bg-surface-container border-y border-surface-variant reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="grid grid-cols-2 gap-x-4 gap-y-6 lg:flex lg:flex-wrap lg:justify-between lg:items-center lg:gap-4">
           <div class="flex items-center gap-2 lg:gap-3 min-w-0">
@@ -153,7 +165,7 @@
     </section>
 
     <!-- The Ellipse Experience -->
-    <section class="py-12 md:py-24 lg:py-section-gap bg-warm-grey reveal">
+    <section class="pt-8 md:pt-14 lg:pt-16 pb-10 md:pb-16 lg:pb-20 bg-warm-grey reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
         <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
           <div class="md:col-span-5 md:col-start-1 order-2 md:order-1 mt-8 md:mt-0">
@@ -206,8 +218,8 @@
     </section>
 
     <!-- Rooms & Suites -->
-    <section class="py-12 md:py-24 lg:py-section-gap max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white">
-      <div class="text-center mb-10 md:mb-20 reveal">
+    <section class="pt-10 md:pt-14 lg:pt-16 pb-10 md:pb-16 lg:pb-20 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white">
+      <div class="text-center mb-8 md:mb-12 reveal">
         <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Stay Your Way</p>
         <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Rooms &amp; Suites</h2>
       </div>
@@ -221,9 +233,9 @@
     </section>
 
     <!-- Facilities -->
-    <section class="py-12 md:py-24 bg-warm-grey reveal">
+    <section class="py-10 md:py-16 bg-warm-grey reveal">
       <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-        <div class="text-center mb-10 md:mb-16">
+        <div class="text-center mb-8 md:mb-12">
           <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Facilities &amp; Amenities</h2>
         </div>
         <div class="home-facilities-grid grid grid-cols-2 md:grid-cols-4 gap-4" id="home-facilities-grid"></div>
@@ -415,7 +427,7 @@
   <script src="api/room-images.php"></script>
   <script src="data/images.js?v=20260812g"></script>
   <script src="js/site-chrome.js?v=20260814a"></script>
-  <script src="js/rooms.js?v=20260814c"></script>
+  <script src="js/rooms.js?v=20260820a"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       var bookHref =

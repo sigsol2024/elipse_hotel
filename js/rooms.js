@@ -289,7 +289,7 @@
       .join("");
 
     return `
-<div class="flex flex-wrap justify-center items-center gap-8 md:gap-10 border-y border-accent-gold/30 py-8 reveal">
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-10 border-y border-accent-gold/30 py-5 md:py-6 reveal">
   ${cells}
 </div>`;
   }
@@ -315,7 +315,7 @@
       .join("");
 
     return `
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-16 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center reveal">
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-6 md:pt-8 pb-6 md:pb-8 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center reveal">
   <div class="order-2 md:order-1">
     <h2 class="font-headline-md text-[2rem] md:text-[2.75rem] lg:text-[3.25rem] text-deep-navy mb-8 font-light tracking-tight">${escapeHtml(title)}</h2>
     ${paras}
@@ -348,7 +348,7 @@
       .join("");
 
     return `
-<section class="bg-surface-container-low w-full py-20 md:py-24 mt-8 md:mt-16 reveal">
+<section class="bg-surface-container-low w-full py-20 md:py-24 mt-4 md:mt-6 reveal">
   <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
     <h3 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-deep-navy mb-12 md:mb-16 text-center font-light tracking-tight">Amenities</h3>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8">
@@ -501,28 +501,26 @@
   <div class="room-detail-hero__media absolute inset-0">
     <img class="w-full h-full object-cover" src="${escapeHtml(heroSrc)}" alt="${escapeHtml(room.name)}" />
   </div>
-  <div class="absolute inset-0 bg-deep-navy/25" aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-deep-navy/35" aria-hidden="true"></div>
   <div class="absolute inset-0 flex items-end">
-    <div class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-12 md:pb-16 reveal active">
+    <div class="w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-10 md:pb-14 reveal active">
       <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-3">Rooms &amp; Suites</p>
-      <h1 class="font-headline-md text-[2.25rem] md:text-[3.5rem] lg:text-[4rem] text-white font-light tracking-tight leading-none">${escapeHtml(room.name)}</h1>
+      <h1 class="font-headline-md text-[2.25rem] md:text-[3.5rem] lg:text-[4rem] text-white font-light tracking-tight leading-none mb-4 md:mb-5">${escapeHtml(room.name)}</h1>
+      ${
+        room.tagline
+          ? `<p class="font-headline-md text-[1.1rem] md:text-[1.35rem] text-white/95 italic font-light leading-relaxed mb-3 md:mb-4 max-w-3xl">${escapeHtml(room.tagline)}</p>`
+          : ""
+      }
+      ${
+        room.shortDescription
+          ? `<p class="font-body-md text-body-md md:text-body-lg text-white/80 leading-relaxed max-w-3xl">${escapeHtml(room.shortDescription)}</p>`
+          : ""
+      }
     </div>
   </div>
 </section>
 
-<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-16 md:pt-24 pb-12 md:pb-16">
-  <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal">
-    ${
-      room.tagline
-        ? `<p class="font-headline-md text-[1.25rem] md:text-[1.5rem] text-deep-navy italic font-light leading-relaxed mb-6">${escapeHtml(room.tagline)}</p>`
-        : ""
-    }
-    ${
-      room.shortDescription
-        ? `<p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant leading-relaxed">${escapeHtml(room.shortDescription)}</p>`
-        : ""
-    }
-  </div>
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop pt-2 md:pt-4 pb-4 md:pb-6">
   ${renderFactsStrip(room)}
 </section>
 
