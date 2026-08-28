@@ -239,20 +239,21 @@ html:not(.ellipse-loading) .ellipse-page-loader {
   inset: 0;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   pointer-events: none;
 }
 
 .home-hero-video iframe,
 .home-hero-video #home-hero-video-host iframe {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100vw;
-  height: 56.25vw;
-  min-height: 100%;
-  min-width: 177.78vh;
-  transform: translate(-50%, -50%);
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: max(100%, 177.78vh) !important;
+  height: max(100%, 56.25vw) !important;
+  max-width: none !important;
+  transform: translate(-50%, -50%) !important;
   border: 0;
+  pointer-events: none;
 }
 
 .home-hero.is-video-active .home-hero-slide {
@@ -563,14 +564,20 @@ html:not(.ellipse-loading) .ellipse-page-loader {
  */
 .home-hero-block {
   position: relative;
-  --home-booking-bridge: 6.25rem;
+  --home-booking-bridge: 4.5rem;
+}
+
+@media (min-width: 768px) {
+  .home-hero-block {
+    --home-booking-bridge: 6.5rem;
+  }
 }
 
 .home-booking-wrap {
   position: relative;
   z-index: 20;
   margin-top: calc(-1 * var(--home-booking-bridge));
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
   background: transparent;
 }
 
