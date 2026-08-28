@@ -234,7 +234,16 @@ html:not(.ellipse-loading) .ellipse-page-loader {
   opacity: 1;
 }
 
-.home-hero-video iframe {
+.home-hero-video #home-hero-video-host {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.home-hero-video iframe,
+.home-hero-video #home-hero-video-host iframe {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -554,7 +563,7 @@ html:not(.ellipse-loading) .ellipse-page-loader {
  */
 .home-hero-block {
   position: relative;
-  --home-booking-bridge: 5.25rem;
+  --home-booking-bridge: 6.25rem;
 }
 
 .home-booking-wrap {

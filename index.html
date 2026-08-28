@@ -13,7 +13,7 @@
   <script src="/js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/css/ellipse.css?v=20260829a" />
+  <link rel="stylesheet" href="/css/ellipse.css?v=20260829b" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="home">
   <div id="site-header-root"></div>
@@ -33,14 +33,7 @@
           <div class="home-hero-slide" style="background-image: url('/assets/images/facilities/Bar%20and%20Lounge/_DSC8546.jpg')" role="img" aria-label="Bar and lounge at Ellipse Hotels" aria-hidden="true"></div>
         </div>
         <div class="home-hero-video" data-home-hero-video aria-hidden="true">
-          <iframe
-            id="home-hero-video"
-            title="Ellipse Hotels aerial video"
-            src="https://www.youtube.com/embed/Vw7-cXEuDwo?autoplay=1&mute=1&controls=0&loop=1&playlist=Vw7-cXEuDwo&playsinline=1&enablejsapi=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin"
-            tabindex="-1"
-          ></iframe>
+          <div id="home-hero-video-host"></div>
         </div>
         <div class="home-hero-overlay" aria-hidden="true"></div>
         <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop w-full text-center pb-16 md:pb-20">
@@ -439,8 +432,8 @@
       (function initHomeHeroVideo() {
         var hero = document.querySelector(".home-hero");
         var videoWrap = document.querySelector("[data-home-hero-video]");
-        var iframe = document.getElementById("home-hero-video");
-        if (!hero || !videoWrap || !iframe) return;
+        var host = document.getElementById("home-hero-video-host");
+        if (!hero || !videoWrap || !host) return;
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           videoWrap.setAttribute("hidden", "");
           return;
@@ -448,21 +441,15 @@
 
         var activated = false;
         var fallback = false;
+        var player = null;
+        var HERO_VIDEO_ID = "Vw7-cXEuDwo";
         var fallbackTimer = window.setTimeout(function () {
           if (!activated) {
             fallback = true;
             videoWrap.setAttribute("hidden", "");
             hero.classList.remove("is-video-pending");
           }
-        }, 5000);
-
-        function post(cmd, args) {
-          if (!iframe.contentWindow) return;
-          iframe.contentWindow.postMessage(
-            JSON.stringify({ event: "command", func: cmd, args: args || [] }),
-            "*"
-          );
-        }
+        }, 8000);
 
         function activate() {
           if (activated || fallback) return;
@@ -477,21 +464,50 @@
           videoWrap.setAttribute("aria-hidden", "false");
         }
 
+        function mountPlayer() {
+          if (fallback || !window.YT || !window.YT.Player) return;
+          player = new window.YT.Player("home-hero-video-host", {
+            videoId: HERO_VIDEO_ID,
+            playerVars: {
+              autoplay: 1,
+              mute: 1,
+              controls: 0,
+              loop: 1,
+              playlist: HERO_VIDEO_ID,
+              playsinline: 1,
+              rel: 0,
+              modestbranding: 1,
+              iv_load_policy: 3,
+              disablekb: 1,
+              origin: window.location.origin || undefined
+            },
+            events: {
+              onReady: function (event) {
+                event.target.mute();
+                event.target.playVideo();
+              },
+              onStateChange: function (event) {
+                if (event.data === window.YT.PlayerState.PLAYING) activate();
+              }
+            }
+          });
+        }
+
         hero.classList.add("is-video-pending");
 
-        window.addEventListener("message", function (e) {
-          if (e.source !== iframe.contentWindow) return;
-          try {
-            var data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-            if (!data || !data.event) return;
-            if (data.event === "onReady") post("playVideo");
-            if (data.event === "onStateChange" && data.info === 1) activate();
-          } catch (err) {}
-        });
+        if (window.YT && window.YT.Player) {
+          mountPlayer();
+        } else {
+          window.onYouTubeIframeAPIReady = mountPlayer;
+          var api = document.createElement("script");
+          api.src = "https://www.youtube.com/iframe_api";
+          api.async = true;
+          document.head.appendChild(api);
+        }
 
-        iframe.addEventListener("load", function () {
-          post("playVideo");
-        });
+        window.setTimeout(function () {
+          if (!activated && !fallback) activate();
+        }, 2500);
       })();
     });
   </script>
