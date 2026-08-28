@@ -577,8 +577,14 @@ html:not(.ellipse-loading) .ellipse-page-loader {
   position: relative;
   z-index: 20;
   margin-top: calc(-1 * var(--home-booking-bridge));
-  padding-bottom: 0.5rem;
+  padding-bottom: 1.5rem;
   background: transparent;
+}
+
+@media (min-width: 768px) {
+  .home-booking-wrap {
+    padding-bottom: 2.25rem;
+  }
 }
 
 .home-booking-wrap .stayeazi-booking-widget {
