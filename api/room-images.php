@@ -42,13 +42,13 @@ foreach ($folders as $slug => $folderName) {
   }
   $paths = [];
   foreach ($files as $name) {
-    $paths[] = encode_asset_path('assets/images/hotel/rooms/' . $folderName . '/' . $name);
+    $paths[] = encode_asset_path('/assets/images/hotel/rooms/' . $folderName . '/' . $name);
   }
   $bySlug[$slug] = $paths;
 }
 
 $payload = [
-  'root' => 'assets/images/hotel/rooms',
+  'root' => '/assets/images/hotel/rooms',
   'folders' => $folders,
   'bySlug' => $bySlug,
 ];

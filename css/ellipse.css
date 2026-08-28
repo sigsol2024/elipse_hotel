@@ -219,6 +219,42 @@ html:not(.ellipse-loading) .ellipse-page-loader {
     rgba(0, 0, 0, 0.14);
 }
 
+/* Hero background video — image slider remains visible until video is playing */
+.home-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
+}
+
+.home-hero-video.is-active {
+  opacity: 1;
+}
+
+.home-hero-video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;
+  min-height: 100%;
+  min-width: 177.78vh;
+  transform: translate(-50%, -50%);
+  border: 0;
+}
+
+.home-hero.is-video-active .home-hero-slide {
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+
+.home-hero.is-video-active .home-hero-slide.is-active {
+  opacity: 0;
+}
+
 .home-hero-slide {
   position: absolute;
   inset: 0;
@@ -514,31 +550,23 @@ html:not(.ellipse-loading) .ellipse-page-loader {
 }
 
 /*
- * Home hero booking:
- * Desktop: widget lives inside the hero (after the subtitle).
- * Mobile: same widget is placed under the hero — no bridge overlay.
+ * Home booking bridge: overlaps the bottom of the hero between hero and next section.
  */
 .home-hero-block {
   position: relative;
+  --home-booking-bridge: 5.25rem;
 }
 
-.home-hero-booking {
-  text-align: left;
+.home-booking-wrap {
+  position: relative;
+  z-index: 20;
+  margin-top: calc(-1 * var(--home-booking-bridge));
+  padding-bottom: 0.75rem;
+  background: transparent;
 }
 
-.home-hero-booking .stayeazi-booking-widget,
-.home-booking-mobile .stayeazi-booking-widget {
+.home-booking-wrap .stayeazi-booking-widget {
   width: 100%;
-}
-
-.home-welcome {
-  padding-top: 1.5rem;
-}
-
-@media (min-width: 1024px) {
-  .home-welcome {
-    padding-top: 2rem;
-  }
 }
 
 /* Mobile / tablet nav overlay */

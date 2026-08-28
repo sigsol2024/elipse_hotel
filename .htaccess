@@ -1,29 +1,36 @@
-# Ellipse Hotels — Apache document root helpers
-# Place this file in the same folder as index.html (usually public_html)
+# Ellipse Hotels — clean URL rewrites + cache headers (Apache / LiteSpeed)
+# Staging may use nginx; see nginx-clean-urls.conf for that stack.
+# Upload to the site document root alongside index.html.
 
-DirectoryIndex index.html index.htm
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
 
-# Stop Apache from showing a bare folder listing when index fails
+  # 301: /index.html → /
+  RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # 301: /page.html → /page
+  RewriteCond %{THE_REQUEST} \s/+(.+?)\.html[\s?] [NC]
+  RewriteRule ^ %1 [R=301,L]
+
+  # Serve /page as page.html (do not touch real files/folders)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME}.html -f
+  RewriteRule ^(.+?)/?$ $1.html [L]
+</IfModule>
+
+DirectoryIndex index.html
+
 Options -Indexes
 
-# If someone hits a directory URL, try index.html first
 <IfModule mod_dir.c>
   DirectoryIndex index.html
 </IfModule>
 
-# Helpful when assets 404 after deploy
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  # Do not rewrite real files/folders
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-</IfModule>
-
-# Reduce stale-page pain during staging / frequent updates
-# HTML must always revalidate; CSS/JS revalidate quickly
 <IfModule mod_headers.c>
-  <FilesMatch "\.(html|htm)$">
+  <FilesMatch "\.(html?)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate"
     Header set Pragma "no-cache"
     Header set Expires "0"

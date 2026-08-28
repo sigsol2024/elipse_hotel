@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rooms &amp; Suites | Ellipse Hotels</title>
   <meta name="description" content="Rooms and suites at Ellipse Hotels, Lagos - thoughtfully designed spaces for rest, work, and everything in between." />
-  <link rel="icon" href="assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
-  <link rel="apple-touch-icon" href="assets/brand/favicon.png?v=20260814" />
+  <link rel="canonical" href="https://ellipsehotelslagos.com/rooms" />
+  <link rel="icon" href="/assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png?v=20260814" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260810h"></script>
+  <script src="/js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260820a" />
+  <link rel="stylesheet" href="/css/ellipse.css?v=20260829a" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col overflow-x-hidden" data-page="rooms">
   <div id="site-header-root"></div>
 
   <main id="main" class="flex-grow pt-[88px]">
     <!-- Intro -->
-    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pt-16 md:pt-24 pb-16 md:pb-24 reveal">
+    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pt-10 md:pt-14 pb-10 md:pb-14 reveal">
       <div class="grid grid-cols-4 md:grid-cols-12 gap-gutter">
         <div class="col-span-4 md:col-span-8 md:col-start-3 text-center">
           <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center justify-center">
@@ -36,7 +37,7 @@
     </section>
 
     <!-- Dynamic catalogue from data/rooms.js -->
-    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-20 md:pb-section-gap space-y-24 md:space-y-32" id="rooms-catalogue" aria-live="polite">
+    <section class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto pb-14 md:pb-20 space-y-16 md:space-y-20" id="rooms-catalogue" aria-live="polite">
       <p class="text-on-surface-variant text-center">Loading rooms...</p>
     </section>
 
@@ -48,7 +49,7 @@
           <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-accent-gold text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors h-14" href="#book" data-book-general>
             Book Your Stay
           </a>
-          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="contact.html">
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="/contact">
             Contact Us
           </a>
         </div>
@@ -58,25 +59,12 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260812g"></script>
-  <script src="data/rooms.js?v=20260814c"></script>
-  <script src="data/room-images.js?v=20260812g"></script>
-  <script src="api/room-images.php"></script>
-  <script src="data/images.js?v=20260812g"></script>
-  <script src="js/site-chrome.js?v=20260813c"></script>
-  <script src="js/rooms.js?v=20260820a"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      var bookHref =
-        window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
-          ? window.EllipseChrome.bookingGeneralHref()
-          : "rooms.html";
-      document.querySelectorAll("[data-book-general]").forEach(function (el) {
-        el.setAttribute("href", bookHref || "rooms.html");
-        el.removeAttribute("target");
-        el.removeAttribute("rel");
-      });
-    });
-  </script>
+  <script src="/data/booking.js?v=20260829b"></script>
+  <script src="/data/rooms.js?v=20260814c"></script>
+  <script src="/data/room-images.js?v=20260812g"></script>
+  <script src="/api/room-images.php"></script>
+  <script src="/data/images.js?v=20260812g"></script>
+  <script src="/js/site-chrome.js?v=20260829c"></script>
+  <script src="/js/rooms.js?v=20260829b"></script>
 </body>
 </html>

@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | Ellipse Hotels</title>
   <meta name="description" content="About Ellipse Hotels - a different way to stay in Lagos. Comfort, thoughtful hospitality and considered spaces." />
-  <link rel="icon" href="assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
-  <link rel="apple-touch-icon" href="assets/brand/favicon.png?v=20260814" />
+  <link rel="canonical" href="https://ellipsehotelslagos.com/about" />
+  <link rel="icon" href="/assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png?v=20260814" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260810h"></script>
+  <script src="/js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260820a" />
+  <link rel="stylesheet" href="/css/ellipse.css?v=20260829a" />
 </head>
 <body class="bg-background text-on-surface font-body-md antialiased selection:bg-deep-navy/20 selection:text-deep-navy min-h-screen flex flex-col" data-page="about">
   <div id="site-header-root"></div>
@@ -21,7 +22,7 @@
     <!-- Hero -->
     <section class="relative h-[80vh] min-h-[520px] max-h-[760px] w-full flex items-end pb-20 md:pb-24">
       <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover" alt="Ellipse Hotels interior" src="assets/images/about/DJI_0978.jpg" />
+        <img class="w-full h-full object-cover" alt="Ellipse Hotels interior" src="/assets/images/about/DJI_0978.jpg" />
         <div class="absolute inset-0 bg-gradient-to-t from-deep-navy/80 via-deep-navy/40 to-deep-navy/50"></div>
       </div>
       <div class="relative z-10 w-full px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
@@ -36,8 +37,33 @@
       </div>
     </section>
 
+    <!-- Welcome to Ellipse -->
+    <section class="py-8 md:py-10 lg:py-12 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop bg-white reveal">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div>
+          <p class="font-label-caps text-label-caps text-accent-gold uppercase tracking-widest mb-4 flex items-center"><span class="w-6 h-px bg-accent-gold mr-4"></span>Welcome to Ellipse</p>
+          <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] leading-snug text-deep-navy mb-5">A place to stay, unwind and experience Lagos</h2>
+          <p class="font-body-md text-body-md md:text-body-lg text-on-surface-variant mb-0 md:mb-8">
+            Ellipse Hotels brings together contemporary spaces, thoughtful comfort and attentive hospitality. We have created a sanctuary in the city, where every detail is considered to offer you a genuinely restful and inspiring stay.
+          </p>
+        </div>
+        <div class="relative w-full aspect-video bg-surface-container overflow-hidden shadow-lg">
+          <iframe
+            id="about-welcome-video"
+            class="absolute inset-0 w-full h-full"
+            src="https://www.youtube.com/embed/Vw7-cXEuDwo?enablejsapi=1&mute=1&playsinline=1&rel=0"
+            title="Ellipse Hotels video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Introduction -->
-    <section class="py-12 md:py-16 lg:py-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface reveal">
+    <section class="py-8 md:py-10 lg:py-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto bg-surface reveal">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
         <div class="md:col-span-5 md:pr-12">
           <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center">
@@ -57,7 +83,7 @@
     </section>
 
     <!-- Philosophy -->
-    <section class="py-12 md:py-16 lg:py-20 bg-warm-grey px-margin-mobile md:px-margin-desktop reveal">
+    <section class="py-8 md:py-10 lg:py-12 bg-warm-grey px-margin-mobile md:px-margin-desktop reveal">
       <div class="max-w-container-max mx-auto">
         <div class="text-center mb-8 md:mb-10 lg:mb-12">
           <h2 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy leading-snug">Our Philosophy</h2>
@@ -83,7 +109,7 @@
     </section>
 
     <!-- The Hotel + Location -->
-    <section class="py-12 md:py-16 lg:py-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
+    <section class="py-8 md:py-10 lg:py-12 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto reveal">
       <div class="mb-8 md:mb-10 lg:mb-12 text-center md:text-left">
         <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center justify-center md:justify-start">
           <span class="w-12 h-px bg-accent-gold mr-4" aria-hidden="true"></span>The Hotel
@@ -93,12 +119,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-10 md:mb-12 lg:mb-14">
         <div class="aspect-[4/3] bg-surface-container overflow-hidden group">
-          <img class="w-full h-full object-cover hover-zoom" alt="Bar and lounge" src="assets/images/facilities/Bar%20and%20Lounge/_DSC8169.jpg" />
+          <img class="w-full h-full object-cover hover-zoom" alt="Bar and lounge" src="/assets/images/facilities/Bar%20and%20Lounge/_DSC8169.jpg" />
         </div>
         <div class="flex flex-col justify-center px-0 md:px-12 py-4 md:py-0">
           <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Bar and Lounge</h3>
           <p class="font-body-md text-body-md text-on-surface-variant mb-6">A composed lounge for conversation and quiet celebration - crafted drinks in a calm, contemporary setting.</p>
-          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="facilities.html#bar">
+          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="/facilities#bar">
             View Facilities
             <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
           </a>
@@ -109,19 +135,19 @@
         <div class="flex flex-col justify-center px-0 md:px-12 py-4 md:py-0 order-2 md:order-1">
           <h3 class="font-headline-md text-[1.35rem] md:text-[1.5rem] lg:text-headline-md text-deep-navy mb-4 leading-snug">Meeting Spaces</h3>
           <p class="font-body-md text-body-md text-on-surface-variant mb-6">Seamless connectivity and thoughtfully designed environments that cater to the needs of the modern business professional.</p>
-          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="facilities.html">
+          <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="/facilities">
             Explore Facilities
             <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
           </a>
         </div>
         <div class="aspect-[4/3] bg-surface-container overflow-hidden order-1 md:order-2 group">
-          <img class="w-full h-full object-cover hover-zoom" alt="Meeting and gathering spaces" src="assets/images/about/_DSC8383.jpg" />
+          <img class="w-full h-full object-cover hover-zoom" alt="Meeting and gathering spaces" src="/assets/images/about/_DSC8383.jpg" />
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
         <div class="md:col-span-7 pr-0 md:pr-12">
-          <img class="w-full aspect-[16/10] object-cover" alt="Ellipse Hotels location in Lagos" src="assets/images/about/DJI_0994.jpg" />
+          <img class="w-full aspect-[16/10] object-cover" alt="Ellipse Hotels location in Lagos" src="/assets/images/about/DJI_0994.jpg" />
         </div>
         <div class="md:col-span-5 mt-8 md:mt-0">
           <p class="font-label-caps text-label-caps text-deep-navy mb-6 tracking-widest uppercase flex items-center">
@@ -145,7 +171,7 @@
     <!-- Full-width break -->
     <section class="relative h-[50vh] min-h-[360px] w-full flex items-center justify-center reveal">
       <div class="absolute inset-0 z-0">
-        <img class="w-full h-full object-cover" alt="Ellipse Hotels exterior" src="assets/images/hotel/_DSC8369.jpg" />
+        <img class="w-full h-full object-cover" alt="Ellipse Hotels exterior" src="/assets/images/hotel/_DSC8369.jpg" />
         <div class="absolute inset-0 bg-deep-navy/55"></div>
       </div>
       <div class="relative z-10 text-center px-margin-mobile">
@@ -161,7 +187,7 @@
           <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-accent-gold text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:bg-white transition-colors h-14" href="#book" data-book-general>
             Book Your Stay
           </a>
-          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="rooms.html">
+          <a class="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 border border-white/30 text-white font-label-caps text-label-caps uppercase tracking-widest hover:bg-white/10 transition-colors h-14" href="/rooms">
             Explore Our Rooms
           </a>
         </div>
@@ -171,21 +197,37 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260810a"></script>
-  <script src="js/site-chrome.js?v=20260813c"></script>
+  <script src="/data/booking.js?v=20260829b"></script>
+  <script src="/js/site-chrome.js?v=20260829c"></script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      var bookHref =
-        window.EllipseChrome && window.EllipseChrome.bookingGeneralHref
-          ? window.EllipseChrome.bookingGeneralHref()
-          : "#book";
-      document.querySelectorAll("[data-book-general]").forEach(function (el) {
-        if (bookHref !== "#book") {
-          el.setAttribute("href", bookHref);
-          el.setAttribute("target", "_blank");
-          el.setAttribute("rel", "noopener noreferrer");
+      (function initAboutWelcomeVideo() {
+        var iframe = document.getElementById("about-welcome-video");
+        if (!iframe || !("IntersectionObserver" in window)) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+        function post(cmd) {
+          if (!iframe.contentWindow) return;
+          iframe.contentWindow.postMessage(
+            JSON.stringify({ event: "command", func: cmd, args: [] }),
+            "*"
+          );
         }
-      });
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && entry.intersectionRatio >= 0.45) {
+                post("playVideo");
+              } else {
+                post("pauseVideo");
+              }
+            });
+          },
+          { threshold: [0, 0.45, 0.75] }
+        );
+        observer.observe(iframe);
+      })();
     });
   </script>
 </body>

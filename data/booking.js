@@ -6,7 +6,7 @@ window.EllipseBooking = {
   widgetToken: "SwFxhsKAvxBwoK0G9WMNFiZqHtCkm8s6",
 
   /** General booking / search URL for "Book Your Stay" CTAs */
-  generalBookingUrl: "index.html#book",
+  generalBookingUrl: "https://app.stayeazi.com/reservation/ellipse-hotels",
 
   /** Optional hotel code once known */
   hotelCode: "",

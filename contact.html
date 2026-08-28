@@ -5,14 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact Us | Ellipse Hotels Lagos</title>
   <meta name="description" content="Contact Ellipse Hotels - Shola, 31 Sola Adewumi St, Oshodi, Bucknor, Ejigbo 100261, Lagos. Enquiries for stays, dining, and events." />
-  <link rel="icon" href="assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
-  <link rel="apple-touch-icon" href="assets/brand/favicon.png?v=20260814" />
+  <link rel="canonical" href="https://ellipsehotelslagos.com/contact" />
+  <link rel="icon" href="/assets/brand/favicon.png?v=20260814" type="image/png" sizes="any" />
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png?v=20260814" />
   <script>document.documentElement.classList.add("ellipse-loading");</script>
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <script src="js/tailwind-theme.js?v=20260810h"></script>
+  <script src="/js/tailwind-theme.js?v=20260810h"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600&family=Newsreader:opsz,wght@6..72,300;400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/ellipse.css?v=20260820a" />
+  <link rel="stylesheet" href="/css/ellipse.css?v=20260820a" />
   <style>
     .contact-accordion__panel {
       display: grid;
@@ -228,7 +229,7 @@
     <section class="bg-deep-navy py-16 md:py-20 px-margin-mobile md:px-margin-desktop text-center w-full">
       <h2 class="font-headline-md text-[1.75rem] md:text-[2.25rem] text-white mb-8 md:mb-10 font-light tracking-tight">Planning your stay?</h2>
       <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-        <a class="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-white/10 transition-colors" href="rooms.html">View Our Rooms</a>
+        <a class="inline-flex items-center justify-center border border-white/30 text-white px-10 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-white/10 transition-colors" href="/rooms">View Our Rooms</a>
         <a class="inline-flex items-center justify-center bg-accent-gold text-deep-navy px-10 py-4 font-label-caps text-label-caps tracking-widest uppercase hover:bg-white transition-colors" id="contact-book" href="#book">Book Your Stay</a>
       </div>
     </section>
@@ -236,8 +237,8 @@
 
   <div id="site-footer-root"></div>
 
-  <script src="data/booking.js?v=20260810e"></script>
-  <script src="js/site-chrome.js?v=20260813c"></script>
+  <script src="/data/booking.js?v=20260829b"></script>
+  <script src="/js/site-chrome.js?v=20260829c"></script>
   <script>
     (function () {
       function mapsEmbedUrl(address) {
@@ -262,15 +263,6 @@
         }
         var directions = document.getElementById("contact-directions");
         if (directions && maps) directions.href = maps;
-        var book = document.getElementById("contact-book");
-        if (book && typeof window.EllipseChrome.bookingGeneralHref === "function") {
-          var href = window.EllipseChrome.bookingGeneralHref();
-          book.href = href || "#book";
-          if (href && href !== "#book") {
-            book.target = "_blank";
-            book.rel = "noopener noreferrer";
-          }
-        }
       }
 
       document.querySelectorAll("[data-accordion-trigger]").forEach(function (btn) {

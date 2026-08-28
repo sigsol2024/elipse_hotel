@@ -4,12 +4,12 @@
  * so it borrows reception / dining / suite photos.
  */
 (function () {
-  var F = "assets/images/facilities/";
-  var D = "assets/images/dining/";
+  var F = "/assets/images/facilities/";
+  var D = "/assets/images/dining/";
   var bar = F + "Bar and Lounge/";
   var pool = F + "pool/";
   var reception = F + "Reception/";
-  var suite = "assets/images/hotel/rooms/SUITE/";
+  var suite = "/assets/images/hotel/rooms/SUITE/";
 
   function rest(cover, all) {
     return all.filter(function (src) {

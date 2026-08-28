@@ -19,8 +19,8 @@
   function roomImage(room) {
     const slug = room && room.slug;
     const images = roomImages(slug);
-    if (images.length) return images[0];
-    return fallbackRoomImage();
+    if (images.length) return assetUrl(images[0]);
+    return assetUrl(fallbackRoomImage());
   }
 
   function roomBookingHref(room) {
@@ -35,9 +35,22 @@
     return null;
   }
 
+  function assetUrl(src) {
+    if (window.EllipseChrome && typeof window.EllipseChrome.assetUrl === "function") {
+      return window.EllipseChrome.assetUrl(src);
+    }
+    if (!src) return "";
+    const p = String(src).trim();
+    if (/^https?:\/\//i.test(p) || p.startsWith("/")) return p;
+    return "/" + p.replace(/^\/+/, "");
+  }
+
   function bookAttrs(href) {
     if (!href) {
-      return 'href="#book" aria-disabled="true" title="Booking engine URL pending configuration"';
+      return 'href="/#book" aria-disabled="true" title="Booking engine URL pending configuration"';
+    }
+    if (/^https?:\/\//i.test(href)) {
+      return `href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer"`;
     }
     return `href="${escapeHtml(href)}"`;
   }
@@ -63,7 +76,7 @@
   function mediaSlot(ratio, label, caption, src, alt) {
     if (src) {
       return `<div class="media-slot has-image" data-ratio="${ratio}">
-      <img src="${escapeHtml(src)}" alt="${escapeHtml(alt || caption || "")}" loading="lazy" />
+      <img src="${escapeHtml(assetUrl(src))}" alt="${escapeHtml(alt || caption || "")}" loading="lazy" />
     </div>`;
     }
     return `<div class="media-slot" data-ratio="${ratio}">
@@ -100,7 +113,7 @@
           <p class="font-body-md text-body-md text-on-surface-variant mb-6">${escapeHtml(room.shortDescription)}</p>
           ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] text-deep-navy mb-8")}
           <div class="flex items-center gap-6">
-            <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="room-details.html?room=${escapeHtml(room.slug)}">
+            <a class="inline-flex items-center text-deep-navy font-label-caps text-label-caps uppercase tracking-widest hover:opacity-80 transition-opacity group" href="/room-details?room=${escapeHtml(room.slug)}">
               ${escapeHtml(viewLabel)}
               <span class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
             </a>
@@ -136,14 +149,14 @@
   }
 
   function viewDetailsButton(room) {
-    return `<a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-8 h-14 hover:bg-deep-navy/90 transition-colors" href="room-details.html?room=${escapeHtml(room.slug)}">View Details</a>`;
+    return `<a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-8 h-14 hover:bg-deep-navy/90 transition-colors" href="/room-details?room=${escapeHtml(room.slug)}">View Details</a>`;
   }
 
   function renderFeatured(room) {
     const src = roomImage(room);
     const facts = factsLine(room);
     return `
-<article class="flex flex-col gap-12 reveal">
+<article class="flex flex-col gap-8 reveal">
   <div class="w-full aspect-video md:aspect-[21/9] bg-surface-container relative overflow-hidden group">
     <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${escapeHtml(room.name)}" src="${escapeHtml(src)}" loading="lazy" />
   </div>
@@ -155,8 +168,8 @@
           ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
           : ""
       }
-      ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
-      <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
+      ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-4 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
+      <p class="font-body-md text-body-md text-on-surface-variant max-w-3xl mb-6">${escapeHtml(room.description || room.shortDescription)}</p>
       ${renderHighlights(room)}
       <div class="flex items-start">
         ${viewDetailsButton(room)}
@@ -180,16 +193,16 @@
       ? `<p class="font-label-caps text-label-caps text-accent-gold mb-4 uppercase tracking-widest">${escapeHtml(room.headline)}</p>`
       : ""
   }
-  ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-6 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
-  <p class="font-body-md text-body-md text-on-surface-variant mb-8">${escapeHtml(room.description || room.shortDescription)}</p>
-  ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy mb-8")}
+  ${facts ? `<p class="font-label-caps text-label-caps text-on-surface-variant mb-4 tracking-widest uppercase">${escapeHtml(facts)}</p>` : ""}
+  <p class="font-body-md text-body-md text-on-surface-variant mb-6">${escapeHtml(room.description || room.shortDescription)}</p>
+  ${priceBlock(room, "font-title-lg text-[0.95rem] md:text-[1rem] lg:text-title-lg text-deep-navy mb-6")}
   ${renderHighlights(room)}
   <div class="flex items-start">
     ${viewDetailsButton(room)}
   </div>
 </div>`;
     const media = `
-<div class="col-span-1 md:col-span-6 ${imageRight ? "md:col-start-7 order-1 md:order-2" : "order-1"} mb-8 md:mb-0">
+<div class="col-span-1 md:col-span-6 ${imageRight ? "md:col-start-7 order-1 md:order-2" : "order-1"} mb-6 md:mb-0">
   <div class="w-full ${imageRight ? "aspect-[4/5] md:aspect-square" : "aspect-[4/3]"} bg-surface-container relative overflow-hidden group">
     <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" alt="${escapeHtml(room.name)}" src="${escapeHtml(src)}" loading="lazy" />
   </div>
@@ -223,7 +236,7 @@
   }
 
   function detailHeroSrc(room, gallery) {
-    if (gallery && gallery[0]) return gallery[0];
+    if (gallery && gallery[0]) return assetUrl(gallery[0]);
     return roomImage(room);
   }
 
@@ -262,7 +275,7 @@
   <p class="font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto mb-10">
     This room is unavailable or the link is incorrect. Explore our full catalogue of rooms and suites.
   </p>
-  <a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-10 h-14 hover:bg-deep-navy/90 transition-colors" href="rooms.html">View All Rooms</a>
+  <a class="inline-flex items-center justify-center bg-deep-navy text-white font-label-caps text-label-caps uppercase tracking-widest px-10 h-14 hover:bg-deep-navy/90 transition-colors" href="/rooms">View All Rooms</a>
 </section>`;
   }
 
@@ -305,7 +318,7 @@
         ? paragraphs
         : [room.description, room.shortDescription].filter(Boolean);
     const gallery = roomImages(room.slug);
-    const imageSrc = gallery[1] || gallery[0] || fallbackRoomImage();
+    const imageSrc = assetUrl(gallery[1] || gallery[0] || fallbackRoomImage());
     if (!copy.length && !imageSrc) return "";
     const paras = copy
       .map(
@@ -359,7 +372,7 @@
   }
 
   function renderGallery(room, gallery) {
-    const images = (gallery || []).filter(Boolean);
+    const images = (gallery || []).filter(Boolean).map(assetUrl);
     if (!images.length) return "";
 
     if (images.length === 1) {
@@ -443,7 +456,7 @@
       .map((r) => {
         const src = roomImage(r) || fallbackRoomImage();
         return `
-<a class="group block" href="room-details.html?room=${escapeHtml(r.slug)}">
+<a class="group block" href="/room-details?room=${escapeHtml(r.slug)}">
   <div class="w-full h-[240px] md:h-[300px] bg-surface-container mb-6 overflow-hidden">
     <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="${escapeHtml(src)}" alt="${escapeHtml(r.name)}" loading="lazy" />
   </div>

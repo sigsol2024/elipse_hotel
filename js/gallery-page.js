@@ -36,6 +36,16 @@
     return "";
   }
 
+  function assetUrl(src) {
+    if (window.EllipseChrome && typeof window.EllipseChrome.assetUrl === "function") {
+      return window.EllipseChrome.assetUrl(src);
+    }
+    if (!src) return "";
+    const p = String(src).trim();
+    if (/^https?:\/\//i.test(p) || p.startsWith("/")) return p;
+    return "/" + p.replace(/^\/+/, "");
+  }
+
   function init() {
     const catalog = window.EllipseGalleryImages;
     const root = document.getElementById("gallery-root");
@@ -53,7 +63,7 @@
         const span = tileSpanClass(i);
         return `
 <button type="button" class="gallery-tile group ${span}" data-gallery-open="${i}" aria-label="Open photo ${i + 1} of ${allImages.length}">
-  <img src="${escapeHtml(src)}" alt="Ellipse Hotels gallery photo ${i + 1}" loading="lazy" />
+  <img src="${escapeHtml(assetUrl(src))}" alt="Ellipse Hotels gallery photo ${i + 1}" loading="lazy" />
   <span class="gallery-tile__shade" aria-hidden="true"></span>
   <span class="gallery-tile__zoom material-symbols-outlined" aria-hidden="true">zoom_in</span>
 </button>`;
@@ -84,7 +94,7 @@
         .map((src, i) => {
           return `
 <button type="button" class="gallery-modal__thumb${i === current ? " is-active" : ""}" data-gallery-thumb="${i}" aria-label="Photo ${i + 1}" aria-current="${i === current ? "true" : "false"}">
-  <img src="${escapeHtml(src)}" alt="" loading="lazy" />
+  <img src="${escapeHtml(assetUrl(src))}" alt="" loading="lazy" />
 </button>`;
         })
         .join("");
@@ -95,7 +105,7 @@
       const src = allImages[current];
       if (!src || !modalImage) return;
 
-      modalImage.src = src;
+      modalImage.src = assetUrl(src);
       modalImage.alt = "Ellipse Hotels photo " + (current + 1);
       if (modalSection) modalSection.textContent = "Gallery";
       if (modalTitle) modalTitle.textContent = "Photo " + (current + 1);
